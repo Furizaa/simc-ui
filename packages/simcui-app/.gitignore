@@ -1,0 +1,12 @@
+# App packaged
+release
+main.prod.js
+main.prod.js.map
+renderer.prod.js
+renderer.prod.js.map
+style.css
+style.css.map
+dist
+dll
+main.js
+main.js.map

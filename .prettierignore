@@ -1,0 +1,7 @@
+node_modules
+dll
+dist
+release
+coverage
+generated
+.templates

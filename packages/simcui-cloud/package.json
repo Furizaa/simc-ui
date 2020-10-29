@@ -1,0 +1,35 @@
+{
+  "name": "@simcui/cloud",
+  "version": "1.0.0",
+  "bin": {
+    "cloud": "bin/cloud.js"
+  },
+  "scripts": {
+    "lint:src": "eslint '{lib,bin,src}/!(*.d).ts'",
+    "lint:types": "tsc --noEmit",
+    "lint": "concurrently yarn:lint:*",
+    "clean": "rimraf cdk.out",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "deploy": "cdk deploy && node ./generateManifest.js"
+  },
+  "devDependencies": {
+    "@types/node": "10.17.27",
+    "aws-cdk": "1.68.0",
+    "concurrently": "^5.3.0",
+    "rimraf": "^3.0.2",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.68.0",
+    "@aws-cdk/aws-dynamodb": "^1.68.0",
+    "@aws-cdk/aws-events": "^1.68.0",
+    "@aws-cdk/aws-events-targets": "^1.68.0",
+    "@aws-cdk/aws-lambda": "^1.68.0",
+    "@aws-cdk/aws-secretsmanager": "^1.68.0",
+    "@aws-cdk/core": "^1.68.0",
+    "aws-sdk": "^2.773.0",
+    "source-map-support": "^0.5.16"
+  }
+}

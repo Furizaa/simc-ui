@@ -1,0 +1,11 @@
+*.js
+*.d.ts
+node_modules
+
+!generateManifest.js
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+gatewayManifest.json

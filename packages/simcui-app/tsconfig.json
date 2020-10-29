@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["modules/shared/*"],
+      "@sim/*": ["modules/sim/*"],
+      "@dbc/*": ["../simcui-dbc/generated/*"],
+      "@cloud/*": ["../simcui-cloud/*"]
+    }
+  },
+  "include": ["modules", "types", "electron", "compat.d.ts", "./*.tsx", "./*.ts"],
+  "exclude": [
+    "test",
+    "release",
+    "node_modules",
+    "main.prod.js",
+    "renderer.prod.js",
+    "dist",
+    "dll",
+    "configs",
+    "internals"
+  ]
+}

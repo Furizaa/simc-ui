@@ -1,0 +1,26 @@
+{
+  "name": "@simcui/dbc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:src": "eslint 'src/**/*.js'",
+    "lint": "concurrently yarn:lint:*",
+    "db-realmlist-update": "ts-node ./src/UpdateRealmList.js",
+    "db-talents-update": "ts-node ./src/UpdateTalents.js",
+    "db-specs-update": "ts-node ./src/UpdateSpecs.js",
+    "db-class-update": "ts-node ./src/UpdateClasses.js",
+    "db-profiles-update": "ts-node ./src/UpdateProfiles.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.21.0",
+    "bluebird": "^3.7.2",
+    "concurrently": "^5.3.0",
+    "lodash": "^4.17.20",
+    "prettier": "^2.1.2",
+    "ts-node": "^9.0.0"
+  }
+}

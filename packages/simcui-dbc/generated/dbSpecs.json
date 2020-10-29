@@ -1,0 +1,614 @@
+{
+  "62": {
+    "name": {
+      "en_US": "Arcane",
+      "es_MX": "Arcano",
+      "pt_BR": "Arcano",
+      "de_DE": "Arkan",
+      "en_GB": "Arcane",
+      "es_ES": "Arcano",
+      "fr_FR": "Arcanes",
+      "it_IT": "Arcano",
+      "ru_RU": "Тайная магия",
+      "ko_KR": "비전",
+      "zh_TW": "秘法",
+      "zh_CN": "奥术"
+    },
+    "id": 62
+  },
+  "63": {
+    "name": {
+      "en_US": "Fire",
+      "es_MX": "Fuego",
+      "pt_BR": "Fogo",
+      "de_DE": "Feuer",
+      "en_GB": "Fire",
+      "es_ES": "Fuego",
+      "fr_FR": "Feu",
+      "it_IT": "Fuoco",
+      "ru_RU": "Огонь",
+      "ko_KR": "화염",
+      "zh_TW": "火焰",
+      "zh_CN": "火焰"
+    },
+    "id": 63
+  },
+  "64": {
+    "name": {
+      "en_US": "Frost",
+      "es_MX": "Escarcha",
+      "pt_BR": "Gélido",
+      "de_DE": "Frost",
+      "en_GB": "Frost",
+      "es_ES": "Escarcha",
+      "fr_FR": "Givre",
+      "it_IT": "Gelo",
+      "ru_RU": "Лед",
+      "ko_KR": "냉기",
+      "zh_TW": "冰霜",
+      "zh_CN": "冰霜"
+    },
+    "id": 64
+  },
+  "65": {
+    "name": {
+      "en_US": "Holy",
+      "es_MX": "Sagrado",
+      "pt_BR": "Sagrado",
+      "de_DE": "Heilig",
+      "en_GB": "Holy",
+      "es_ES": "Sagrado",
+      "fr_FR": "Sacré",
+      "it_IT": "Sacro",
+      "ru_RU": "Свет",
+      "ko_KR": "신성",
+      "zh_TW": "神聖",
+      "zh_CN": "神圣"
+    },
+    "id": 65
+  },
+  "66": {
+    "name": {
+      "en_US": "Protection",
+      "es_MX": "Protección",
+      "pt_BR": "Proteção",
+      "de_DE": "Schutz",
+      "en_GB": "Protection",
+      "es_ES": "Protección",
+      "fr_FR": "Protection",
+      "it_IT": "Protezione",
+      "ru_RU": "Защита",
+      "ko_KR": "보호",
+      "zh_TW": "防護",
+      "zh_CN": "防护"
+    },
+    "id": 66
+  },
+  "70": {
+    "name": {
+      "en_US": "Retribution",
+      "es_MX": "Reprensión",
+      "pt_BR": "Retribuição",
+      "de_DE": "Vergeltung",
+      "en_GB": "Retribution",
+      "es_ES": "Reprensión",
+      "fr_FR": "Vindicte",
+      "it_IT": "Castigo",
+      "ru_RU": "Воздаяние",
+      "ko_KR": "징벌",
+      "zh_TW": "懲戒",
+      "zh_CN": "惩戒"
+    },
+    "id": 70
+  },
+  "71": {
+    "name": {
+      "en_US": "Arms",
+      "es_MX": "Armas",
+      "pt_BR": "Armas",
+      "de_DE": "Waffen",
+      "en_GB": "Arms",
+      "es_ES": "Armas",
+      "fr_FR": "Armes",
+      "it_IT": "Armi",
+      "ru_RU": "Оружие",
+      "ko_KR": "무기",
+      "zh_TW": "武器",
+      "zh_CN": "武器"
+    },
+    "id": 71
+  },
+  "72": {
+    "name": {
+      "en_US": "Fury",
+      "es_MX": "Furia",
+      "pt_BR": "Fúria",
+      "de_DE": "Furor",
+      "en_GB": "Fury",
+      "es_ES": "Furia",
+      "fr_FR": "Fureur",
+      "it_IT": "Furia",
+      "ru_RU": "Неистовство",
+      "ko_KR": "분노",
+      "zh_TW": "狂怒",
+      "zh_CN": "狂怒"
+    },
+    "id": 72
+  },
+  "73": {
+    "name": {
+      "en_US": "Protection",
+      "es_MX": "Protección",
+      "pt_BR": "Proteção",
+      "de_DE": "Schutz",
+      "en_GB": "Protection",
+      "es_ES": "Protección",
+      "fr_FR": "Protection",
+      "it_IT": "Protezione",
+      "ru_RU": "Защита",
+      "ko_KR": "방어",
+      "zh_TW": "防護",
+      "zh_CN": "防护"
+    },
+    "id": 73
+  },
+  "102": {
+    "name": {
+      "en_US": "Balance",
+      "es_MX": "Equilibrio",
+      "pt_BR": "Equilíbrio",
+      "de_DE": "Gleichgewicht",
+      "en_GB": "Balance",
+      "es_ES": "Equilibrio",
+      "fr_FR": "Équilibre",
+      "it_IT": "Equilibrio",
+      "ru_RU": "Баланс",
+      "ko_KR": "조화",
+      "zh_TW": "平衡",
+      "zh_CN": "平衡"
+    },
+    "id": 102
+  },
+  "103": {
+    "name": {
+      "en_US": "Feral",
+      "es_MX": "Feral",
+      "pt_BR": "Feral",
+      "de_DE": "Wildheit",
+      "en_GB": "Feral",
+      "es_ES": "Feral",
+      "fr_FR": "Farouche",
+      "it_IT": "Aggressore Ferino",
+      "ru_RU": "Сила зверя",
+      "ko_KR": "야성",
+      "zh_TW": "野性戰鬥",
+      "zh_CN": "野性"
+    },
+    "id": 103
+  },
+  "104": {
+    "name": {
+      "en_US": "Guardian",
+      "es_MX": "Guardián",
+      "pt_BR": "Guardião",
+      "de_DE": "Wächter",
+      "en_GB": "Guardian",
+      "es_ES": "Guardián",
+      "fr_FR": "Gardien",
+      "it_IT": "Guardiano Ferino",
+      "ru_RU": "Страж",
+      "ko_KR": "수호",
+      "zh_TW": "守護者",
+      "zh_CN": "守护"
+    },
+    "id": 104
+  },
+  "105": {
+    "name": {
+      "en_US": "Restoration",
+      "es_MX": "Restauración",
+      "pt_BR": "Restauração",
+      "de_DE": "Wiederherstellung",
+      "en_GB": "Restoration",
+      "es_ES": "Restauración",
+      "fr_FR": "Restauration",
+      "it_IT": "Rigenerazione",
+      "ru_RU": "Исцеление",
+      "ko_KR": "회복",
+      "zh_TW": "恢復",
+      "zh_CN": "恢复"
+    },
+    "id": 105
+  },
+  "250": {
+    "name": {
+      "en_US": "Blood",
+      "es_MX": "Sangre",
+      "pt_BR": "Sangue",
+      "de_DE": "Blut",
+      "en_GB": "Blood",
+      "es_ES": "Sangre",
+      "fr_FR": "Sang",
+      "it_IT": "Sangue",
+      "ru_RU": "Кровь",
+      "ko_KR": "혈기",
+      "zh_TW": "血魄",
+      "zh_CN": "鲜血"
+    },
+    "id": 250
+  },
+  "251": {
+    "name": {
+      "en_US": "Frost",
+      "es_MX": "Escarcha",
+      "pt_BR": "Gélido",
+      "de_DE": "Frost",
+      "en_GB": "Frost",
+      "es_ES": "Escarcha",
+      "fr_FR": "Givre",
+      "it_IT": "Gelo",
+      "ru_RU": "Лед",
+      "ko_KR": "냉기",
+      "zh_TW": "冰霜",
+      "zh_CN": "冰霜"
+    },
+    "id": 251
+  },
+  "252": {
+    "name": {
+      "en_US": "Unholy",
+      "es_MX": "Profano",
+      "pt_BR": "Profano",
+      "de_DE": "Unheilig",
+      "en_GB": "Unholy",
+      "es_ES": "Profano",
+      "fr_FR": "Impie",
+      "it_IT": "Empietà",
+      "ru_RU": "Нечестивость",
+      "ko_KR": "부정",
+      "zh_TW": "穢邪",
+      "zh_CN": "邪恶"
+    },
+    "id": 252
+  },
+  "253": {
+    "name": {
+      "en_US": "Beast Mastery",
+      "es_MX": "Bestias",
+      "pt_BR": "Domínio das Feras",
+      "de_DE": "Tierherrschaft",
+      "en_GB": "Beast Mastery",
+      "es_ES": "Bestias",
+      "fr_FR": "Maîtrise des bêtes",
+      "it_IT": "Affinità Animale",
+      "ru_RU": "Повелитель зверей",
+      "ko_KR": "야수",
+      "zh_TW": "野獸控制",
+      "zh_CN": "野兽控制"
+    },
+    "id": 253
+  },
+  "254": {
+    "name": {
+      "en_US": "Marksmanship",
+      "es_MX": "Puntería",
+      "pt_BR": "Precisão",
+      "de_DE": "Treffsicherheit",
+      "en_GB": "Marksmanship",
+      "es_ES": "Puntería",
+      "fr_FR": "Précision",
+      "it_IT": "Precisione di Tiro",
+      "ru_RU": "Стрельба",
+      "ko_KR": "사격",
+      "zh_TW": "射擊",
+      "zh_CN": "射击"
+    },
+    "id": 254
+  },
+  "255": {
+    "name": {
+      "en_US": "Survival",
+      "es_MX": "Supervivencia",
+      "pt_BR": "Sobrevivência",
+      "de_DE": "Überleben",
+      "en_GB": "Survival",
+      "es_ES": "Supervivencia",
+      "fr_FR": "Survie",
+      "it_IT": "Sopravvivenza",
+      "ru_RU": "Выживание",
+      "ko_KR": "생존",
+      "zh_TW": "生存",
+      "zh_CN": "生存"
+    },
+    "id": 255
+  },
+  "256": {
+    "name": {
+      "en_US": "Discipline",
+      "es_MX": "Disciplina",
+      "pt_BR": "Disciplina",
+      "de_DE": "Disziplin",
+      "en_GB": "Discipline",
+      "es_ES": "Disciplina",
+      "fr_FR": "Discipline",
+      "it_IT": "Disciplina",
+      "ru_RU": "Послушание",
+      "ko_KR": "수양",
+      "zh_TW": "戒律",
+      "zh_CN": "戒律"
+    },
+    "id": 256
+  },
+  "257": {
+    "name": {
+      "en_US": "Holy",
+      "es_MX": "Sagrado",
+      "pt_BR": "Sagrado",
+      "de_DE": "Heilig",
+      "en_GB": "Holy",
+      "es_ES": "Sagrado",
+      "fr_FR": "Sacré",
+      "it_IT": "Sacro",
+      "ru_RU": "Свет",
+      "ko_KR": "신성",
+      "zh_TW": "神聖",
+      "zh_CN": "神圣"
+    },
+    "id": 257
+  },
+  "258": {
+    "name": {
+      "en_US": "Shadow",
+      "es_MX": "Sombra",
+      "pt_BR": "Sombra",
+      "de_DE": "Schatten",
+      "en_GB": "Shadow",
+      "es_ES": "Sombra",
+      "fr_FR": "Ombre",
+      "it_IT": "Ombra",
+      "ru_RU": "Тьма",
+      "ko_KR": "암흑",
+      "zh_TW": "暗影",
+      "zh_CN": "暗影"
+    },
+    "id": 258
+  },
+  "259": {
+    "name": {
+      "en_US": "Assassination",
+      "es_MX": "Asesinato",
+      "pt_BR": "Assassinato",
+      "de_DE": "Meucheln",
+      "en_GB": "Assassination",
+      "es_ES": "Asesinato",
+      "fr_FR": "Assassinat",
+      "it_IT": "Assassinio",
+      "ru_RU": "Ликвидация",
+      "ko_KR": "암살",
+      "zh_TW": "刺殺",
+      "zh_CN": "奇袭"
+    },
+    "id": 259
+  },
+  "260": {
+    "name": {
+      "en_US": "Outlaw",
+      "es_MX": "Forajido",
+      "pt_BR": "Fora da Lei",
+      "de_DE": "Gesetzlosigkeit",
+      "en_GB": "Outlaw",
+      "es_ES": "Forajido",
+      "fr_FR": "Hors-la-loi",
+      "it_IT": "Fuorilegge",
+      "ru_RU": "Головорез",
+      "ko_KR": "무법",
+      "zh_TW": "暴徒",
+      "zh_CN": "狂徒"
+    },
+    "id": 260
+  },
+  "261": {
+    "name": {
+      "en_US": "Subtlety",
+      "es_MX": "Sutileza",
+      "pt_BR": "Subterfúgio",
+      "de_DE": "Täuschung",
+      "en_GB": "Subtlety",
+      "es_ES": "Sutileza",
+      "fr_FR": "Finesse",
+      "it_IT": "Scaltrezza",
+      "ru_RU": "Скрытность",
+      "ko_KR": "잠행",
+      "zh_TW": "敏銳",
+      "zh_CN": "敏锐"
+    },
+    "id": 261
+  },
+  "262": {
+    "name": {
+      "en_US": "Elemental",
+      "es_MX": "Elemental",
+      "pt_BR": "Elemental",
+      "de_DE": "Elementar",
+      "en_GB": "Elemental",
+      "es_ES": "Elemental",
+      "fr_FR": "Élémentaire",
+      "it_IT": "Elementale",
+      "ru_RU": "Стихии",
+      "ko_KR": "정기",
+      "zh_TW": "元素",
+      "zh_CN": "元素"
+    },
+    "id": 262
+  },
+  "263": {
+    "name": {
+      "en_US": "Enhancement",
+      "es_MX": "Mejora",
+      "pt_BR": "Aperfeiçoamento",
+      "de_DE": "Verstärkung",
+      "en_GB": "Enhancement",
+      "es_ES": "Mejora",
+      "fr_FR": "Amélioration",
+      "it_IT": "Potenziamento",
+      "ru_RU": "Совершенствование",
+      "ko_KR": "고양",
+      "zh_TW": "增強",
+      "zh_CN": "增强"
+    },
+    "id": 263
+  },
+  "264": {
+    "name": {
+      "en_US": "Restoration",
+      "es_MX": "Restauración",
+      "pt_BR": "Restauração",
+      "de_DE": "Wiederherstellung",
+      "en_GB": "Restoration",
+      "es_ES": "Restauración",
+      "fr_FR": "Restauration",
+      "it_IT": "Rigenerazione",
+      "ru_RU": "Исцеление",
+      "ko_KR": "복원",
+      "zh_TW": "恢復",
+      "zh_CN": "恢复"
+    },
+    "id": 264
+  },
+  "265": {
+    "name": {
+      "en_US": "Affliction",
+      "es_MX": "Aflicción",
+      "pt_BR": "Suplício",
+      "de_DE": "Gebrechen",
+      "en_GB": "Affliction",
+      "es_ES": "Aflicción",
+      "fr_FR": "Affliction",
+      "it_IT": "Afflizione",
+      "ru_RU": "Колдовство",
+      "ko_KR": "고통",
+      "zh_TW": "痛苦",
+      "zh_CN": "痛苦"
+    },
+    "id": 265
+  },
+  "266": {
+    "name": {
+      "en_US": "Demonology",
+      "es_MX": "Demonología",
+      "pt_BR": "Demonologia",
+      "de_DE": "Dämonologie",
+      "en_GB": "Demonology",
+      "es_ES": "Demonología",
+      "fr_FR": "Démonologie",
+      "it_IT": "Demonologia",
+      "ru_RU": "Демонология",
+      "ko_KR": "악마",
+      "zh_TW": "惡魔學識",
+      "zh_CN": "恶魔学识"
+    },
+    "id": 266
+  },
+  "267": {
+    "name": {
+      "en_US": "Destruction",
+      "es_MX": "Destrucción",
+      "pt_BR": "Destruição",
+      "de_DE": "Zerstörung",
+      "en_GB": "Destruction",
+      "es_ES": "Destrucción",
+      "fr_FR": "Destruction",
+      "it_IT": "Distruzione",
+      "ru_RU": "Разрушение",
+      "ko_KR": "파괴",
+      "zh_TW": "毀滅",
+      "zh_CN": "毁灭"
+    },
+    "id": 267
+  },
+  "268": {
+    "name": {
+      "en_US": "Brewmaster",
+      "es_MX": "Maestro cervecero",
+      "pt_BR": "Mestre Cervejeiro",
+      "de_DE": "Braumeister",
+      "en_GB": "Brewmaster",
+      "es_ES": "Maestro cervecero",
+      "fr_FR": "Maître brasseur",
+      "it_IT": "Mastro Birraio",
+      "ru_RU": "Хмелевар",
+      "ko_KR": "양조",
+      "zh_TW": "釀酒",
+      "zh_CN": "酒仙"
+    },
+    "id": 268
+  },
+  "269": {
+    "name": {
+      "en_US": "Windwalker",
+      "es_MX": "Viajero del viento",
+      "pt_BR": "Andarilho do Vento",
+      "de_DE": "Windläufer",
+      "en_GB": "Windwalker",
+      "es_ES": "Viajero del viento",
+      "fr_FR": "Marche-vent",
+      "it_IT": "Impeto",
+      "ru_RU": "Танцующий с ветром",
+      "ko_KR": "풍운",
+      "zh_TW": "御風",
+      "zh_CN": "踏风"
+    },
+    "id": 269
+  },
+  "270": {
+    "name": {
+      "en_US": "Mistweaver",
+      "es_MX": "Tejedor de niebla",
+      "pt_BR": "Tecelão da Névoa",
+      "de_DE": "Nebelwirker",
+      "en_GB": "Mistweaver",
+      "es_ES": "Tejedor de niebla",
+      "fr_FR": "Tisse-brume",
+      "it_IT": "Misticismo",
+      "ru_RU": "Ткач туманов",
+      "ko_KR": "운무",
+      "zh_TW": "織霧",
+      "zh_CN": "织雾"
+    },
+    "id": 270
+  },
+  "577": {
+    "name": {
+      "en_US": "Havoc",
+      "es_MX": "Caos",
+      "pt_BR": "Devastação",
+      "de_DE": "Verwüstung",
+      "en_GB": "Havoc",
+      "es_ES": "Devastación",
+      "fr_FR": "Dévastation",
+      "it_IT": "Rovina",
+      "ru_RU": "Истребление",
+      "ko_KR": "파멸",
+      "zh_TW": "災虐",
+      "zh_CN": "浩劫"
+    },
+    "id": 577
+  },
+  "581": {
+    "name": {
+      "en_US": "Vengeance",
+      "es_MX": "Venganza",
+      "pt_BR": "Vingança",
+      "de_DE": "Rachsucht",
+      "en_GB": "Vengeance",
+      "es_ES": "Venganza",
+      "fr_FR": "Vengeance",
+      "it_IT": "Vendetta",
+      "ru_RU": "Месть",
+      "ko_KR": "복수",
+      "zh_TW": "復仇",
+      "zh_CN": "复仇"
+    },
+    "id": 581
+  }
+}

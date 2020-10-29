@@ -1,0 +1,1718 @@
+{
+  "1": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/1?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 1,
+    "name": {
+      "en_US": "Warrior",
+      "es_MX": "Guerrero",
+      "pt_BR": "Guerreiro",
+      "de_DE": "Krieger",
+      "en_GB": "Warrior",
+      "es_ES": "Guerrero",
+      "fr_FR": "Guerrier",
+      "it_IT": "Guerriero",
+      "ru_RU": "Воин",
+      "ko_KR": "전사",
+      "zh_TW": "戰士",
+      "zh_CN": "战士"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Warrior",
+        "es_MX": "Guerrero",
+        "pt_BR": "Guerreiro",
+        "de_DE": "Krieger",
+        "en_GB": "Warrior",
+        "es_ES": "Guerrero",
+        "fr_FR": "Guerrier",
+        "it_IT": "Guerriero",
+        "ru_RU": "Воин",
+        "ko_KR": "전사",
+        "zh_TW": "戰士",
+        "zh_CN": "战士"
+      },
+      "female": {
+        "en_US": "Warrior",
+        "es_MX": "Guerrera",
+        "pt_BR": "Guerreira",
+        "de_DE": "Kriegerin",
+        "en_GB": "Warrior",
+        "es_ES": "Guerrera",
+        "fr_FR": "Guerrière",
+        "it_IT": "Guerriera",
+        "ru_RU": "Воин",
+        "ko_KR": "전사",
+        "zh_TW": "戰士",
+        "zh_CN": "战士"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/1?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Rage",
+        "es_MX": "Ira",
+        "pt_BR": "Raiva",
+        "de_DE": "Wut",
+        "en_GB": "Rage",
+        "es_ES": "Ira",
+        "fr_FR": "Rage",
+        "it_IT": "Rabbia",
+        "ru_RU": "Ярость",
+        "ko_KR": "분노",
+        "zh_TW": "怒氣",
+        "zh_CN": "怒气"
+      },
+      "id": 1
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/71?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Arms",
+          "es_MX": "Armas",
+          "pt_BR": "Armas",
+          "de_DE": "Waffen",
+          "en_GB": "Arms",
+          "es_ES": "Armas",
+          "fr_FR": "Armes",
+          "it_IT": "Armi",
+          "ru_RU": "Оружие",
+          "ko_KR": "무기",
+          "zh_TW": "武器",
+          "zh_CN": "武器"
+        },
+        "id": 71
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/72?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Fury",
+          "es_MX": "Furia",
+          "pt_BR": "Fúria",
+          "de_DE": "Furor",
+          "en_GB": "Fury",
+          "es_ES": "Furia",
+          "fr_FR": "Fureur",
+          "it_IT": "Furia",
+          "ru_RU": "Неистовство",
+          "ko_KR": "분노",
+          "zh_TW": "狂怒",
+          "zh_CN": "狂怒"
+        },
+        "id": 72
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/73?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Protection",
+          "es_MX": "Protección",
+          "pt_BR": "Proteção",
+          "de_DE": "Schutz",
+          "en_GB": "Protection",
+          "es_ES": "Protección",
+          "fr_FR": "Protection",
+          "it_IT": "Protezione",
+          "ru_RU": "Защита",
+          "ko_KR": "방어",
+          "zh_TW": "防護",
+          "zh_CN": "防护"
+        },
+        "id": 73
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/1?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 1
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/1/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "2": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/2?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 2,
+    "name": {
+      "en_US": "Paladin",
+      "es_MX": "Paladín",
+      "pt_BR": "Paladino",
+      "de_DE": "Paladin",
+      "en_GB": "Paladin",
+      "es_ES": "Paladín",
+      "fr_FR": "Paladin",
+      "it_IT": "Paladino",
+      "ru_RU": "Паладин",
+      "ko_KR": "성기사",
+      "zh_TW": "聖騎士",
+      "zh_CN": "圣骑士"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Paladin",
+        "es_MX": "Paladín",
+        "pt_BR": "Paladino",
+        "de_DE": "Paladin",
+        "en_GB": "Paladin",
+        "es_ES": "Paladín",
+        "fr_FR": "Paladin",
+        "it_IT": "Paladino",
+        "ru_RU": "Паладин",
+        "ko_KR": "성기사",
+        "zh_TW": "聖騎士",
+        "zh_CN": "圣骑士"
+      },
+      "female": {
+        "en_US": "Paladin",
+        "es_MX": "Paladín",
+        "pt_BR": "Paladina",
+        "de_DE": "Paladin",
+        "en_GB": "Paladin",
+        "es_ES": "Paladín",
+        "fr_FR": "Paladin",
+        "it_IT": "Paladina",
+        "ru_RU": "Паладин",
+        "ko_KR": "성기사",
+        "zh_TW": "聖騎士",
+        "zh_CN": "圣骑士"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Mana",
+        "es_MX": "Maná",
+        "pt_BR": "Mana",
+        "de_DE": "Mana",
+        "en_GB": "Mana",
+        "es_ES": "Maná",
+        "fr_FR": "Mana",
+        "it_IT": "Mana",
+        "ru_RU": "Мана",
+        "ko_KR": "마나",
+        "zh_TW": "法力",
+        "zh_CN": "法力值"
+      },
+      "id": 0
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/65?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Holy",
+          "es_MX": "Sagrado",
+          "pt_BR": "Sagrado",
+          "de_DE": "Heilig",
+          "en_GB": "Holy",
+          "es_ES": "Sagrado",
+          "fr_FR": "Sacré",
+          "it_IT": "Sacro",
+          "ru_RU": "Свет",
+          "ko_KR": "신성",
+          "zh_TW": "神聖",
+          "zh_CN": "神圣"
+        },
+        "id": 65
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/66?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Protection",
+          "es_MX": "Protección",
+          "pt_BR": "Proteção",
+          "de_DE": "Schutz",
+          "en_GB": "Protection",
+          "es_ES": "Protección",
+          "fr_FR": "Protection",
+          "it_IT": "Protezione",
+          "ru_RU": "Защита",
+          "ko_KR": "보호",
+          "zh_TW": "防護",
+          "zh_CN": "防护"
+        },
+        "id": 66
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/70?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Retribution",
+          "es_MX": "Reprensión",
+          "pt_BR": "Retribuição",
+          "de_DE": "Vergeltung",
+          "en_GB": "Retribution",
+          "es_ES": "Reprensión",
+          "fr_FR": "Vindicte",
+          "it_IT": "Castigo",
+          "ru_RU": "Воздаяние",
+          "ko_KR": "징벌",
+          "zh_TW": "懲戒",
+          "zh_CN": "惩戒"
+        },
+        "id": 70
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/2?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 2
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/2/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "3": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/3?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 3,
+    "name": {
+      "en_US": "Hunter",
+      "es_MX": "Cazador",
+      "pt_BR": "Caçador",
+      "de_DE": "Jäger",
+      "en_GB": "Hunter",
+      "es_ES": "Cazador",
+      "fr_FR": "Chasseur",
+      "it_IT": "Cacciatore",
+      "ru_RU": "Охотник",
+      "ko_KR": "사냥꾼",
+      "zh_TW": "獵人",
+      "zh_CN": "猎人"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Hunter",
+        "es_MX": "Cazador",
+        "pt_BR": "Caçador",
+        "de_DE": "Jäger",
+        "en_GB": "Hunter",
+        "es_ES": "Cazador",
+        "fr_FR": "Chasseur",
+        "it_IT": "Cacciatore",
+        "ru_RU": "Охотник",
+        "ko_KR": "사냥꾼",
+        "zh_TW": "獵人",
+        "zh_CN": "猎人"
+      },
+      "female": {
+        "en_US": "Hunter",
+        "es_MX": "Cazadora",
+        "pt_BR": "Caçadora",
+        "de_DE": "Jägerin",
+        "en_GB": "Hunter",
+        "es_ES": "Cazadora",
+        "fr_FR": "Chasseresse",
+        "it_IT": "Cacciatrice",
+        "ru_RU": "Охотница",
+        "ko_KR": "사냥꾼",
+        "zh_TW": "獵人",
+        "zh_CN": "猎人"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/2?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Focus",
+        "es_MX": "Enfoque",
+        "pt_BR": "Concentração",
+        "de_DE": "Fokus",
+        "en_GB": "Focus",
+        "es_ES": "Enfoque",
+        "fr_FR": "Focalisation",
+        "it_IT": "Focus",
+        "ru_RU": "Концентрация",
+        "ko_KR": "집중",
+        "zh_TW": "集中值",
+        "zh_CN": "集中值"
+      },
+      "id": 2
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/253?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Beast Mastery",
+          "es_MX": "Bestias",
+          "pt_BR": "Domínio das Feras",
+          "de_DE": "Tierherrschaft",
+          "en_GB": "Beast Mastery",
+          "es_ES": "Bestias",
+          "fr_FR": "Maîtrise des bêtes",
+          "it_IT": "Affinità Animale",
+          "ru_RU": "Повелитель зверей",
+          "ko_KR": "야수",
+          "zh_TW": "野獸控制",
+          "zh_CN": "野兽控制"
+        },
+        "id": 253
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/254?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Marksmanship",
+          "es_MX": "Puntería",
+          "pt_BR": "Precisão",
+          "de_DE": "Treffsicherheit",
+          "en_GB": "Marksmanship",
+          "es_ES": "Puntería",
+          "fr_FR": "Précision",
+          "it_IT": "Precisione di Tiro",
+          "ru_RU": "Стрельба",
+          "ko_KR": "사격",
+          "zh_TW": "射擊",
+          "zh_CN": "射击"
+        },
+        "id": 254
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/255?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Survival",
+          "es_MX": "Supervivencia",
+          "pt_BR": "Sobrevivência",
+          "de_DE": "Überleben",
+          "en_GB": "Survival",
+          "es_ES": "Supervivencia",
+          "fr_FR": "Survie",
+          "it_IT": "Sopravvivenza",
+          "ru_RU": "Выживание",
+          "ko_KR": "생존",
+          "zh_TW": "生存",
+          "zh_CN": "生存"
+        },
+        "id": 255
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/3?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 3
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/3/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "4": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/4?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 4,
+    "name": {
+      "en_US": "Rogue",
+      "es_MX": "Pícaro",
+      "pt_BR": "Ladino",
+      "de_DE": "Schurke",
+      "en_GB": "Rogue",
+      "es_ES": "Pícaro",
+      "fr_FR": "Voleur",
+      "it_IT": "Ladro",
+      "ru_RU": "Разбойник",
+      "ko_KR": "도적",
+      "zh_TW": "盜賊",
+      "zh_CN": "潜行者"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Rogue",
+        "es_MX": "Pícaro",
+        "pt_BR": "Ladino",
+        "de_DE": "Schurke",
+        "en_GB": "Rogue",
+        "es_ES": "Pícaro",
+        "fr_FR": "Voleur",
+        "it_IT": "Ladro",
+        "ru_RU": "Разбойник",
+        "ko_KR": "도적",
+        "zh_TW": "盜賊",
+        "zh_CN": "潜行者"
+      },
+      "female": {
+        "en_US": "Rogue",
+        "es_MX": "Pícara",
+        "pt_BR": "Ladina",
+        "de_DE": "Schurkin",
+        "en_GB": "Rogue",
+        "es_ES": "Pícara",
+        "fr_FR": "Voleuse",
+        "it_IT": "Ladra",
+        "ru_RU": "Разбойница",
+        "ko_KR": "도적",
+        "zh_TW": "盜賊",
+        "zh_CN": "潜行者"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/3?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Energy",
+        "es_MX": "Energía",
+        "pt_BR": "Energia",
+        "de_DE": "Energie",
+        "en_GB": "Energy",
+        "es_ES": "Energía",
+        "fr_FR": "Énergie",
+        "it_IT": "Energia",
+        "ru_RU": "Энергия",
+        "ko_KR": "기력",
+        "zh_TW": "能量",
+        "zh_CN": "能量"
+      },
+      "id": 3
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/259?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Assassination",
+          "es_MX": "Asesinato",
+          "pt_BR": "Assassinato",
+          "de_DE": "Meucheln",
+          "en_GB": "Assassination",
+          "es_ES": "Asesinato",
+          "fr_FR": "Assassinat",
+          "it_IT": "Assassinio",
+          "ru_RU": "Ликвидация",
+          "ko_KR": "암살",
+          "zh_TW": "刺殺",
+          "zh_CN": "奇袭"
+        },
+        "id": 259
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/260?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Outlaw",
+          "es_MX": "Forajido",
+          "pt_BR": "Fora da Lei",
+          "de_DE": "Gesetzlosigkeit",
+          "en_GB": "Outlaw",
+          "es_ES": "Forajido",
+          "fr_FR": "Hors-la-loi",
+          "it_IT": "Fuorilegge",
+          "ru_RU": "Головорез",
+          "ko_KR": "무법",
+          "zh_TW": "暴徒",
+          "zh_CN": "狂徒"
+        },
+        "id": 260
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/261?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Subtlety",
+          "es_MX": "Sutileza",
+          "pt_BR": "Subterfúgio",
+          "de_DE": "Täuschung",
+          "en_GB": "Subtlety",
+          "es_ES": "Sutileza",
+          "fr_FR": "Finesse",
+          "it_IT": "Scaltrezza",
+          "ru_RU": "Скрытность",
+          "ko_KR": "잠행",
+          "zh_TW": "敏銳",
+          "zh_CN": "敏锐"
+        },
+        "id": 261
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/4?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 4
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/4/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "5": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/5?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 5,
+    "name": {
+      "en_US": "Priest",
+      "es_MX": "Sacerdote",
+      "pt_BR": "Sacerdote",
+      "de_DE": "Priester",
+      "en_GB": "Priest",
+      "es_ES": "Sacerdote",
+      "fr_FR": "Prêtre",
+      "it_IT": "Sacerdote",
+      "ru_RU": "Жрец",
+      "ko_KR": "사제",
+      "zh_TW": "牧師",
+      "zh_CN": "牧师"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Priest",
+        "es_MX": "Sacerdote",
+        "pt_BR": "Sacerdote",
+        "de_DE": "Priester",
+        "en_GB": "Priest",
+        "es_ES": "Sacerdote",
+        "fr_FR": "Prêtre",
+        "it_IT": "Sacerdote",
+        "ru_RU": "Жрец",
+        "ko_KR": "사제",
+        "zh_TW": "牧師",
+        "zh_CN": "牧师"
+      },
+      "female": {
+        "en_US": "Priest",
+        "es_MX": "Sacerdotisa",
+        "pt_BR": "Sacerdotisa",
+        "de_DE": "Priesterin",
+        "en_GB": "Priest",
+        "es_ES": "Sacerdotisa",
+        "fr_FR": "Prêtresse",
+        "it_IT": "Sacerdotessa",
+        "ru_RU": "Жрица",
+        "ko_KR": "사제",
+        "zh_TW": "牧師",
+        "zh_CN": "牧师"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Mana",
+        "es_MX": "Maná",
+        "pt_BR": "Mana",
+        "de_DE": "Mana",
+        "en_GB": "Mana",
+        "es_ES": "Maná",
+        "fr_FR": "Mana",
+        "it_IT": "Mana",
+        "ru_RU": "Мана",
+        "ko_KR": "마나",
+        "zh_TW": "法力",
+        "zh_CN": "法力值"
+      },
+      "id": 0
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/256?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Discipline",
+          "es_MX": "Disciplina",
+          "pt_BR": "Disciplina",
+          "de_DE": "Disziplin",
+          "en_GB": "Discipline",
+          "es_ES": "Disciplina",
+          "fr_FR": "Discipline",
+          "it_IT": "Disciplina",
+          "ru_RU": "Послушание",
+          "ko_KR": "수양",
+          "zh_TW": "戒律",
+          "zh_CN": "戒律"
+        },
+        "id": 256
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/257?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Holy",
+          "es_MX": "Sagrado",
+          "pt_BR": "Sagrado",
+          "de_DE": "Heilig",
+          "en_GB": "Holy",
+          "es_ES": "Sagrado",
+          "fr_FR": "Sacré",
+          "it_IT": "Sacro",
+          "ru_RU": "Свет",
+          "ko_KR": "신성",
+          "zh_TW": "神聖",
+          "zh_CN": "神圣"
+        },
+        "id": 257
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/258?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Shadow",
+          "es_MX": "Sombra",
+          "pt_BR": "Sombra",
+          "de_DE": "Schatten",
+          "en_GB": "Shadow",
+          "es_ES": "Sombra",
+          "fr_FR": "Ombre",
+          "it_IT": "Ombra",
+          "ru_RU": "Тьма",
+          "ko_KR": "암흑",
+          "zh_TW": "暗影",
+          "zh_CN": "暗影"
+        },
+        "id": 258
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/5?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 5
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/5/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "6": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/6?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 6,
+    "name": {
+      "en_US": "Death Knight",
+      "es_MX": "Caballero de la Muerte",
+      "pt_BR": "Cavaleiro da Morte",
+      "de_DE": "Todesritter",
+      "en_GB": "Death Knight",
+      "es_ES": "Caballero de la Muerte",
+      "fr_FR": "Chevalier de la mort",
+      "it_IT": "Cavaliere della Morte",
+      "ru_RU": "Рыцарь смерти",
+      "ko_KR": "죽음의 기사",
+      "zh_TW": "死亡騎士",
+      "zh_CN": "死亡骑士"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Death Knight",
+        "es_MX": "Caballero de la Muerte",
+        "pt_BR": "Cavaleiro da Morte",
+        "de_DE": "Todesritter",
+        "en_GB": "Death Knight",
+        "es_ES": "Caballero de la Muerte",
+        "fr_FR": "Chevalier de la mort",
+        "it_IT": "Cavaliere della Morte",
+        "ru_RU": "Рыцарь смерти",
+        "ko_KR": "죽음의 기사",
+        "zh_TW": "死亡騎士",
+        "zh_CN": "死亡骑士"
+      },
+      "female": {
+        "en_US": "Death Knight",
+        "es_MX": "Caballero de la Muerte",
+        "pt_BR": "Cavaleira da Morte",
+        "de_DE": "Todesritter",
+        "en_GB": "Death Knight",
+        "es_ES": "Caballero de la Muerte",
+        "fr_FR": "Chevalier de la mort",
+        "it_IT": "Cavaliere della Morte",
+        "ru_RU": "Рыцарь смерти",
+        "ko_KR": "죽음의 기사",
+        "zh_TW": "死亡騎士",
+        "zh_CN": "死亡骑士"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/6?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Runic Power",
+        "es_MX": "Poder rúnico",
+        "pt_BR": "Poder Rúnico",
+        "de_DE": "Runenmacht",
+        "en_GB": "Runic Power",
+        "es_ES": "Poder rúnico",
+        "fr_FR": "Puissance runique",
+        "it_IT": "Potenza runica",
+        "ru_RU": "Сила рун",
+        "ko_KR": "룬 마력",
+        "zh_TW": "符能",
+        "zh_CN": "符文能量"
+      },
+      "id": 6
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/250?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Blood",
+          "es_MX": "Sangre",
+          "pt_BR": "Sangue",
+          "de_DE": "Blut",
+          "en_GB": "Blood",
+          "es_ES": "Sangre",
+          "fr_FR": "Sang",
+          "it_IT": "Sangue",
+          "ru_RU": "Кровь",
+          "ko_KR": "혈기",
+          "zh_TW": "血魄",
+          "zh_CN": "鲜血"
+        },
+        "id": 250
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/251?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Frost",
+          "es_MX": "Escarcha",
+          "pt_BR": "Gélido",
+          "de_DE": "Frost",
+          "en_GB": "Frost",
+          "es_ES": "Escarcha",
+          "fr_FR": "Givre",
+          "it_IT": "Gelo",
+          "ru_RU": "Лед",
+          "ko_KR": "냉기",
+          "zh_TW": "冰霜",
+          "zh_CN": "冰霜"
+        },
+        "id": 251
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/252?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Unholy",
+          "es_MX": "Profano",
+          "pt_BR": "Profano",
+          "de_DE": "Unheilig",
+          "en_GB": "Unholy",
+          "es_ES": "Profano",
+          "fr_FR": "Impie",
+          "it_IT": "Empietà",
+          "ru_RU": "Нечестивость",
+          "ko_KR": "부정",
+          "zh_TW": "穢邪",
+          "zh_CN": "邪恶"
+        },
+        "id": 252
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/6?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 6
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/6/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "7": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/7?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 7,
+    "name": {
+      "en_US": "Shaman",
+      "es_MX": "Chamán",
+      "pt_BR": "Xamã",
+      "de_DE": "Schamane",
+      "en_GB": "Shaman",
+      "es_ES": "Chamán",
+      "fr_FR": "Chaman",
+      "it_IT": "Sciamano",
+      "ru_RU": "Шаман",
+      "ko_KR": "주술사",
+      "zh_TW": "薩滿",
+      "zh_CN": "萨满祭司"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Shaman",
+        "es_MX": "Chamán",
+        "pt_BR": "Xamã",
+        "de_DE": "Schamane",
+        "en_GB": "Shaman",
+        "es_ES": "Chamán",
+        "fr_FR": "Chaman",
+        "it_IT": "Sciamano",
+        "ru_RU": "Шаман",
+        "ko_KR": "주술사",
+        "zh_TW": "薩滿",
+        "zh_CN": "萨满祭司"
+      },
+      "female": {
+        "en_US": "Shaman",
+        "es_MX": "Chamán",
+        "pt_BR": "Xamã",
+        "de_DE": "Schamanin",
+        "en_GB": "Shaman",
+        "es_ES": "Chamán",
+        "fr_FR": "Chamane",
+        "it_IT": "Sciamana",
+        "ru_RU": "Шаманка",
+        "ko_KR": "주술사",
+        "zh_TW": "薩滿",
+        "zh_CN": "萨满祭司"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Mana",
+        "es_MX": "Maná",
+        "pt_BR": "Mana",
+        "de_DE": "Mana",
+        "en_GB": "Mana",
+        "es_ES": "Maná",
+        "fr_FR": "Mana",
+        "it_IT": "Mana",
+        "ru_RU": "Мана",
+        "ko_KR": "마나",
+        "zh_TW": "法力",
+        "zh_CN": "法力值"
+      },
+      "id": 0
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/262?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Elemental",
+          "es_MX": "Elemental",
+          "pt_BR": "Elemental",
+          "de_DE": "Elementar",
+          "en_GB": "Elemental",
+          "es_ES": "Elemental",
+          "fr_FR": "Élémentaire",
+          "it_IT": "Elementale",
+          "ru_RU": "Стихии",
+          "ko_KR": "정기",
+          "zh_TW": "元素",
+          "zh_CN": "元素"
+        },
+        "id": 262
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/263?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Enhancement",
+          "es_MX": "Mejora",
+          "pt_BR": "Aperfeiçoamento",
+          "de_DE": "Verstärkung",
+          "en_GB": "Enhancement",
+          "es_ES": "Mejora",
+          "fr_FR": "Amélioration",
+          "it_IT": "Potenziamento",
+          "ru_RU": "Совершенствование",
+          "ko_KR": "고양",
+          "zh_TW": "增強",
+          "zh_CN": "增强"
+        },
+        "id": 263
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/264?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Restoration",
+          "es_MX": "Restauración",
+          "pt_BR": "Restauração",
+          "de_DE": "Wiederherstellung",
+          "en_GB": "Restoration",
+          "es_ES": "Restauración",
+          "fr_FR": "Restauration",
+          "it_IT": "Rigenerazione",
+          "ru_RU": "Исцеление",
+          "ko_KR": "복원",
+          "zh_TW": "恢復",
+          "zh_CN": "恢复"
+        },
+        "id": 264
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/7?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 7
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/7/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "8": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/8?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 8,
+    "name": {
+      "en_US": "Mage",
+      "es_MX": "Mago",
+      "pt_BR": "Mago",
+      "de_DE": "Magier",
+      "en_GB": "Mage",
+      "es_ES": "Mago",
+      "fr_FR": "Mage",
+      "it_IT": "Mago",
+      "ru_RU": "Маг",
+      "ko_KR": "마법사",
+      "zh_TW": "法師",
+      "zh_CN": "法师"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Mage",
+        "es_MX": "Mago",
+        "pt_BR": "Mago",
+        "de_DE": "Magier",
+        "en_GB": "Mage",
+        "es_ES": "Mago",
+        "fr_FR": "Mage",
+        "it_IT": "Mago",
+        "ru_RU": "Маг",
+        "ko_KR": "마법사",
+        "zh_TW": "法師",
+        "zh_CN": "法师"
+      },
+      "female": {
+        "en_US": "Mage",
+        "es_MX": "Maga",
+        "pt_BR": "Maga",
+        "de_DE": "Magierin",
+        "en_GB": "Mage",
+        "es_ES": "Maga",
+        "fr_FR": "Mage",
+        "it_IT": "Maga",
+        "ru_RU": "Маг",
+        "ko_KR": "마법사",
+        "zh_TW": "法師",
+        "zh_CN": "法师"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Mana",
+        "es_MX": "Maná",
+        "pt_BR": "Mana",
+        "de_DE": "Mana",
+        "en_GB": "Mana",
+        "es_ES": "Maná",
+        "fr_FR": "Mana",
+        "it_IT": "Mana",
+        "ru_RU": "Мана",
+        "ko_KR": "마나",
+        "zh_TW": "法力",
+        "zh_CN": "法力值"
+      },
+      "id": 0
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/62?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Arcane",
+          "es_MX": "Arcano",
+          "pt_BR": "Arcano",
+          "de_DE": "Arkan",
+          "en_GB": "Arcane",
+          "es_ES": "Arcano",
+          "fr_FR": "Arcanes",
+          "it_IT": "Arcano",
+          "ru_RU": "Тайная магия",
+          "ko_KR": "비전",
+          "zh_TW": "秘法",
+          "zh_CN": "奥术"
+        },
+        "id": 62
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/63?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Fire",
+          "es_MX": "Fuego",
+          "pt_BR": "Fogo",
+          "de_DE": "Feuer",
+          "en_GB": "Fire",
+          "es_ES": "Fuego",
+          "fr_FR": "Feu",
+          "it_IT": "Fuoco",
+          "ru_RU": "Огонь",
+          "ko_KR": "화염",
+          "zh_TW": "火焰",
+          "zh_CN": "火焰"
+        },
+        "id": 63
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/64?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Frost",
+          "es_MX": "Escarcha",
+          "pt_BR": "Gélido",
+          "de_DE": "Frost",
+          "en_GB": "Frost",
+          "es_ES": "Escarcha",
+          "fr_FR": "Givre",
+          "it_IT": "Gelo",
+          "ru_RU": "Лед",
+          "ko_KR": "냉기",
+          "zh_TW": "冰霜",
+          "zh_CN": "冰霜"
+        },
+        "id": 64
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/8?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 8
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/8/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "9": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/9?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 9,
+    "name": {
+      "en_US": "Warlock",
+      "es_MX": "Brujo",
+      "pt_BR": "Bruxo",
+      "de_DE": "Hexenmeister",
+      "en_GB": "Warlock",
+      "es_ES": "Brujo",
+      "fr_FR": "Démoniste",
+      "it_IT": "Stregone",
+      "ru_RU": "Чернокнижник",
+      "ko_KR": "흑마법사",
+      "zh_TW": "術士",
+      "zh_CN": "术士"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Warlock",
+        "es_MX": "Brujo",
+        "pt_BR": "Bruxo",
+        "de_DE": "Hexenmeister",
+        "en_GB": "Warlock",
+        "es_ES": "Brujo",
+        "fr_FR": "Démoniste",
+        "it_IT": "Stregone",
+        "ru_RU": "Чернокнижник",
+        "ko_KR": "흑마법사",
+        "zh_TW": "術士",
+        "zh_CN": "术士"
+      },
+      "female": {
+        "en_US": "Warlock",
+        "es_MX": "Bruja",
+        "pt_BR": "Bruxa",
+        "de_DE": "Hexenmeisterin",
+        "en_GB": "Warlock",
+        "es_ES": "Bruja",
+        "fr_FR": "Démoniste",
+        "it_IT": "Strega",
+        "ru_RU": "Чернокнижница",
+        "ko_KR": "흑마법사",
+        "zh_TW": "術士",
+        "zh_CN": "术士"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Mana",
+        "es_MX": "Maná",
+        "pt_BR": "Mana",
+        "de_DE": "Mana",
+        "en_GB": "Mana",
+        "es_ES": "Maná",
+        "fr_FR": "Mana",
+        "it_IT": "Mana",
+        "ru_RU": "Мана",
+        "ko_KR": "마나",
+        "zh_TW": "法力",
+        "zh_CN": "法力值"
+      },
+      "id": 0
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/265?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Affliction",
+          "es_MX": "Aflicción",
+          "pt_BR": "Suplício",
+          "de_DE": "Gebrechen",
+          "en_GB": "Affliction",
+          "es_ES": "Aflicción",
+          "fr_FR": "Affliction",
+          "it_IT": "Afflizione",
+          "ru_RU": "Колдовство",
+          "ko_KR": "고통",
+          "zh_TW": "痛苦",
+          "zh_CN": "痛苦"
+        },
+        "id": 265
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/266?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Demonology",
+          "es_MX": "Demonología",
+          "pt_BR": "Demonologia",
+          "de_DE": "Dämonologie",
+          "en_GB": "Demonology",
+          "es_ES": "Demonología",
+          "fr_FR": "Démonologie",
+          "it_IT": "Demonologia",
+          "ru_RU": "Демонология",
+          "ko_KR": "악마",
+          "zh_TW": "惡魔學識",
+          "zh_CN": "恶魔学识"
+        },
+        "id": 266
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/267?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Destruction",
+          "es_MX": "Destrucción",
+          "pt_BR": "Destruição",
+          "de_DE": "Zerstörung",
+          "en_GB": "Destruction",
+          "es_ES": "Destrucción",
+          "fr_FR": "Destruction",
+          "it_IT": "Distruzione",
+          "ru_RU": "Разрушение",
+          "ko_KR": "파괴",
+          "zh_TW": "毀滅",
+          "zh_CN": "毁灭"
+        },
+        "id": 267
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/9?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 9
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/9/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "10": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/10?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 10,
+    "name": {
+      "en_US": "Monk",
+      "es_MX": "Monje",
+      "pt_BR": "Monge",
+      "de_DE": "Mönch",
+      "en_GB": "Monk",
+      "es_ES": "Monje",
+      "fr_FR": "Moine",
+      "it_IT": "Monaco",
+      "ru_RU": "Монах",
+      "ko_KR": "수도사",
+      "zh_TW": "武僧",
+      "zh_CN": "武僧"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Monk",
+        "es_MX": "Monje",
+        "pt_BR": "Monge",
+        "de_DE": "Mönch",
+        "en_GB": "Monk",
+        "es_ES": "Monje",
+        "fr_FR": "Moine",
+        "it_IT": "Monaco",
+        "ru_RU": "Монах",
+        "ko_KR": "수도사",
+        "zh_TW": "武僧",
+        "zh_CN": "武僧"
+      },
+      "female": {
+        "en_US": "Monk",
+        "es_MX": "Monje",
+        "pt_BR": "Monja",
+        "de_DE": "Mönch",
+        "en_GB": "Monk",
+        "es_ES": "Monje",
+        "fr_FR": "Moniale",
+        "it_IT": "Monaca",
+        "ru_RU": "Монахиня",
+        "ko_KR": "수도사",
+        "zh_TW": "武僧",
+        "zh_CN": "武僧"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/3?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Energy",
+        "es_MX": "Energía",
+        "pt_BR": "Energia",
+        "de_DE": "Energie",
+        "en_GB": "Energy",
+        "es_ES": "Energía",
+        "fr_FR": "Énergie",
+        "it_IT": "Energia",
+        "ru_RU": "Энергия",
+        "ko_KR": "기력",
+        "zh_TW": "能量",
+        "zh_CN": "能量"
+      },
+      "id": 3
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/268?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Brewmaster",
+          "es_MX": "Maestro cervecero",
+          "pt_BR": "Mestre Cervejeiro",
+          "de_DE": "Braumeister",
+          "en_GB": "Brewmaster",
+          "es_ES": "Maestro cervecero",
+          "fr_FR": "Maître brasseur",
+          "it_IT": "Mastro Birraio",
+          "ru_RU": "Хмелевар",
+          "ko_KR": "양조",
+          "zh_TW": "釀酒",
+          "zh_CN": "酒仙"
+        },
+        "id": 268
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/269?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Windwalker",
+          "es_MX": "Viajero del viento",
+          "pt_BR": "Andarilho do Vento",
+          "de_DE": "Windläufer",
+          "en_GB": "Windwalker",
+          "es_ES": "Viajero del viento",
+          "fr_FR": "Marche-vent",
+          "it_IT": "Impeto",
+          "ru_RU": "Танцующий с ветром",
+          "ko_KR": "풍운",
+          "zh_TW": "御風",
+          "zh_CN": "踏风"
+        },
+        "id": 269
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/270?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Mistweaver",
+          "es_MX": "Tejedor de niebla",
+          "pt_BR": "Tecelão da Névoa",
+          "de_DE": "Nebelwirker",
+          "en_GB": "Mistweaver",
+          "es_ES": "Tejedor de niebla",
+          "fr_FR": "Tisse-brume",
+          "it_IT": "Misticismo",
+          "ru_RU": "Ткач туманов",
+          "ko_KR": "운무",
+          "zh_TW": "織霧",
+          "zh_CN": "织雾"
+        },
+        "id": 270
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/10?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 10
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/10/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "11": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/11?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 11,
+    "name": {
+      "en_US": "Druid",
+      "es_MX": "Druida",
+      "pt_BR": "Druida",
+      "de_DE": "Druide",
+      "en_GB": "Druid",
+      "es_ES": "Druida",
+      "fr_FR": "Druide",
+      "it_IT": "Druido",
+      "ru_RU": "Друид",
+      "ko_KR": "드루이드",
+      "zh_TW": "德魯伊",
+      "zh_CN": "德鲁伊"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Druid",
+        "es_MX": "Druida",
+        "pt_BR": "Druida",
+        "de_DE": "Druide",
+        "en_GB": "Druid",
+        "es_ES": "Druida",
+        "fr_FR": "Druide",
+        "it_IT": "Druido",
+        "ru_RU": "Друид",
+        "ko_KR": "드루이드",
+        "zh_TW": "德魯伊",
+        "zh_CN": "德鲁伊"
+      },
+      "female": {
+        "en_US": "Druid",
+        "es_MX": "Druida",
+        "pt_BR": "Druidesa",
+        "de_DE": "Druidin",
+        "en_GB": "Druid",
+        "es_ES": "Druida",
+        "fr_FR": "Druidesse",
+        "it_IT": "Druida",
+        "ru_RU": "Друид",
+        "ko_KR": "드루이드",
+        "zh_TW": "德魯伊",
+        "zh_CN": "德鲁伊"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/0?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Mana",
+        "es_MX": "Maná",
+        "pt_BR": "Mana",
+        "de_DE": "Mana",
+        "en_GB": "Mana",
+        "es_ES": "Maná",
+        "fr_FR": "Mana",
+        "it_IT": "Mana",
+        "ru_RU": "Мана",
+        "ko_KR": "마나",
+        "zh_TW": "法力",
+        "zh_CN": "法力值"
+      },
+      "id": 0
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/102?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Balance",
+          "es_MX": "Equilibrio",
+          "pt_BR": "Equilíbrio",
+          "de_DE": "Gleichgewicht",
+          "en_GB": "Balance",
+          "es_ES": "Equilibrio",
+          "fr_FR": "Équilibre",
+          "it_IT": "Equilibrio",
+          "ru_RU": "Баланс",
+          "ko_KR": "조화",
+          "zh_TW": "平衡",
+          "zh_CN": "平衡"
+        },
+        "id": 102
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/103?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Feral",
+          "es_MX": "Feral",
+          "pt_BR": "Feral",
+          "de_DE": "Wildheit",
+          "en_GB": "Feral",
+          "es_ES": "Feral",
+          "fr_FR": "Farouche",
+          "it_IT": "Aggressore Ferino",
+          "ru_RU": "Сила зверя",
+          "ko_KR": "야성",
+          "zh_TW": "野性戰鬥",
+          "zh_CN": "野性"
+        },
+        "id": 103
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/104?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Guardian",
+          "es_MX": "Guardián",
+          "pt_BR": "Guardião",
+          "de_DE": "Wächter",
+          "en_GB": "Guardian",
+          "es_ES": "Guardián",
+          "fr_FR": "Gardien",
+          "it_IT": "Guardiano Ferino",
+          "ru_RU": "Страж",
+          "ko_KR": "수호",
+          "zh_TW": "守護者",
+          "zh_CN": "守护"
+        },
+        "id": 104
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/105?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Restoration",
+          "es_MX": "Restauración",
+          "pt_BR": "Restauração",
+          "de_DE": "Wiederherstellung",
+          "en_GB": "Restoration",
+          "es_ES": "Restauración",
+          "fr_FR": "Restauration",
+          "it_IT": "Rigenerazione",
+          "ru_RU": "Исцеление",
+          "ko_KR": "회복",
+          "zh_TW": "恢復",
+          "zh_CN": "恢复"
+        },
+        "id": 105
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/11?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 11
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/11/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  },
+  "12": {
+    "_links": {
+      "self": {
+        "href": "https://eu.api.blizzard.com/data/wow/playable-class/12?namespace=static-9.0.1_36072-eu"
+      }
+    },
+    "id": 12,
+    "name": {
+      "en_US": "Demon Hunter",
+      "es_MX": "Cazador de demonios",
+      "pt_BR": "Caçador de Demônios",
+      "de_DE": "Dämonenjäger",
+      "en_GB": "Demon Hunter",
+      "es_ES": "Cazador de demonios",
+      "fr_FR": "Chasseur de démons",
+      "it_IT": "Cacciatore di Demoni",
+      "ru_RU": "Охотник на демонов",
+      "ko_KR": "악마사냥꾼",
+      "zh_TW": "惡魔獵人",
+      "zh_CN": "恶魔猎手"
+    },
+    "gender_name": {
+      "male": {
+        "en_US": "Demon Hunter",
+        "es_MX": "Cazador de demonios",
+        "pt_BR": "Caçador de Demônios",
+        "de_DE": "Dämonenjäger",
+        "en_GB": "Demon Hunter",
+        "es_ES": "Cazador de demonios",
+        "fr_FR": "Chasseur de démons",
+        "it_IT": "Cacciatore di Demoni",
+        "ru_RU": "Охотник на демонов",
+        "ko_KR": "악마사냥꾼",
+        "zh_TW": "惡魔獵人",
+        "zh_CN": "恶魔猎手"
+      },
+      "female": {
+        "en_US": "Demon Hunter",
+        "es_MX": "Cazadora de demonios",
+        "pt_BR": "Caçadora de Demônios",
+        "de_DE": "Dämonenjägerin",
+        "en_GB": "Demon Hunter",
+        "es_ES": "Cazadora de demonios",
+        "fr_FR": "Chasseuse de démons",
+        "it_IT": "Cacciatrice di Demoni",
+        "ru_RU": "Охотница на демонов",
+        "ko_KR": "악마사냥꾼",
+        "zh_TW": "惡魔獵人",
+        "zh_CN": "恶魔猎手"
+      }
+    },
+    "power_type": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/power-type/17?namespace=static-9.0.1_36072-eu"
+      },
+      "name": {
+        "en_US": "Fury",
+        "es_MX": "Furia",
+        "pt_BR": "Fúria",
+        "de_DE": "Jähzorn",
+        "en_GB": "Fury",
+        "es_ES": "Furia",
+        "fr_FR": "Fureur",
+        "it_IT": "Furia",
+        "ru_RU": "Гнев",
+        "ko_KR": "격노",
+        "zh_TW": "狂怒",
+        "zh_CN": "恶魔之怒"
+      },
+      "id": 17
+    },
+    "specializations": [
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/577?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Havoc",
+          "es_MX": "Caos",
+          "pt_BR": "Devastação",
+          "de_DE": "Verwüstung",
+          "en_GB": "Havoc",
+          "es_ES": "Devastación",
+          "fr_FR": "Dévastation",
+          "it_IT": "Rovina",
+          "ru_RU": "Истребление",
+          "ko_KR": "파멸",
+          "zh_TW": "災虐",
+          "zh_CN": "浩劫"
+        },
+        "id": 577
+      },
+      {
+        "key": {
+          "href": "https://eu.api.blizzard.com/data/wow/playable-specialization/581?namespace=static-9.0.1_36072-eu"
+        },
+        "name": {
+          "en_US": "Vengeance",
+          "es_MX": "Venganza",
+          "pt_BR": "Vingança",
+          "de_DE": "Rachsucht",
+          "en_GB": "Vengeance",
+          "es_ES": "Venganza",
+          "fr_FR": "Vengeance",
+          "it_IT": "Vendetta",
+          "ru_RU": "Месть",
+          "ko_KR": "복수",
+          "zh_TW": "復仇",
+          "zh_CN": "复仇"
+        },
+        "id": 581
+      }
+    ],
+    "media": {
+      "key": {
+        "href": "https://eu.api.blizzard.com/data/wow/media/playable-class/12?namespace=static-9.0.1_36072-eu"
+      },
+      "id": 12
+    },
+    "pvp_talent_slots": {
+      "href": "https://eu.api.blizzard.com/data/wow/playable-class/12/pvp-talent-slots?namespace=static-9.0.1_36072-eu"
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "1": {
+    "id": 1,
+    "name": {
+      "en_US": "Warrior",
+      "es_MX": "Guerrero",
+      "pt_BR": "Guerreiro",
+      "de_DE": "Krieger",
+      "en_GB": "Warrior",
+      "es_ES": "Guerrero",
+      "fr_FR": "Guerrier",
+      "it_IT": "Guerriero",
+      "ru_RU": "Воин",
+      "ko_KR": "전사",
+      "zh_TW": "戰士",
+      "zh_CN": "战士"
+    }
+  },
+  "2": {
+    "id": 2,
+    "name": {
+      "en_US": "Paladin",
+      "es_MX": "Paladín",
+      "pt_BR": "Paladino",
+      "de_DE": "Paladin",
+      "en_GB": "Paladin",
+      "es_ES": "Paladín",
+      "fr_FR": "Paladin",
+      "it_IT": "Paladino",
+      "ru_RU": "Паладин",
+      "ko_KR": "성기사",
+      "zh_TW": "聖騎士",
+      "zh_CN": "圣骑士"
+    }
+  },
+  "3": {
+    "id": 3,
+    "name": {
+      "en_US": "Hunter",
+      "es_MX": "Cazador",
+      "pt_BR": "Caçador",
+      "de_DE": "Jäger",
+      "en_GB": "Hunter",
+      "es_ES": "Cazador",
+      "fr_FR": "Chasseur",
+      "it_IT": "Cacciatore",
+      "ru_RU": "Охотник",
+      "ko_KR": "사냥꾼",
+      "zh_TW": "獵人",
+      "zh_CN": "猎人"
+    }
+  },
+  "4": {
+    "id": 4,
+    "name": {
+      "en_US": "Rogue",
+      "es_MX": "Pícaro",
+      "pt_BR": "Ladino",
+      "de_DE": "Schurke",
+      "en_GB": "Rogue",
+      "es_ES": "Pícaro",
+      "fr_FR": "Voleur",
+      "it_IT": "Ladro",
+      "ru_RU": "Разбойник",
+      "ko_KR": "도적",
+      "zh_TW": "盜賊",
+      "zh_CN": "潜行者"
+    }
+  },
+  "5": {
+    "id": 5,
+    "name": {
+      "en_US": "Priest",
+      "es_MX": "Sacerdote",
+      "pt_BR": "Sacerdote",
+      "de_DE": "Priester",
+      "en_GB": "Priest",
+      "es_ES": "Sacerdote",
+      "fr_FR": "Prêtre",
+      "it_IT": "Sacerdote",
+      "ru_RU": "Жрец",
+      "ko_KR": "사제",
+      "zh_TW": "牧師",
+      "zh_CN": "牧师"
+    }
+  },
+  "6": {
+    "id": 6,
+    "name": {
+      "en_US": "Death Knight",
+      "es_MX": "Caballero de la Muerte",
+      "pt_BR": "Cavaleiro da Morte",
+      "de_DE": "Todesritter",
+      "en_GB": "Death Knight",
+      "es_ES": "Caballero de la Muerte",
+      "fr_FR": "Chevalier de la mort",
+      "it_IT": "Cavaliere della Morte",
+      "ru_RU": "Рыцарь смерти",
+      "ko_KR": "죽음의 기사",
+      "zh_TW": "死亡騎士",
+      "zh_CN": "死亡骑士"
+    }
+  },
+  "7": {
+    "id": 7,
+    "name": {
+      "en_US": "Shaman",
+      "es_MX": "Chamán",
+      "pt_BR": "Xamã",
+      "de_DE": "Schamane",
+      "en_GB": "Shaman",
+      "es_ES": "Chamán",
+      "fr_FR": "Chaman",
+      "it_IT": "Sciamano",
+      "ru_RU": "Шаман",
+      "ko_KR": "주술사",
+      "zh_TW": "薩滿",
+      "zh_CN": "萨满祭司"
+    }
+  },
+  "8": {
+    "id": 8,
+    "name": {
+      "en_US": "Mage",
+      "es_MX": "Mago",
+      "pt_BR": "Mago",
+      "de_DE": "Magier",
+      "en_GB": "Mage",
+      "es_ES": "Mago",
+      "fr_FR": "Mage",
+      "it_IT": "Mago",
+      "ru_RU": "Маг",
+      "ko_KR": "마법사",
+      "zh_TW": "法師",
+      "zh_CN": "法师"
+    }
+  },
+  "9": {
+    "id": 9,
+    "name": {
+      "en_US": "Warlock",
+      "es_MX": "Brujo",
+      "pt_BR": "Bruxo",
+      "de_DE": "Hexenmeister",
+      "en_GB": "Warlock",
+      "es_ES": "Brujo",
+      "fr_FR": "Démoniste",
+      "it_IT": "Stregone",
+      "ru_RU": "Чернокнижник",
+      "ko_KR": "흑마법사",
+      "zh_TW": "術士",
+      "zh_CN": "术士"
+    }
+  },
+  "10": {
+    "id": 10,
+    "name": {
+      "en_US": "Monk",
+      "es_MX": "Monje",
+      "pt_BR": "Monge",
+      "de_DE": "Mönch",
+      "en_GB": "Monk",
+      "es_ES": "Monje",
+      "fr_FR": "Moine",
+      "it_IT": "Monaco",
+      "ru_RU": "Монах",
+      "ko_KR": "수도사",
+      "zh_TW": "武僧",
+      "zh_CN": "武僧"
+    }
+  },
+  "11": {
+    "id": 11,
+    "name": {
+      "en_US": "Druid",
+      "es_MX": "Druida",
+      "pt_BR": "Druida",
+      "de_DE": "Druide",
+      "en_GB": "Druid",
+      "es_ES": "Druida",
+      "fr_FR": "Druide",
+      "it_IT": "Druido",
+      "ru_RU": "Друид",
+      "ko_KR": "드루이드",
+      "zh_TW": "德魯伊",
+      "zh_CN": "德鲁伊"
+    }
+  },
+  "12": {
+    "id": 12,
+    "name": {
+      "en_US": "Demon Hunter",
+      "es_MX": "Cazador de demonios",
+      "pt_BR": "Caçador de Demônios",
+      "de_DE": "Dämonenjäger",
+      "en_GB": "Demon Hunter",
+      "es_ES": "Cazador de demonios",
+      "fr_FR": "Chasseur de démons",
+      "it_IT": "Cacciatore di Demoni",
+      "ru_RU": "Охотник на демонов",
+      "ko_KR": "악마사냥꾼",
+      "zh_TW": "惡魔獵人",
+      "zh_CN": "恶魔猎手"
+    }
+  }
+}

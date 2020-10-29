@@ -1,0 +1,5 @@
+# aws cdk
+cdk.out
+cloud/**/*.js
+cloud/**/*.d.ts
+.cdk.staging

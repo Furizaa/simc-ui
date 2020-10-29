@@ -1,0 +1,195 @@
+{
+  "name": "@simcui/app",
+  "productName": "SimulationcraftUI",
+  "version": "0.0.1-prealpha",
+  "description": "",
+  "scripts": {
+    "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
+    "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
+    "build-e2e": "cross-env E2E_BUILD=true yarn build",
+    "build-main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.main.prod.babel.js --colors",
+    "build-renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
+    "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 yarn start-renderer-dev",
+    "electron-rebuild": "node -r ./internals/scripts/BabelRegister.js ./internals/scripts/ElectronRebuild.js",
+    "lint:src": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
+    "lint:types": "tsc --noEmit",
+    "lint": "concurrently yarn:lint:*",
+    "package": "yarn build && electron-builder build --publish never",
+    "package-all": "yarn build && electron-builder build -mwl",
+    "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
+    "package-mac": "yarn build && electron-builder build --mac",
+    "package-linux": "yarn build && electron-builder build --linux",
+    "package-win": "yarn build && electron-builder build --win --x64",
+    "postinstall": "node -r @babel/register internals/scripts/CheckNativeDep.js && electron-builder install-app-deps && yarn build-dll && electron-rebuild",
+    "preinstall": "node ./internals/scripts/CheckYarn.js",
+    "prestart": "yarn build",
+    "start": "cross-env NODE_ENV=production electron ./main.prod.js",
+    "start-main-debug": "yarn start-main-dev --inspect=5858 --remote-debugging-port=9223",
+    "start-main-dev": "cross-env START_HOT=1 NODE_ENV=development electron -r ./internals/scripts/BabelRegister ./main.dev.ts",
+    "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "main": "./main.prod.js",
+  "build": {
+    "productName": "SimulationcraftUI",
+    "appId": "org.devdreas.SimcUI",
+    "files": [
+      "dist/",
+      "node_modules/",
+      "app.html",
+      "main.prod.js",
+      "main.prod.js.map",
+      "package.json"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "extraResources": [
+      "./resources/**"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "furizaa",
+      "repo": "simc-ui",
+      "private": false
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/furizaa/simc-ui.git"
+  },
+  "author": {
+    "name": "Andreas Hoffmann",
+    "email": "furizaa@gmail.com",
+    "url": "https://github.com/furizaa"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/furizaa/simc-ui/issues"
+  },
+  "keywords": [],
+  "homepage": "https://github.com/furizaa/simc-ui#readme",
+  "devDependencies": {
+    "@hot-loader/react-dom": "^16.13.0",
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-links": "^6.0.26",
+    "@storybook/react": "^6.0.26",
+    "@types/d3-array": "^2.3.0",
+    "@types/d3-time": "^2.0.0",
+    "@types/detect-port": "^1.3.0",
+    "@types/electron-devtools-installer": "^2.2.0",
+    "@types/file-loader": "^4.2.0",
+    "@types/lodash": "^4.14.162",
+    "@types/pify": "^3.0.2",
+    "@types/react": "^16.9.44",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-is": "^16.7.1",
+    "@types/rimraf": "^3.0.0",
+    "@types/source-map-support": "^0.5.3",
+    "@types/terser-webpack-plugin": "^4.2.0",
+    "@types/webpack": "^4.41.21",
+    "@types/webpack-bundle-analyzer": "^3.8.0",
+    "@types/webpack-dev-server": "^3.11.0",
+    "@types/webpack-env": "^1.15.2",
+    "@types/yup": "^0.29.8",
+    "browserslist-config-erb": "^0.0.1",
+    "chalk": "^4.1.0",
+    "concurrently": "^5.3.0",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
+    "detect-port": "^1.3.0",
+    "electron": "8.5.2",
+    "electron-builder": "^22.3.6",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-rebuild": "^1.10.0",
+    "file-loader": "^6.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "prettier": "^2.1.2",
+    "react-hot-loader": "^4.12.21",
+    "react-is": "^16.13.1",
+    "rimraf": "^3.0.0",
+    "storybook-addon-performance": "^0.12.0",
+    "terser-webpack-plugin": "^3.0.7",
+    "tsconfig-paths-webpack-plugin": "^3.3.0",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.0.9"
+  },
+  "dependencies": {
+    "@chakra-ui/core": "^1.0.0-rc.5",
+    "@chakra-ui/icons": "^1.0.0-rc.5",
+    "@visx/axis": "^1.1.0",
+    "@visx/curve": "^1.0.0",
+    "@visx/event": "^1.0.0",
+    "@visx/gradient": "^1.0.0",
+    "@visx/grid": "^1.1.0",
+    "@visx/responsive": "^1.1.0",
+    "@visx/scale": "^1.1.0",
+    "@visx/shape": "^1.1.0",
+    "@visx/tooltip": "^1.1.0",
+    "axios": "^0.20.0",
+    "d3-array": "^2.8.0",
+    "d3-time": "^2.0.0",
+    "date-fns": "^2.16.1",
+    "dmg": "^0.1.0",
+    "electron-debug": "^3.1.0",
+    "electron-log": "^4.2.4",
+    "electron-updater": "^4.3.4",
+    "formik": "^2.2.0",
+    "framer-motion": "^2.9.4",
+    "history": "^4.7.2",
+    "immer": "^7.0.9",
+    "lodash": "^4.17.20",
+    "pify": "^5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.12.0",
+    "react-icons": "^3.11.0",
+    "react-use-dimensions": "^1.2.1",
+    "regenerator-runtime": "^0.13.5",
+    "source-map-support": "^0.5.19",
+    "ulid": "^2.3.0",
+    "yup": "^0.29.3",
+    "zustand": "^3.1.3"
+  },
+  "devEngines": {
+    "node": ">=7.x",
+    "npm": ">=4.x",
+    "yarn": ">=0.21.3"
+  },
+  "browserslist": []
+}

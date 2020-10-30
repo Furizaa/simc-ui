@@ -19,6 +19,5 @@ const Content = () => (
 
 export const Initial = Template.bind({});
 Initial.args = {
-  executableComponent: <Content />,
   configurationComponent: <Content />,
 };

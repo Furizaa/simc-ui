@@ -3,12 +3,10 @@ import React from 'react';
 import { Field, Form, Formik, FormikProps, FieldProps } from 'formik';
 import useSimulationsStore from '../store/useSimulationsStore';
 import FormLayoutNewSimulation from '../components/FormLayoutNewSimulation';
-import SimcExecutableDropdown from '../components/SimcExecutableDropdown';
 import SimcConfigurationDropdown from '../components/SimcConfigurationDropdown';
 import { useRouter } from '../../shared/context/RouterContext';
 
 interface FormValues {
-  executableGUID: string | undefined;
   configurationId: string | undefined;
 }
 
@@ -17,8 +15,8 @@ export default function ModalNewSimulation() {
   const { push } = useRouter();
 
   const handleSubmit = (values: FormValues) => {
-    if (values.executableGUID && values.configurationId) {
-      createSimulation(values.executableGUID, values.configurationId);
+    if (values.configurationId) {
+      createSimulation(values.configurationId);
       push('SIM_HOME');
     }
   };
@@ -45,16 +43,6 @@ export default function ModalNewSimulation() {
             return (
               <Form>
                 <FormLayoutNewSimulation
-                  executableComponent={
-                    <Field name="executableGUID">
-                      {({ field }: FieldProps<FormValues['executableGUID'], FormValues>) => (
-                        <SimcExecutableDropdown
-                          value={field.value}
-                          onSelect={(value) => props.setFieldValue('executableGUID', value)}
-                        />
-                      )}
-                    </Field>
-                  }
                   configurationComponent={
                     <Field name="configurationId">
                       {({ field }: FieldProps<FormValues['configurationId'], FormValues>) => (
@@ -66,7 +54,7 @@ export default function ModalNewSimulation() {
                     </Field>
                   }
                   onClickComplete={() => null}
-                  isComplete={Boolean(props.values.executableGUID) && Boolean(props.values.configurationId)}
+                  isComplete={Boolean(props.values.configurationId)}
                 />
               </Form>
             );

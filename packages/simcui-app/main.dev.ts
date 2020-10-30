@@ -16,9 +16,6 @@ import { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import simcFetchApi from './electron/simcFetchApi';
-import SimcAutoUpdater from './electron/SimcAutoUpdater';
-
-const SimcUpdater = new SimcAutoUpdater();
 
 export default class AppUpdater {
   constructor() {
@@ -89,7 +86,6 @@ const createWindow = async () => {
     if (process.env.START_MINIMIZED) {
       mainWindow.minimize();
     } else {
-      SimcUpdater.chackForUpdatesAndNotify();
       mainWindow.show();
       mainWindow.focus();
     }

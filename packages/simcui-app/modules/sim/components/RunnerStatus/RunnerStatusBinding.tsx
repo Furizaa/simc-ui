@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import useExecutableRunner from '../../hooks/useExecutableRunner';
 import useSimProcessStore from '../../store/useSimProcessStore';
-import useSimulationsStore from '../../store/useSimulationsStore';
 import useSnapshotStore from '../../store/useSnapshotStore';
 import useTCI from '../../hooks/useTCI';
 import RunnerStatusError from '../RunnerStatusError';
@@ -13,10 +12,7 @@ export interface RunnerStatusBindingProps {
   characterId: string;
 }
 
-export default function RunnerStatusBinding({ simulationId, snapshotId, characterId }: RunnerStatusBindingProps) {
-  const currentSimulation = useSimulationsStore(
-    useCallback((store) => store.getSimulation(simulationId), [simulationId]),
-  );
+export default function RunnerStatusBinding({ snapshotId, characterId }: RunnerStatusBindingProps) {
   const [currentSnapshot, freezeSnapshot] = useSnapshotStore(
     useCallback((store) => [store.getSnapshot(snapshotId), store.freezeSnapshot], [snapshotId]),
   );
@@ -26,7 +22,7 @@ export default function RunnerStatusBinding({ simulationId, snapshotId, characte
   );
 
   const tci = useTCI({ characterId });
-  useExecutableRunner(currentSimulation?.executableGUID, currentSnapshot?.simProcessId, tci);
+  useExecutableRunner(currentSnapshot?.simProcessId, tci);
 
   const handleRunProcessClick = () => {
     if (currentSnapshot) {

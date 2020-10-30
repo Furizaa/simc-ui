@@ -17,11 +17,6 @@ export interface NativeEventReturnValue<T> {
   error: string | null;
 }
 
-export type NativeDownloadEventData =
-  | { stage: 'downloading'; percentage: number }
-  | { stage: 'unpacking' }
-  | { stage: 'done' };
-
 export type NativeRunEventData = { stage: 'running'; percentage: number } | { stage: 'done'; output: string };
 
 export type SimProcessStatus =
@@ -39,17 +34,6 @@ export type SimProcess = {
   status: SimProcessStatus;
 };
 
-export type ExecutableOption = {
-  url: string;
-  simver: string;
-  semver: string;
-  wowver: string;
-  wowverDisplay: string;
-  wowverColor: string;
-  target: string;
-  guid: string;
-};
-
 export type SimulationConfigId = string;
 export type SimulationConfig = {
   id: SimulationConfigId;
@@ -61,7 +45,6 @@ export type SimulationConfig = {
 export type SimulationParametersId = string;
 export type SimulationParameters = {
   id: SimulationParametersId;
-  executableGUID: ExecutableOption['guid'];
   configurationId: SimulationConfigId;
 };
 

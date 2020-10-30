@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import { NativeEventReturnValue, NativeRunEventData, SimProcess, SimProcessId } from '../../../types';
 import useSimProcessStore from '../store/useSimProcessStore';
 
-export default function useExecutableRunner(executableGUID = '0', procId: SimProcessId = '0', tci: string) {
+export default function useExecutableRunner(procId: SimProcessId = '0', tci: string) {
   const backChannel = `sim-status/${procId}`;
 
   const setSimProcessStatus = useSimProcessStore(useCallback((state) => state.setProcessStatus, []));
@@ -15,9 +15,9 @@ export default function useExecutableRunner(executableGUID = '0', procId: SimPro
       return;
     }
 
-    if (simProcess.status.type === 'staged' && executableGUID) {
+    if (simProcess.status.type === 'staged') {
       setSimProcessStatus(procId, { type: 'running', percentage: 0 });
-      ipcRenderer.send('sim', [executableGUID, procId, tci]);
+      ipcRenderer.send('sim', [procId, tci]);
     }
   };
 

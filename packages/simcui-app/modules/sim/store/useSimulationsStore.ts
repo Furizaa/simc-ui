@@ -7,7 +7,7 @@ import { CharacterId, SimulationConfigId, SimulationParameters, SimulationParame
 export type SimulationsState = {
   list: Record<SimulationParametersId, SimulationParameters>;
   selectedSimulationId: SimulationParametersId | undefined;
-  createSimulation: (executableGUID: string, configurationId: SimulationConfigId) => void;
+  createSimulation: (configurationId: SimulationConfigId) => void;
   selectSimulation: (simulationId: SimulationParametersId) => void;
   getSimulation: (simulationId: SimulationParametersId) => SimulationParameters | undefined;
 
@@ -23,11 +23,11 @@ const store = (set: SetState<SimulationsState>, get: GetState<SimulationsState>)
 
   selectedSimulationId: undefined,
 
-  createSimulation: (executableGUID: string, configurationId: SimulationConfigId) => {
+  createSimulation: (configurationId: SimulationConfigId) => {
     const id = ulid();
     return set((state) =>
       produce(state, (draft) => {
-        draft.list[id] = { id, executableGUID, configurationId };
+        draft.list[id] = { id, configurationId };
         draft.selectedSimulationId = id;
         draft.charactersInSimulation[id] = [];
       }),

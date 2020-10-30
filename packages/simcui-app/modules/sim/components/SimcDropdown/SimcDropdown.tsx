@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, HStack } from '@chakra-ui/core';
 import Breadcrumb from '@shared/components/Breadcrumb';
 import { BreadcrumbValue } from '@shared/components/Breadcrumb/Breadcrumb';
-import executables from '../../../data/executables';
 import SimcCardList from '../SimcCard/SimcCardList';
 import { SimulationConfig, SimulationParameters } from '../../../../types';
 import SimcCardContent from '../SimcCard/SimcCardContent';
@@ -38,17 +37,13 @@ export default function SimcDropdown({
       renderItems={({ handleSelect }) => (
         <SimcCardList>
           {simulationParameterList.map((param) => {
-            const executable = executables.find((exec) => exec.guid === param.executableGUID);
             const configuration = simulationConfigList.find((conf) => conf.id === param.configurationId);
-            if (executable && configuration) {
+            if (configuration) {
               return (
                 <SimcCard
                   key={param.id}
                   onSelect={() => handleSelect(param.id)}
-                  gameVersionDisplay={executable.wowverDisplay}
-                  gameVersionColor={executable.wowverColor}
                   simcConfigDisplay={configuration.name}
-                  simcVersionDisplay={executable.simver}
                 />
               );
             }
@@ -59,17 +54,9 @@ export default function SimcDropdown({
       renderSelectedItem={(selectedValue) => {
         const parameters = simulationParameterList.find((param) => param.id === selectedValue);
         if (parameters) {
-          const executable = executables.find((exec) => exec.guid === parameters.executableGUID);
           const configuration = simulationConfigList.find((conf) => conf.id === parameters.configurationId);
-          if (executable && configuration) {
-            return (
-              <SimcCardContent
-                gameVersionDisplay={executable.wowverDisplay}
-                gameVersionColor={executable.wowverColor}
-                simcConfigDisplay={configuration.name}
-                simcVersionDisplay={executable.simver}
-              />
-            );
+          if (configuration) {
+            return <SimcCardContent simcConfigDisplay={configuration.name} />;
           }
         }
         return null;

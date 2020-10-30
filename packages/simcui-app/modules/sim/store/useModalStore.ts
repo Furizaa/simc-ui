@@ -3,6 +3,7 @@ import { devtools } from 'zustand/middleware';
 
 export enum SimModalType {
   SIM_IMPORT_CHARACTER,
+  SIM_CREATE_CONFIGURATION,
 }
 
 export type SimModalState = {

@@ -4,6 +4,7 @@ import { SimulationId, SnapshotId } from 'types';
 import useSnapshotManager from '@sim/hooks/useSnapshotManager';
 import SimulationTabs from '@sim/components/SimulationTabs';
 import SnapshotTimeline from '@sim/components/SnapshotTimeline';
+import ModalLayoutSimulationConfig from '@sim/components/ModalLayoutSimulationConfig';
 import { useRouter } from '../../shared/context/RouterContext';
 import useSimulationsStore from '../store/useSimulationsStore';
 import ModalLayoutCharacterImport from '../components/ModalLayoutCharacterImport';
@@ -58,7 +59,7 @@ export default function SimulationHome() {
   };
 
   const handleCreateNewSimulationClick = () => {
-    push('SIM_CREATE_NEW');
+    openModal(SimModalType.SIM_CREATE_CONFIGURATION);
   };
 
   const handleImportCharacterClick = () => {
@@ -78,6 +79,7 @@ export default function SimulationHome() {
   return (
     <>
       <ModalLayoutCharacterImport />
+      <ModalLayoutSimulationConfig />
 
       <Box h="100%">
         <SimulationTabs

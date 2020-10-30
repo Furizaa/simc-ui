@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-export type Route = 'SIM_HOME' | 'SIM_NEW_USER_EXPERIENCE' | 'SIM_CREATE_NEW';
+export type Route = 'SIM_HOME' | 'SIM_NEW_USER_EXPERIENCE';
 
 interface RouterContextState {
   currentRoute: Route;

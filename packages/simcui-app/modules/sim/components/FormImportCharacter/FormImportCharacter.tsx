@@ -124,7 +124,7 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
               )}
             </Field>
 
-            <Field name="name">
+            <Field name="characterName">
               {({ field }: FieldProps<FormValues['characterName'], FormValues>) => (
                 <FormControl
                   mt={6}
@@ -143,7 +143,7 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
             </Field>
 
             <HStack mt={6} spacing={6}>
-              <Button flexShrink={0} isLoading={props.isSubmitting} colorScheme="purple" type="submit">
+              <Button flexShrink={0} isLoading={props.isSubmitting} colorScheme="blue" type="submit">
                 Import
               </Button>
               {!props.isSubmitting && loadError ? (

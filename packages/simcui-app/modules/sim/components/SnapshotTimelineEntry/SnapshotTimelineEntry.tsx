@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Text } from '@chakra-ui/core';
-import { formatDistance } from 'date-fns';
+import { format } from 'date-fns';
 import React from 'react';
 import { SimProcess, Snapshot, SnapshotId } from 'types';
 import SnapshotCard from '../SnapshotCard';
@@ -107,9 +107,10 @@ export default function SnapshotTimelineEntry({
             noOfLines={prevMeanDps ? 1 : 2}
             fontSize="xs"
             color={isActive ? 'blue.200' : 'blue.400'}
-            fontWeight="semibold"
+            fontWeight="light"
+            letterSpacing="tight"
           >
-            {formatDistance(new Date(snapshot.at), new Date())}
+            {format(new Date(snapshot.at), 'dd LLL HH:MM')}
           </Text>
           {prevMeanDps && prevMeanDps < meanDps ? (
             <Text fontSize="xs" fontWeight="bold" color="limegreen.400">

@@ -27,6 +27,7 @@ build/Release
 #
 internals
 configs
+babel.config.js
 
 # App packaged
 release

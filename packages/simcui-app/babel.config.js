@@ -24,6 +24,9 @@ module.exports = (api) => {
       require('@babel/preset-typescript'),
       [require('@babel/preset-react'), { development }],
     ],
-    plugins: [...(development ? developmentPlugins : productionPlugins)],
+    plugins: [
+      require('@babel/plugin-proposal-class-properties'),
+      ...(development ? developmentPlugins : productionPlugins),
+    ],
   };
 };

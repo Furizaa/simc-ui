@@ -1,6 +1,5 @@
 import { Box, Button, Grid, Text } from '@chakra-ui/core';
 import { formatDistance } from 'date-fns';
-import Card from '@shared/components/Card';
 import React from 'react';
 import { SimProcess, Snapshot, SnapshotId } from 'types';
 import SnapshotCard from '../SnapshotCard';
@@ -51,7 +50,7 @@ export default function SnapshotTimelineEntry({
 
   if (!snapshot.isFrozen) {
     return (
-      <Grid templateColumns="120px 20px 1fr 100px" columnGap={2} w="lg" h="64px">
+      <Grid templateColumns="80px 20px 1fr" columnGap={2} w="100%" h="64px" bgColor="gray.700">
         <Box d="flex" alignItems="center" justifyContent="flex-end">
           <Text fontSize="xs" color="gray.400" fontWeight="semibold">
             current
@@ -62,7 +61,7 @@ export default function SnapshotTimelineEntry({
             w="20px"
             h="20px"
             borderRadius="full"
-            borderColor="gray.700"
+            borderColor="gray.600"
             borderWidth="2px"
             bgColor="gray.900"
             pos="relative"
@@ -73,7 +72,7 @@ export default function SnapshotTimelineEntry({
                     content: '""',
                     borderLeftWidth: '1px',
                     borderRightWidth: '1px',
-                    borderColor: 'gray.700',
+                    borderColor: 'gray.600',
                     top: '18px',
                     left: 'calc(50% - 1px)',
                     w: '1px',
@@ -83,20 +82,46 @@ export default function SnapshotTimelineEntry({
             }
           />
         </Box>
-        <Card variant="outline" d="flex" justifyContent="center" onClick={handleFreezeSnapshotClick}>
-          <Button size="sm">Save Changes</Button>
-        </Card>
-        <Box />
+        <Box d="flex" h="100%" justifyContent="start" alignItems="center" onClick={handleFreezeSnapshotClick} p={2}>
+          <Button size="xs">Save Snapshot</Button>
+        </Box>
       </Grid>
     );
   }
 
   return (
-    <Grid templateColumns="120px 20px 1fr 100px" columnGap={2} w="lg" h="64px">
+    <Grid
+      templateColumns="80px 20px 1fr"
+      columnGap={2}
+      w="100%"
+      h="64px"
+      bgColor="gray.700"
+      onClick={handleSelectSnapshotClick}
+      cursor="pointer"
+      _hover={{ bgColor: 'lightblue.900' }}
+    >
       <Box d="flex" alignItems="center" justifyContent="flex-end">
-        <Text w="" fontSize="xs" color={isActive ? 'blue.200' : 'blue.400'} fontWeight="semibold">
-          {formatDistance(new Date(snapshot.at), new Date())}
-        </Text>
+        <Box d="flex" alignItems="flex-end" flexDir="column">
+          <Text
+            isTruncated
+            noOfLines={prevMeanDps ? 1 : 2}
+            fontSize="xs"
+            color={isActive ? 'blue.200' : 'blue.400'}
+            fontWeight="semibold"
+          >
+            {formatDistance(new Date(snapshot.at), new Date())}
+          </Text>
+          {prevMeanDps && prevMeanDps < meanDps ? (
+            <Text fontSize="xs" fontWeight="bold" color="limegreen.400">
+              {`+ ${formatDps(meanDps - prevMeanDps)} DPS`}
+            </Text>
+          ) : null}
+          {prevMeanDps && prevMeanDps > meanDps ? (
+            <Text fontSize="xs" fontWeight="bold" color="red.400">
+              {`- ${formatDps(prevMeanDps - meanDps)} DPS`}
+            </Text>
+          ) : null}
+        </Box>
       </Box>
       <Box d="flex" alignItems="center">
         <Box
@@ -124,27 +149,12 @@ export default function SnapshotTimelineEntry({
           }
         />
       </Box>
-      <Box h="67px">
-        <SnapshotCard snapshot={snapshot} process={process} onClick={handleSelectSnapshotClick} />
-      </Box>
-      <Box d="flex" alignItems="center">
-        <Box>
-          {meanDps ? (
-            <Text fontSize="lg" fontWeight="semibold" color="gray.200">
-              {`${formatDps(meanDps)} DPS`}
-            </Text>
-          ) : null}
-          {prevMeanDps && prevMeanDps < meanDps ? (
-            <Text fontSize="xs" fontWeight="bold" color="limegreen.400">
-              {`(+ ${formatDps(meanDps - prevMeanDps)} DPS)`}
-            </Text>
-          ) : null}
-          {prevMeanDps && prevMeanDps > meanDps ? (
-            <Text fontSize="xs" fontWeight="bold" color="red.400">
-              {`(- ${formatDps(prevMeanDps - meanDps)} DPS)`}
-            </Text>
-          ) : null}
-        </Box>
+      <Box>
+        <SnapshotCard
+          snapshot={snapshot}
+          process={process}
+          dpsDisplay={meanDps ? `${formatDps(meanDps)} DPS` : undefined}
+        />
       </Box>
     </Grid>
   );

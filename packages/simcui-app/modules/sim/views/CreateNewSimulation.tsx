@@ -16,7 +16,7 @@ export default function ModalNewSimulation() {
 
   const handleSubmit = (values: FormValues) => {
     if (values.configurationId) {
-      createSimulation(values.configurationId);
+      createSimulation('Undefined', values.configurationId);
       push('SIM_HOME');
     }
   };

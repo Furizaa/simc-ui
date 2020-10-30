@@ -1,27 +1,24 @@
-import { Box, Grid } from '@chakra-ui/core';
+import { Box, Button, Grid } from '@chakra-ui/core';
 import React, { useEffect } from 'react';
-import { SnapshotId } from 'types';
+import { SimulationId, SnapshotId } from 'types';
 import useSnapshotManager from '@sim/hooks/useSnapshotManager';
+import SimulationTabs from '@sim/components/SimulationTabs';
+import SnapshotTimeline from '@sim/components/SnapshotTimeline';
 import { useRouter } from '../../shared/context/RouterContext';
-import SimcDropdown from '../components/SimcDropdown';
 import useSimulationsStore from '../store/useSimulationsStore';
-import premadeSimulationConfigs from '../../data/simConfigs';
 import ModalLayoutCharacterImport from '../components/ModalLayoutCharacterImport';
 import useModalStore, { SimModalType } from '../store/useModalStore';
 import useCharacterStore from '../store/useCharacterStore';
 import CharacterSheet from '../components/CharacterSheet';
-import BreadcrumbBar from '../../shared/components/BreadcrumbBar';
 import CharacterDropdown from '../components/CharacterDropdown';
-import { BreadcrumbValue } from '../../shared/components/Breadcrumb/Breadcrumb';
-import SnapshotDropdown from '../components/SnapshotDropdown';
 import RunnerStatusBinding from '../components/RunnerStatus/RunnerStatusBinding';
 
 export default function SimulationHome() {
   const { push } = useRouter();
   const [openModal] = useModalStore((store) => [store.open]);
-  const characterIdList = useSimulationsStore((store) => store.getCharacterIdsInSelectedSimulation());
-  const [simulationRecord, selectedSimulationId, selectSimulation] = useSimulationsStore((store) => [
-    store.list,
+  const [characterIdList] = useSimulationsStore((store) => [store.getCharacterIdsInSelectedSimulation()]);
+  const [simulationList, selectedSimulationId, selectSimulation] = useSimulationsStore((store) => [
+    Object.values(store.list),
     store.selectedSimulationId,
     store.selectSimulation,
   ]);
@@ -40,7 +37,7 @@ export default function SimulationHome() {
     currentCharacterId,
   );
 
-  const isEmpty = Object.keys(simulationRecord).length === 0;
+  const isEmpty = simulationList.length === 0;
 
   useEffect(() => {
     if (isEmpty) {
@@ -52,10 +49,8 @@ export default function SimulationHome() {
     return null;
   }
 
-  const handleSimulationSelection = (value: BreadcrumbValue) => {
-    if (typeof value === 'string') {
-      selectSimulation(value);
-    }
+  const handleSimulationSelection = (simulationId: SimulationId) => {
+    selectSimulation(simulationId);
   };
 
   const handleCreateNewSimulationClick = () => {
@@ -76,48 +71,58 @@ export default function SimulationHome() {
     freezeSnapshotAndIdleProcess(snapshotId);
   };
 
+  console.log(currentCharacterId);
+
   return (
     <>
       <ModalLayoutCharacterImport />
 
-      <Grid height="100%" templateRows="auto 1fr">
-        <BreadcrumbBar>
-          <SimcDropdown
-            value={selectedSimulationId}
-            simulationConfigList={premadeSimulationConfigs}
-            simulationParameterList={Object.values(simulationRecord)}
-            onSelect={handleSimulationSelection}
-            onCreateNewClick={handleCreateNewSimulationClick}
-          />
-          <CharacterDropdown
-            characterList={characterListInCurrentSimulation}
-            value={currentCharacterId}
-            onSelect={(id) => selectCharacter(id ?? undefined)}
-            onCreateNewClick={handleImportCharacterClick}
-          />
-          {currentCharacterId && (
-            <SnapshotDropdown
-              data={getSnapshotProcessMap()}
-              value={currentCharacterSelectedSnapshot}
-              onSelect={handleSelectSnapshotClick}
-              onFreezeSnapshotClick={handleFreezeSnapshotClick}
-            />
+      <Box h="100%">
+        <SimulationTabs
+          simulations={simulationList}
+          selectedSimulationId={selectedSimulationId}
+          onSelectSimulation={handleSimulationSelection}
+          onClickAddSimulation={handleCreateNewSimulationClick}
+          renderTabPanel={() => (
+            <Grid height="100%" templateColumns="18rem 1fr auto">
+              <Grid bgColor="gray.800" borderRight="1px solid" borderRightColor="gray.900" templateRows="auto 1fr auto">
+                {currentCharacterId && (
+                  <CharacterDropdown
+                    characterList={characterListInCurrentSimulation}
+                    value={currentCharacterId}
+                    onSelect={(id) => selectCharacter(id ?? undefined)}
+                    onCreateNewClick={handleImportCharacterClick}
+                  />
+                )}
+                {!currentCharacterId && (
+                  <Button m={4} colorScheme="blue" onClick={handleImportCharacterClick}>
+                    Create New Character
+                  </Button>
+                )}
+                {currentCharacterId && (
+                  <SnapshotTimeline
+                    data={getSnapshotProcessMap()}
+                    activeSnapshotId={currentCharacterSelectedSnapshot}
+                    onSelect={handleSelectSnapshotClick}
+                    onClickFreezeSnapshot={handleFreezeSnapshotClick}
+                  />
+                )}
+                {selectedSimulationId && currentCharacterSelectedSnapshot && currentCharacterId && (
+                  <Box d="flex" justifyContent="center" p={2}>
+                    <RunnerStatusBinding
+                      simulationId={selectedSimulationId}
+                      snapshotId={currentCharacterSelectedSnapshot}
+                      characterId={currentCharacterId}
+                    />
+                  </Box>
+                )}
+              </Grid>
+              <Box bgColor="gray.900">{currentCharacterId && <CharacterSheet characterId={currentCharacterId} />}</Box>
+              <Box borderRight="1px solid #fff" />
+            </Grid>
           )}
-
-          {selectedSimulationId && currentCharacterSelectedSnapshot && currentCharacterId && (
-            <Box d="flex" flexGrow={1} justifyContent="flex-end" px={4}>
-              <Box maxW="xs">
-                <RunnerStatusBinding
-                  simulationId={selectedSimulationId}
-                  snapshotId={currentCharacterSelectedSnapshot}
-                  characterId={currentCharacterId}
-                />
-              </Box>
-            </Box>
-          )}
-        </BreadcrumbBar>
-        {currentCharacterId && <CharacterSheet characterId={currentCharacterId} />}
-      </Grid>
+        />
+      </Box>
     </>
   );
 }

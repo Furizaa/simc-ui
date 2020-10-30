@@ -4,9 +4,7 @@ const Card = {
     borderRadius: 'md',
   },
   variants: {
-    clean: {
-      borderRadius: 0,
-    },
+    clean: {},
     solid: {
       borderWidth: '2px',
       borderColor: 'gray.600',
@@ -111,24 +109,42 @@ const Tabs = {
     enclosed: {
       tab: {
         fontWeight: 'semibold',
-        backdropFilter: 'blur(20px)',
-        borderWidth: '2px',
+        borderRadius: 0,
         borderBottomColor: 'gray.400',
-        borderRight: 0,
-        borderLeft: 0,
+        border: 0,
+        py: '13px',
         _selected: {
-          borderBottom: '0',
-          borderColor: 'gray.400',
-          backdropFilter: 'none',
+          bgColor: 'frosted',
         },
         _disabled: {
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0,
           color: 'gray.400',
         },
       },
       tablist: {
-        border: '0',
+        backdropFilter: 'blur(20px)',
+        boxShadow: 'md',
+        border: 0,
+      },
+    },
+    config: {
+      tab: {
+        fontWeight: 'semibold',
+        borderTopRightRadius: '4px',
+        borderTopLeftRadius: '4px',
+        borderBottom: 0,
+        fontSize: 'xs',
+        _selected: {
+          backgroundColor: 'gray.700',
+        },
+        _hover: {
+          backgroundColor: 'lightblue.900',
+        },
+      },
+      tablist: {
+        backgroundColor: 'gray.800',
+      },
+      tabpanel: {
+        backgroundColor: 'gray.700',
       },
     },
     vertical: {

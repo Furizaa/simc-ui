@@ -1,6 +1,5 @@
 import { Box, HStack } from '@chakra-ui/core';
 import React from 'react';
-import Background from '../Background/Background';
 
 interface AppShellProps {
   children?: React.ReactNode;
@@ -34,7 +33,7 @@ const StorybookWindowStyleWrapper = ({ children }: { children: React.ReactNode }
 export default function AppShell({ children }: AppShellProps) {
   return (
     <StorybookWindowStyleWrapper>
-      <Background>
+      <>
         {'IS_STORYBOOK' in window && (
           <HStack position="absolute" top="5px" left="8px">
             <Box w="12px" h="12px" borderRadius="full" bgColor="red.500" />
@@ -46,17 +45,15 @@ export default function AppShell({ children }: AppShellProps) {
           id="app-os-bar"
           w="100%"
           h="24px"
-          bgColor="translucent"
-          borderBottomWidth="1px"
-          borderColor="gray.700"
+          bgColor="gray.800"
           css={{
             WebkitAppRegion: 'drag',
           }}
         />
-        <Box id="app-content" pos="absolute" top="24px" left="0" right="0" bottom="0">
+        <Box id="app-content" pos="absolute" top="8px" left="0" right="0" bottom="0">
           {children}
         </Box>
-      </Background>
+      </>
     </StorybookWindowStyleWrapper>
   );
 }

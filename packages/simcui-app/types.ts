@@ -42,9 +42,10 @@ export type SimulationConfig = {
   opts: Simc.Config;
 };
 
-export type SimulationParametersId = string;
-export type SimulationParameters = {
-  id: SimulationParametersId;
+export type SimulationId = string;
+export type Simulation = {
+  id: SimulationId;
+  name: string;
   configurationId: SimulationConfigId;
 };
 

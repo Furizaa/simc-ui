@@ -16,6 +16,10 @@ export type SimulationsState = {
   charactersInSimulation: Record<SimulationId, CharacterId[]>;
   addCharacterToSimulation: (simulationId: SimulationId, characterId: CharacterId) => void;
   getCharacterIdsInSelectedSimulation: () => CharacterId[];
+
+  selectedCharacter: Record<SimulationId, CharacterId>;
+  selectCharacter: (simulationId?: SimulationId, characterId?: CharacterId) => void;
+  getSelectedCharacterId: (simulationId?: SimulationId) => CharacterId | undefined;
 };
 
 const store = (set: SetState<SimulationsState>, get: GetState<SimulationsState>) => ({
@@ -63,6 +67,24 @@ const store = (set: SetState<SimulationsState>, get: GetState<SimulationsState>)
   getCharacterIdsInSelectedSimulation: () => {
     const selectedSim = get().selectedSimulationId;
     return selectedSim && selectedSim in get().charactersInSimulation ? get().charactersInSimulation[selectedSim] : [];
+  },
+
+  selectedCharacter: {},
+
+  selectCharacter: (simulationId?: SimulationId, characterId?: CharacterId) => {
+    set((state) =>
+      produce(state, (draft) => {
+        if (characterId && simulationId) {
+          draft.selectedCharacter[simulationId] = characterId;
+        } else if (simulationId) {
+          delete draft.selectedCharacter[simulationId];
+        }
+      }),
+    );
+  },
+
+  getSelectedCharacterId: (simulationId?: SimulationId) => {
+    return simulationId && simulationId in get().selectedCharacter ? get().selectedCharacter[simulationId] : undefined;
   },
 });
 

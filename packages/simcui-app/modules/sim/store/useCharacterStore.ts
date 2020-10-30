@@ -6,11 +6,8 @@ import { Character, CharacterId, SnapshotId, WOW } from '../../../types';
 
 export type CharacterState = {
   list: Record<CharacterId, Character>;
-  selectedCharacterId: CharacterId | undefined;
   addCharacter: (character: Character, snapshotId: SnapshotId) => void;
   getCharacter: (characterId?: CharacterId) => Character | undefined;
-  selectCharacter: (characterId: CharacterId | undefined) => void;
-  getSelectedCharacter: () => Character | undefined;
 
   // Character -> Snapshot
 
@@ -30,7 +27,6 @@ const store = (set: SetState<CharacterState>, get: GetState<CharacterState>) => 
     return set((state) =>
       produce(state, (draft) => {
         draft.list[character.id] = character;
-        draft.selectedCharacterId = character.id;
         draft.snapshotsInCharacter[character.id] = [snapshotId];
         draft.selectedSnapshotForCharacter[character.id] = snapshotId;
       }),
@@ -39,23 +35,6 @@ const store = (set: SetState<CharacterState>, get: GetState<CharacterState>) => 
 
   getCharacter: (characterId?: CharacterId) => {
     return characterId && characterId in get().list ? get().list[characterId] : undefined;
-  },
-
-  selectCharacter: (characterId?: CharacterId) =>
-    set((state) => {
-      if (characterId && characterId in state.list) {
-        return {
-          selectedCharacterId: characterId,
-        };
-      }
-      return {
-        selectedCharacterId: undefined,
-      };
-    }),
-
-  getSelectedCharacter: () => {
-    const { selectedCharacterId } = get();
-    return selectedCharacterId && selectedCharacterId in get().list ? get().list[selectedCharacterId] : undefined;
   },
 
   // Character -> Snapshot

@@ -16,19 +16,23 @@ import RunnerStatusBinding from '../components/RunnerStatus/RunnerStatusBinding'
 export default function SimulationHome() {
   const { push } = useRouter();
   const [openModal] = useModalStore((store) => [store.open]);
-  const [characterIdList] = useSimulationsStore((store) => [store.getCharacterIdsInSelectedSimulation()]);
-  const [simulationList, selectedSimulationId, selectSimulation] = useSimulationsStore((store) => [
+
+  const [characterIdList, simulationList, selectedSimulationId, selectSimulation] = useSimulationsStore((store) => [
+    store.getCharacterIdsInSelectedSimulation(),
     Object.values(store.list),
     store.selectedSimulationId,
     store.selectSimulation,
   ]);
+
+  const [currentCharacterId, selectCharacter] = useSimulationsStore((store) => [
+    store.getSelectedCharacterId(selectedSimulationId),
+    store.selectCharacter,
+  ]);
+
   const characterListInCurrentSimulation = useCharacterStore((store) =>
     Object.values(store.list).filter((char) => characterIdList.includes(char.id)),
   );
-  const [currentCharacterId, selectCharacter] = useCharacterStore((store) => [
-    store.selectedCharacterId,
-    store.selectCharacter,
-  ]);
+
   const currentCharacterSelectedSnapshot = useCharacterStore((store) =>
     store.getSelectedSnapshotId(currentCharacterId),
   );
@@ -71,8 +75,6 @@ export default function SimulationHome() {
     freezeSnapshotAndIdleProcess(snapshotId);
   };
 
-  console.log(currentCharacterId);
-
   return (
     <>
       <ModalLayoutCharacterImport />
@@ -90,7 +92,7 @@ export default function SimulationHome() {
                   <CharacterDropdown
                     characterList={characterListInCurrentSimulation}
                     value={currentCharacterId}
-                    onSelect={(id) => selectCharacter(id ?? undefined)}
+                    onSelect={(id) => selectCharacter(selectedSimulationId, id ?? undefined)}
                     onCreateNewClick={handleImportCharacterClick}
                   />
                 )}

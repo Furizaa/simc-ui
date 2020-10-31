@@ -35,6 +35,8 @@ jobs:
         run: yarn install --frozen-lockfile && yarn bootstrap
 
       - name: Create Package
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: yarn app postinstall && yarn app package-mac
 
       - uses: actions/upload-artifact@v2

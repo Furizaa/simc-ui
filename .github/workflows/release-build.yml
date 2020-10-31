@@ -104,8 +104,12 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: simc-artifact-macos
-          path: packages/simcui-app/resources/bin
-
+          path: packages/simcui-app/resources/bin/
+      
+      - name: Check resources folder
+        working-directory: packages/simcui-app/resources
+        run: ls -R
+      
       - name: Create Package
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -147,12 +151,17 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: simc-artifact-macos
-          path: packages/simcui-app/resources/bin
-
+          path: packages\simcui-app\resources\bin\
+          
+      - name: Check resources folder
+        working-directory: packages\simcui-app\resources
+        run: dir /s /b
+         
       - name: Create Package
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: yarn app postinstall && yarn app package-win
+        working-directory: packages\simcui-app\
+        run: yarn postinstall && yarn package-win
 
       - uses: actions/upload-artifact@v2
         with:

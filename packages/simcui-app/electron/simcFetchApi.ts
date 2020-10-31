@@ -15,6 +15,13 @@ const parseSimOutputPercentage = (out: string) => {
   return null;
 };
 
+const getExecutableFileName = () => {
+  if (process.platform === 'win32') {
+    return 'simc.exe';
+  }
+  return 'simc';
+};
+
 export default function instrument(app: App) {
   const resourcesPath = app.isPackaged
     ? path.join(process.resourcesPath, 'resources')
@@ -26,7 +33,7 @@ export default function instrument(app: App) {
     const eventChannel = `sim-status/${simGUID}`;
 
     try {
-      const execFullPath = path.resolve(resourcesPath, 'bin/simc');
+      const execFullPath = path.resolve(resourcesPath, 'bin', getExecutableFileName());
       const outputFullPath = path.resolve(userDataPath, `${simGUID}.json`);
       const simTCIFullPath = path.resolve(userDataPath, `${simGUID}.simc`);
 
@@ -65,7 +72,7 @@ export default function instrument(app: App) {
 
   ipcMain.on('exec-status', (event) => {
     try {
-      const execFullPath = path.resolve(resourcesPath, 'bin/simc');
+      const execFullPath = path.resolve(resourcesPath, 'bin', getExecutableFileName());
 
       const result = cproc.spawnSync(execFullPath, { encoding: 'utf-8' });
 

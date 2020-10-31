@@ -63,8 +63,23 @@ export default function instrument(app: App) {
   ipcMain.on('exec-status', (event) => {
     try {
       const execFullPath = path.resolve(__dirname, '..', 'internals/bin/simc');
-      const fileExists = fs.existsSync(execFullPath);
-      event.returnValue = { data: fileExists, error: null };
+
+      const result = cproc.spawnSync(execFullPath, { encoding: 'utf-8' });
+
+      const verSimcMatch = result.stdout.match(/^SimulationCraft\s([0-9-]+)/);
+      const verWowMatch = result.stdout.match(/World of Warcraft\s([0-9.]+)/);
+      const verBuildMatch = result.stdout.match(/\s([0-9a-f]{7})/);
+
+      if (verSimcMatch && verSimcMatch[1] && verWowMatch && verWowMatch[1] && verBuildMatch && verBuildMatch[1]) {
+        event.returnValue = {
+          data: {
+            simc: `${verSimcMatch[1]} ${verBuildMatch[1]}`,
+            wow: verWowMatch[1],
+          },
+          error: null,
+        };
+      }
+      event.returnValue = { data: null, error: 'Unable to determine versions.' };
     } catch (e) {
       event.returnValue = { data: null, error: e.message ?? e };
     }

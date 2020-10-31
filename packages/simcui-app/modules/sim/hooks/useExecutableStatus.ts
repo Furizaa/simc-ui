@@ -1,9 +1,9 @@
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
-import { NativeEventReturnValue } from '../../../types';
+import { NativeEventReturnValue, NativeStatusEventData } from '../../../types';
 
 export default function useExecutableStatus() {
-  const [returnValue, setReturnValue] = useState<NativeEventReturnValue<boolean>>({
+  const [returnValue, setReturnValue] = useState<NativeEventReturnValue<NativeStatusEventData>>({
     data: null,
     error: null,
   });

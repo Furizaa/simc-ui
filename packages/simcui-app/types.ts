@@ -19,6 +19,8 @@ export interface NativeEventReturnValue<T> {
 
 export type NativeRunEventData = { stage: 'running'; percentage: number } | { stage: 'done'; output: string };
 
+export type NativeStatusEventData = { simc: string; wow: string };
+
 export type SimProcessStatus =
   | { type: 'idle' }
   | { type: 'staged' }

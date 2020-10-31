@@ -5,6 +5,7 @@ import useSnapshotManager from '@sim/hooks/useSnapshotManager';
 import SimulationTabs from '@sim/components/SimulationTabs';
 import SnapshotTimeline from '@sim/components/SnapshotTimeline';
 import ModalLayoutSimulationConfig from '@sim/components/ModalLayoutSimulationConfig';
+import StatusBar from '@sim/components/StatusBar';
 import { useRouter } from '../../shared/context/RouterContext';
 import useSimulationsStore from '../store/useSimulationsStore';
 import ModalLayoutCharacterImport from '../components/ModalLayoutCharacterImport';
@@ -81,7 +82,7 @@ export default function SimulationHome() {
       <ModalLayoutCharacterImport />
       <ModalLayoutSimulationConfig />
 
-      <Box h="100%">
+      <Grid h="100%" templateRows="1fr auto">
         <SimulationTabs
           simulations={simulationList}
           selectedSimulationId={selectedSimulationId}
@@ -122,11 +123,12 @@ export default function SimulationHome() {
                 )}
               </Grid>
               <Box bgColor="gray.900">{currentCharacterId && <CharacterSheet characterId={currentCharacterId} />}</Box>
-              <Box borderRight="1px solid #fff" />
+              <Box />
             </Grid>
           )}
         />
-      </Box>
+        <StatusBar />
+      </Grid>
     </>
   );
 }

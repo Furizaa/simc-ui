@@ -14,7 +14,7 @@ export interface SimcConfigurationDropdownProps {
 
 export default function SimcConfigurationDropdown({ onSelect, value }: SimcConfigurationDropdownProps) {
   return (
-    <Box maxW="sm">
+    <Box>
       <CardDropdown
         onSelect={onSelect}
         value={value}

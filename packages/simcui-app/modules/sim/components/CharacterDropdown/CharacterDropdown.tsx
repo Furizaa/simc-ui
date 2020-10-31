@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, HStack } from '@chakra-ui/core';
+import { Button, HStack } from '@chakra-ui/core';
 import Breadcrumb from '@shared/components/Breadcrumb';
 import { Character } from '../../../../types';
 import CharacterCardList from '../CharacterCard/CharacterCardList';
@@ -9,32 +9,32 @@ import characterClassToColor from '../../util/characterClassToColor';
 
 export interface CharacterDropdownProps {
   onSelect?: (value: string | undefined) => void;
-  onCreateNewClick?: () => void;
   value?: string;
   characterList: Character[];
+  onCreateNewClick?: () => void;
 }
 
 export default function CharacterDropdown({
   onSelect,
-  onCreateNewClick,
   value,
   characterList,
+  onCreateNewClick,
 }: CharacterDropdownProps) {
+  const character = characterList.find((char) => char.id === value);
+  const classColor = character ? `${characterClassToColor(character.classWowId)}.900` : 'gray.800';
+
   const handleCreateNewClick = () => {
     if (onCreateNewClick) {
       onCreateNewClick();
     }
   };
 
-  const character = characterList.find((char) => char.id === value);
-  const classColor = character ? `${characterClassToColor(character.classWowId)}.900` : 'gray.800';
-
   return (
     <Breadcrumb
       label="Select Character"
       onSelect={onSelect}
       value={value}
-      placement="bottom"
+      placement="right-start"
       bgColor={classColor}
       renderItems={({ handleSelect }) => (
         <CharacterCardList>
@@ -45,6 +45,7 @@ export default function CharacterDropdown({
                 character={char}
                 onClick={() => handleSelect(char.id)}
                 isActive={char.id === value}
+                isVertical
               />
             );
           })}
@@ -66,13 +67,6 @@ export default function CharacterDropdown({
             Manage All
           </Button>
         </HStack>
-      )}
-      renderEmpty={() => (
-        <Box pl={12}>
-          <Button colorScheme="purple" size="sm" onClick={handleCreateNewClick}>
-            Create or Import New Character
-          </Button>
-        </Box>
       )}
     />
   );

@@ -34,9 +34,10 @@ export default function useCharacterLoader(): UseCharacterLoader {
     store.replaceTalentSet,
   ]);
   const initializeClassTalents = useSpellStore((store) => store.initializeClassTalents);
-  const [currentSimulationId, addCharacterToSimulation] = useSimulationsStore((store) => [
+  const [currentSimulationId, addCharacterToSimulation, selectCharacter] = useSimulationsStore((store) => [
     store.selectedSimulationId,
     store.addCharacterToSimulation,
+    store.selectCharacter,
   ]);
 
   const loadCharacter = async (params: WOW.CharacterRequestParams) => {
@@ -59,7 +60,6 @@ export default function useCharacterLoader(): UseCharacterLoader {
     if (json.data && currentSimulationId) {
       const character = createCharacterFromApi(json.data.character, json.data.media);
 
-      addCharacterToSimulation(currentSimulationId, character.id);
       initializeClassTalents(character.classWowId);
 
       const equipmentSetId = createEquipmentSet();
@@ -107,6 +107,8 @@ export default function useCharacterLoader(): UseCharacterLoader {
       });
 
       addCharacter(character, newSnapshotId);
+      addCharacterToSimulation(currentSimulationId, character.id);
+      selectCharacter(currentSimulationId, character.id);
     }
 
     setIsLoading(false);

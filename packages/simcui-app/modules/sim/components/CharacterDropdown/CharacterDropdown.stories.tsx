@@ -65,8 +65,3 @@ Initial.args = {
   characterList,
   value: '0',
 };
-
-export const Empty = Template.bind({});
-Empty.args = {
-  characterList,
-};

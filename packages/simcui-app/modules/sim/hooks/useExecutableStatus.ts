@@ -1,17 +1,17 @@
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
-import { NativeEventReturnValue } from '../../../types';
+import { NativeEventReturnValue, NativeStatusEventData } from '../../../types';
 
-export default function useExecutableStatus(executableGUID: string) {
-  const [returnValue, setReturnValue] = useState<NativeEventReturnValue<boolean>>({
+export default function useExecutableStatus() {
+  const [returnValue, setReturnValue] = useState<NativeEventReturnValue<NativeStatusEventData>>({
     data: null,
     error: null,
   });
 
   useEffect(() => {
-    const ipcResult = ipcRenderer.sendSync('exec-status', [executableGUID]);
+    const ipcResult = ipcRenderer.sendSync('exec-status');
     setReturnValue(ipcResult);
-  }, [executableGUID]);
+  }, []);
 
   return returnValue;
 }

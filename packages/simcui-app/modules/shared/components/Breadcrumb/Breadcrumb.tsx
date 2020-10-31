@@ -13,7 +13,7 @@ import {
   Portal,
 } from '@chakra-ui/core';
 import useDimensions from 'react-use-dimensions';
-import { ArrowUpDownIcon } from '@chakra-ui/icons';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import React from 'react';
 
 export type BreadcrumbValue = string | undefined;
@@ -92,7 +92,7 @@ export default function Breadcrumb({
   const triggerComponent = (
     <Box {...rest} h="100%" d="flex" alignItems="center" justifyContent="space-between" onClick={handleClick}>
       <Box h="100%">{renderSelectedItem ? renderSelectedItem(value) : null}</Box>
-      <ArrowUpDownIcon
+      <HamburgerIcon
         color="gray.300"
         zIndex="2"
         fontSize="2xl"
@@ -106,7 +106,6 @@ export default function Breadcrumb({
   return (
     <Box
       role="group"
-      h="67px"
       backgroundColor={color}
       borderTopWidth="1px"
       borderBottomWidth="1px"
@@ -114,7 +113,6 @@ export default function Breadcrumb({
       cursor="pointer"
       p={3}
       ref={ref}
-      d="inline-block"
       pos="relative"
       _after={
         height && {
@@ -122,11 +120,11 @@ export default function Breadcrumb({
           content: '""',
           w: `${height}px`,
           h: `${height}px`,
-          borderTop: '2px solid',
-          borderTopColor: 'gray.600',
-          borderRight: '2px solid',
-          borderRightColor: 'gray.600',
-          borderTopRightRadius: '8px',
+          borderTop: '1px solid',
+          borderTopColor: 'gray.400',
+          borderRight: '1px solid',
+          borderRightColor: 'gray.400',
+          borderTopRightRadius: '4px',
           boxShadow: '4px -4px 6px 0px rgba(0,0,0,0.3);',
           right: `calc(${height}px / 2 * -1)`,
           top: '-1px',

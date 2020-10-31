@@ -24,6 +24,7 @@ const race = {
 
 const Children = [
   <CharacterCard
+    isVertical
     key="Furizaa"
     character={{
       race,
@@ -38,6 +39,7 @@ const Children = [
     isActive
   />,
   <CharacterCard
+    isVertical
     key="Neliel"
     character={{
       race,
@@ -51,6 +53,7 @@ const Children = [
     }}
   />,
   <CharacterCard
+    isVertical
     key="Nnoitra"
     character={{
       race,
@@ -65,6 +68,7 @@ const Children = [
     isActive
   />,
   <CharacterCard
+    isVertical
     key="Fishstyx"
     character={{
       race,
@@ -78,6 +82,7 @@ const Children = [
     }}
   />,
   <CharacterCard
+    isVertical
     key="Knopperz"
     character={{
       race,
@@ -91,6 +96,7 @@ const Children = [
     }}
   />,
   <CharacterCard
+    isVertical
     key="Nutterz"
     character={{
       race,
@@ -104,6 +110,7 @@ const Children = [
     }}
   />,
   <CharacterCard
+    isVertical
     key="Paladoxon"
     character={{
       race,

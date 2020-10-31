@@ -31,7 +31,7 @@ export default function SnapshotTimeline({
   const sortedData = data.sort((a, b) => (a.snapshot.at < b.snapshot.at ? 1 : -1));
 
   return (
-    <VStack py={4}>
+    <VStack py={2}>
       {sortedData.map(({ snapshot, process }, index) => {
         const processPrevious =
           data[index + 1] && data[index + 1].process.status.type === 'done' && process.status.type === 'done'

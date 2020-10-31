@@ -12,8 +12,5 @@ const Template: Story<SimcCardProps> = (args) => <SimcCard {...args} />;
 
 export const Initial = Template.bind({});
 Initial.args = {
-  gameVersionColor: '#fdfdfa',
-  gameVersionDisplay: 'Shadowlands',
-  simcVersionDisplay: '9.01.0',
   simcConfigDisplay: 'Sane Defaults Patchwerk',
 };

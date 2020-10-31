@@ -13,8 +13,6 @@ export interface RunnerStatusProps {
   onClickRun?: () => void;
 }
 
-const dpsFormatter = new Intl.NumberFormat('en-US', { style: 'decimal' });
-
 export default function RunnerStatus({ currentRun, onClickRun }: RunnerStatusProps) {
   const handleClickRun = () => {
     if (onClickRun) {
@@ -42,24 +40,14 @@ export default function RunnerStatus({ currentRun, onClickRun }: RunnerStatusPro
         </HStack>
       )}
       {currentRun && currentRun.status === 'done' && (
-        <HStack>
-          <Text color="limegreen.500" fontWeight="black">
-            {`${dpsFormatter.format(Math.ceil(currentRun.dps))} DPS`}
-          </Text>
-          <Button onClick={handleClickRun} variant="outline" size="sm">
-            Rerun
-          </Button>
-        </HStack>
+        <Button onClick={handleClickRun} variant="outline" size="sm" isFullWidth>
+          Rerun
+        </Button>
       )}
       {currentRun && currentRun.status === 'dirty' && (
-        <HStack>
-          <Text color="gray.400" fontWeight="black">
-            {`${dpsFormatter.format(Math.ceil(currentRun.dps))} DPS`}
-          </Text>
-          <Button onClick={handleClickRun} colorScheme="green" size="sm">
-            Snapshot Changes & Rerun
-          </Button>
-        </HStack>
+        <Button onClick={handleClickRun} colorScheme="gray" size="sm">
+          Snapshot Changes & Run
+        </Button>
       )}
     </>
   );

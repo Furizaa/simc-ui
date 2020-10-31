@@ -8,8 +8,8 @@ on:
         default: true
 
 jobs:
-  package-ui:
-    runs-on: ubuntu-latest
+  package-ui-macos:
+    runs-on: macos-latest
     steps:
       - name: Get Yarn cache path
         id: yarn-cache

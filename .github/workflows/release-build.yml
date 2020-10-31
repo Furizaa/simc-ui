@@ -2,14 +2,81 @@ name: Release
 
 on:
   workflow_dispatch:
-    inputs:
-      dryRun:
-        description: 'If true, do not publish files'
-        default: true
 
 jobs:
-  package-ui:
-    runs-on: ubuntu-latest
+  build-simc-macos:
+    runs-on: macos-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: 'simulationcraft/simc'
+          
+      - name: Extract Simc Version info and setup output information
+        id: simc_info
+        env:
+          configHeader: engine/config.hpp
+        run: |
+          export SIMC_MAJOR=$(grep -E -e "^#define SC_MAJOR_VERSION" "${{ env.configHeader }}" | sed -E -e "s/#define SC_MAJOR_VERSION \"([0-9]+)\"/\1/g")
+          export SIMC_MINOR=$(grep -E -e "^#define SC_MINOR_VERSION" "${{ env.configHeader }}" | sed -E -e "s/#define SC_MINOR_VERSION \"([0-9]+)\"/\1/g")
+          export SIMC_VERSION=$SIMC_MAJOR-$SIMC_MINOR
+          echo "::set-output name=simc_version::$(echo "$SIMC_VERSION")"
+          echo "::set-output name=simc_output_file::$(echo "simc-$SIMC_VERSION-osx-x86.dmg")"
+          echo "::set-output name=simc_nightly_file::$(echo "simc-$SIMC_VERSION-${{ matrix.architecture }}-${{ steps.git_hash.outputs.sha_short }}.dmg")"
+          echo "$SIMC_VERSION" > ./simc-version
+      
+      - name: Compile CLI
+        working-directory: ./engine 
+        run: |
+          cmake ../ -DBUILD_GUI=OFF -DSC_NO_NETWORKING=ON
+          make
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: simc-artifact-macos
+          path: ./engine/simc
+          
+  build-simc-win64:
+    runs-on: windows-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: 'simulationcraft/simc'
+          
+      - name: Extract Simc Version info
+        id: simc_info
+        env:
+          configHeader: engine/config.hpp
+        run: |
+          $env:simc_major = Get-Content "${{ env.configHeader }}" | Select-String '#define SC_MAJOR_VERSION \"(.+)\"' | ForEach-Object {$_.Matches[0].Groups[1].Value}
+          $env:simc_minor = Get-Content "${{ env.configHeader }}" | Select-String '#define SC_MINOR_VERSION \"(.+)\"' | ForEach-Object {$_.Matches[0].Groups[1].Value}
+          echo "::set-output name=cli_executable::$(echo "${{ env.INSTALL }}\simc-$env:simc_major-$env:simc_minor-${{ matrix.package_suffix }}\simc.exe")"
+          echo "::set-output name=simc_version::$(echo "$env:simc_major-$env:simc_minor")"
+          echo "$env:simc_major-$env:simc_minor" > ${{ env.INSTALL }}\simc-version
+      
+      - name: Prepare msbuild
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Create build directory
+        run: mkdir ./build
+
+      - name: Compile CLI
+        working-directory: ./build
+        run: |
+          cmake ../ -DBUILD_GUI=OFF -DSC_NO_NETWORKING=ON
+          msbuild ALL_BUILD.vcxproj -p:Configuration=Release
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: simc-artifact-win64
+          path: ./build/Release/simc.exe
+        
+  package-ui-macos:
+    runs-on: macos-latest
+    needs: [build-simc-macos]
     steps:
       - name: Get Yarn cache path
         id: yarn-cache
@@ -34,7 +101,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile && yarn bootstrap
 
+      - uses: actions/download-artifact@v2
+        with:
+          name: simc-artifact-macos
+          path: packages/simcui-app/resources/bin
+
       - name: Create Package
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: yarn app postinstall && yarn app package-mac
 
       - uses: actions/upload-artifact@v2
@@ -42,3 +116,47 @@ jobs:
           name: package-artifact-macos
           path: |
             packages/simcui-app/release/*.dmg
+            
+  package-ui-win64:
+    runs-on: windows-latest
+    needs: [build-simc-win64]
+    steps:
+      - name: Get Yarn cache path
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Enable node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Load Yarn cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile && yarn bootstrap
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: simc-artifact-macos
+          path: packages/simcui-app/resources/bin
+
+      - name: Create Package
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: yarn app postinstall && yarn app package-win
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: package-artifact-macos
+          path: |
+            packages/simcui-app/release/*.nsis
+            packages/simcui-app/release/*.msi

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-simc:
+  build-simc-macos:
     runs-on: macos-latest
     steps:
 
@@ -28,16 +28,18 @@ jobs:
       
       - name: Build CLI
         working-directory: ./engine 
-        run: make optimized
+        run: |
+          cmake ../ -DBUILD_GUI=OFF -DSC_NO_NETWORKING=ON
+          make
 
       - uses: actions/upload-artifact@v2
         with:
           name: simc-artifact-macos
-          path: ./simc
+          path: ./engine/simc
         
   package-ui-macos:
     runs-on: macos-latest
-    needs: [build-simc]
+    needs: [build-simc-macos]
     steps:
       - name: Get Yarn cache path
         id: yarn-cache

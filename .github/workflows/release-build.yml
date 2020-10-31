@@ -27,7 +27,8 @@ jobs:
           echo "$SIMC_VERSION" > ./simc-version
       
       - name: Build CLI
-        run: ./engine/make optimized
+        working-directory: ./engine 
+        run: make optimized
 
       - uses: actions/upload-artifact@v2
         with:

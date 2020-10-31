@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        description: 'If true, do not publish files'
+        default: true
+
+jobs:
+  package-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Yarn cache path
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Enable node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Load Yarn cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile && yarn bootstrap
+
+      - name: Create Package
+        run: yarn app postinstall && yarn app package-mac
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: package-artifact-macos
+          path: |
+            packages/simcui-app/release/*.dmg

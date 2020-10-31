@@ -16,6 +16,9 @@ const parseSimOutputPercentage = (out: string) => {
 };
 
 export default function instrument(app: App) {
+  const resourcesPath = app.isPackaged
+    ? path.join(process.resourcesPath, 'resources')
+    : path.join(__dirname, '../resources');
   const userDataPath = app.getPath('userData');
 
   ipcMain.on('sim', (event, args) => {
@@ -23,7 +26,7 @@ export default function instrument(app: App) {
     const eventChannel = `sim-status/${simGUID}`;
 
     try {
-      const execFullPath = path.resolve(__dirname, '..', 'internals/bin/simc');
+      const execFullPath = path.resolve(resourcesPath, 'bin/simc');
       const outputFullPath = path.resolve(userDataPath, `${simGUID}.json`);
       const simTCIFullPath = path.resolve(userDataPath, `${simGUID}.simc`);
 
@@ -62,7 +65,7 @@ export default function instrument(app: App) {
 
   ipcMain.on('exec-status', (event) => {
     try {
-      const execFullPath = path.resolve(__dirname, '..', 'internals/bin/simc');
+      const execFullPath = path.resolve(resourcesPath, 'bin/simc');
 
       const result = cproc.spawnSync(execFullPath, { encoding: 'utf-8' });
 

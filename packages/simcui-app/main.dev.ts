@@ -63,6 +63,7 @@ const createWindow = async () => {
     height: 1400,
     titleBarStyle: 'hidden',
     icon: getAssetPath('icon.png'),
+    frame: process.platform !== 'win32',
     webPreferences:
       (process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true') && process.env.ERB_SECURE !== 'true'
         ? {

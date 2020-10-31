@@ -146,7 +146,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile && yarn bootstrap
+        run: yarn install --frozen-lockfile --ignore-scripts && yarn bootstrap --ignore-scripts
 
       - uses: actions/download-artifact@v2
         with:

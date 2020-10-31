@@ -6,6 +6,7 @@ import SimulationTabs from '@sim/components/SimulationTabs';
 import SnapshotTimeline from '@sim/components/SnapshotTimeline';
 import ModalLayoutSimulationConfig from '@sim/components/ModalLayoutSimulationConfig';
 import StatusBar from '@sim/components/StatusBar';
+import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import { useRouter } from '../../shared/context/RouterContext';
 import useSimulationsStore from '../store/useSimulationsStore';
 import ModalLayoutCharacterImport from '../components/ModalLayoutCharacterImport';
@@ -17,30 +18,27 @@ import RunnerStatusBinding from '../components/RunnerStatus/RunnerStatusBinding'
 
 export default function SimulationHome() {
   const { push } = useRouter();
-  const [openModal] = useModalStore((store) => [store.open]);
+  const [openModal] = useModalStore(store => [store.open]);
 
-  const [characterIdList, simulationList, selectedSimulationId, selectSimulation] = useSimulationsStore((store) => [
-    store.getCharacterIdsInSelectedSimulation(),
-    Object.values(store.list),
-    store.selectedSimulationId,
-    store.selectSimulation,
-  ]);
-
-  const [currentCharacterId, selectCharacter] = useSimulationsStore((store) => [
-    store.getSelectedCharacterId(selectedSimulationId),
-    store.selectCharacter,
-  ]);
-
-  const characterListInCurrentSimulation = useCharacterStore((store) =>
-    Object.values(store.list).filter((char) => characterIdList.includes(char.id)),
+  const selectSimulationId = useInterfaceStateStore(store => store.setSelectedSimulationId);
+  const selectCharacterId = useInterfaceStateStore(store => store.setSelectedCharacterId);
+  const selectedSimulationId = useInterfaceStateStore(store => store.getSelectedSimulationId());
+  const selectedCharacterId = useInterfaceStateStore(store =>
+    selectedSimulationId ? store.getSelectedCharacterId(selectedSimulationId) : undefined,
   );
 
-  const currentCharacterSelectedSnapshot = useCharacterStore((store) =>
-    store.getSelectedSnapshotId(currentCharacterId),
+  const simulationList = useSimulationsStore(store => Object.values(store.list));
+  const selectedSimulation = useSimulationsStore(store =>
+    selectedSimulationId ? store.getSimulation(selectedSimulationId) : undefined,
+  );
+
+  const currentCharacterSelectedSnapshot = useCharacterStore(store => store.getSelectedSnapshotId(selectedCharacterId));
+  const characterListInSimulation = useCharacterStore(store =>
+    Object.values(store.list).filter(char => selectedSimulation?.characterIds.includes(char.id)),
   );
 
   const { switchSnapshot, getSnapshotProcessMap, freezeSnapshotAndIdleProcess } = useSnapshotManager(
-    currentCharacterId,
+    selectedCharacterId,
   );
 
   const isEmpty = simulationList.length === 0;
@@ -56,7 +54,7 @@ export default function SimulationHome() {
   }
 
   const handleSimulationSelection = (simulationId: SimulationId) => {
-    selectSimulation(simulationId);
+    selectSimulationId(simulationId);
   };
 
   const handleCreateNewSimulationClick = () => {
@@ -91,20 +89,20 @@ export default function SimulationHome() {
           renderTabPanel={() => (
             <Grid height="100%" templateColumns="18rem 1fr auto">
               <Grid bgColor="gray.800" borderRight="1px solid" borderRightColor="gray.900" templateRows="auto 1fr auto">
-                {currentCharacterId && (
+                {selectedSimulationId && selectedSimulation && selectedCharacterId && (
                   <CharacterDropdown
-                    characterList={characterListInCurrentSimulation}
-                    value={currentCharacterId}
-                    onSelect={(id) => selectCharacter(selectedSimulationId, id ?? undefined)}
+                    characterList={characterListInSimulation}
+                    value={selectedCharacterId}
+                    onSelect={id => selectCharacterId(selectedSimulationId, id ?? undefined)}
                     onCreateNewClick={handleImportCharacterClick}
                   />
                 )}
-                {!currentCharacterId && (
+                {!selectedCharacterId && (
                   <Button m={4} colorScheme="blue" onClick={handleImportCharacterClick}>
                     Create New Character
                   </Button>
                 )}
-                {currentCharacterId && (
+                {selectedCharacterId && (
                   <SnapshotTimeline
                     data={getSnapshotProcessMap()}
                     activeSnapshotId={currentCharacterSelectedSnapshot}
@@ -112,17 +110,19 @@ export default function SimulationHome() {
                     onClickFreezeSnapshot={handleFreezeSnapshotClick}
                   />
                 )}
-                {selectedSimulationId && currentCharacterSelectedSnapshot && currentCharacterId && (
+                {selectedSimulationId && currentCharacterSelectedSnapshot && selectedCharacterId && (
                   <Box d="flex" justifyContent="center" p={2}>
                     <RunnerStatusBinding
                       simulationId={selectedSimulationId}
                       snapshotId={currentCharacterSelectedSnapshot}
-                      characterId={currentCharacterId}
+                      characterId={selectedCharacterId}
                     />
                   </Box>
                 )}
               </Grid>
-              <Box bgColor="gray.900">{currentCharacterId && <CharacterSheet characterId={currentCharacterId} />}</Box>
+              <Box bgColor="gray.900">
+                {selectedCharacterId && <CharacterSheet characterId={selectedCharacterId} />}
+              </Box>
               <Box />
             </Grid>
           )}

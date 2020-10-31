@@ -8,23 +8,26 @@ export default {
   component: SimulationTabs,
 } as Meta;
 
-const Template: Story<SimulationTabsProps> = (args) => <SimulationTabs {...args} />;
+const Template: Story<SimulationTabsProps> = args => <SimulationTabs {...args} />;
 
 const simulations: Simulation[] = [
   {
     id: '1',
     name: 'Patchwerk',
     configurationId: '1',
+    characterIds: [],
   },
   {
     id: '2',
     name: 'Dungeon Slice',
     configurationId: '1',
+    characterIds: [],
   },
   {
     id: '3',
     name: 'Helter Skelter',
     configurationId: '1',
+    characterIds: [],
   },
 ];
 

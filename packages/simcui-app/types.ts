@@ -49,6 +49,7 @@ export type Simulation = {
   id: SimulationId;
   name: string;
   configurationId: SimulationConfigId;
+  characterIds: CharacterId[];
 };
 
 export type CharacterId = string;

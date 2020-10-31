@@ -154,8 +154,8 @@ jobs:
           path: packages\simcui-app\resources\bin\
           
       - name: Check resources folder
-        working-directory: packages\simcui-app\resources
-        run: dir /s /b
+        working-directory: packages\simcui-app\resources\bin
+        run: dir
          
       - name: Create Package
         env:

@@ -49,6 +49,7 @@ export type Simulation = {
   id: SimulationId;
   name: string;
   configurationId: SimulationConfigId;
+  characterIds: CharacterId[];
 };
 
 export type CharacterId = string;
@@ -61,6 +62,7 @@ export type Character = {
   equippedItemLevel: number;
   backgroundRenderUrl?: string;
   race: WOW.LocalizedString;
+  snapshotIds: SnapshotId[];
 };
 
 export type ItemInstance = {

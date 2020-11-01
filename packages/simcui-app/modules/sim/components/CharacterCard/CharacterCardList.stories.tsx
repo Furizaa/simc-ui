@@ -8,7 +8,7 @@ export default {
   component: CharacterCardList,
 } as Meta;
 
-const Template: Story<CharacterCardListProps> = (args) => <CharacterCardList {...args} />;
+const Template: Story<CharacterCardListProps> = args => <CharacterCardList {...args} />;
 
 const race = {
   en_US: 'maggot',
@@ -35,6 +35,7 @@ const Children = [
       classWowId: 8,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
     isActive
   />,
@@ -50,6 +51,7 @@ const Children = [
       classWowId: 4,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
   />,
   <CharacterCard
@@ -64,6 +66,7 @@ const Children = [
       classWowId: 5,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
     isActive
   />,
@@ -79,6 +82,7 @@ const Children = [
       classWowId: 3,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
   />,
   <CharacterCard
@@ -93,6 +97,7 @@ const Children = [
       classWowId: 1,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
   />,
   <CharacterCard
@@ -107,6 +112,7 @@ const Children = [
       classWowId: 7,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
   />,
   <CharacterCard
@@ -121,6 +127,7 @@ const Children = [
       classWowId: 2,
       level: 50,
       equippedItemLevel: 400,
+      snapshotIds: [],
     }}
   />,
 ];

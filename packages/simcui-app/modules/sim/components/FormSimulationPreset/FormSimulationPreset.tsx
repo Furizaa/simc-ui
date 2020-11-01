@@ -3,6 +3,7 @@ import { Field, FieldProps, Form, Formik, FormikProps } from 'formik';
 import { Button, FormControl, FormErrorMessage, FormLabel, HStack, Input } from '@chakra-ui/core';
 import * as Yup from 'yup';
 import useSimulationsStore from '@sim/store/useSimulationsStore';
+import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import SimcConfigurationDropdown from '../SimcConfigurationDropdown';
 import dbSimulationPresets from '../../../data/simConfigs';
 
@@ -16,9 +17,10 @@ interface FormValues {
 }
 
 export default function FormSimulationPreset({ onSimulationCreated }: FormSimulationPresetProps) {
-  const createSimulation = useSimulationsStore((store) => useCallback(store.createSimulation, []));
+  const setSelectedSimulationId = useInterfaceStateStore(useCallback(store => store.setSelectedSimulationId, []));
+  const createSimulation = useSimulationsStore(store => useCallback(store.createSimulation, []));
 
-  const validPresetIds = dbSimulationPresets.map((preset) => preset.id);
+  const validPresetIds = dbSimulationPresets.map(preset => preset.id);
 
   const validationSchema = Yup.object().shape({
     simulationPresetId: Yup.string().required('Preset is required').oneOf(validPresetIds, 'This preset is not valid'),
@@ -26,7 +28,8 @@ export default function FormSimulationPreset({ onSimulationCreated }: FormSimula
   });
 
   const handleSubmit = (formValues: FormValues) => {
-    createSimulation(formValues.simulationName, formValues.simulationPresetId);
+    const simulationId = createSimulation(formValues.simulationName, formValues.simulationPresetId);
+    setSelectedSimulationId(simulationId);
     onSimulationCreated();
   };
 
@@ -48,9 +51,9 @@ export default function FormSimulationPreset({ onSimulationCreated }: FormSimula
                   <FormLabel variant="large">Select Preset</FormLabel>
                   <SimcConfigurationDropdown
                     value={field.value}
-                    onSelect={(value) => {
+                    onSelect={value => {
                       props.setFieldValue('simulationPresetId', value);
-                      const preset = dbSimulationPresets.find((item) => item.id === value);
+                      const preset = dbSimulationPresets.find(item => item.id === value);
                       if (preset) {
                         props.setFieldValue('simulationName', preset.name);
                       }
@@ -70,7 +73,7 @@ export default function FormSimulationPreset({ onSimulationCreated }: FormSimula
                   <FormLabel variant="large">Simulation Name</FormLabel>
                   <Input
                     variant="filled"
-                    onChange={(event) => props.setFieldValue('simulationName', event.target.value)}
+                    onChange={event => props.setFieldValue('simulationName', event.target.value)}
                     value={field.value}
                   />
                   <FormErrorMessage>{props.errors.simulationName}</FormErrorMessage>

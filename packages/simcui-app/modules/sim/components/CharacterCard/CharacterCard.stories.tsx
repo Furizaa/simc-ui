@@ -8,7 +8,7 @@ export default {
   component: CharacterCard,
 } as Meta;
 
-const Template: Story<CharacterCardProps> = (args) => <CharacterCard {...args} />;
+const Template: Story<CharacterCardProps> = args => <CharacterCard {...args} />;
 
 const race = {
   en_US: 'maggot',
@@ -33,5 +33,6 @@ Initial.args = {
     level: 50,
     equippedItemLevel: 45,
     backgroundRenderUrl: '',
+    snapshotIds: [],
   },
 };

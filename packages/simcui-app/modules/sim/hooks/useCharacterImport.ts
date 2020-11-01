@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import qs from 'querystring';
 import manifest from '@cloud/gatewayManifest.json';
+import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import { AsyncError, WOW } from '../../../types';
 import useCharacterStore, { createCharacterFromApi } from '../store/useCharacterStore';
 import useEquipmentStore from '../store/useEquipmentStore';
@@ -18,27 +19,27 @@ type UseCharacterLoader = [AsyncError, (params: WOW.CharacterRequestParams) => v
 export default function useCharacterLoader(): UseCharacterLoader {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AsyncError>(null);
-  const addCharacter = useCharacterStore((store) => store.addCharacter);
-  const addItemInstance = useItemInstanceStore((store) => store.addItemInstance);
-  const addBaseItem = useBaseItemStore((store) => store.addBaseItem);
-  const createSimProcess = useSimProcessStore((store) => store.createProcess);
-  const [createEquipmentSet, equipItem, enchantItem] = useEquipmentStore((store) => [
+
+  const [selectedSimulationId, setSelectedCharacterId, setSelectedSnapshotId] = useInterfaceStateStore(store => [
+    store.getSelectedSimulationId(),
+    store.setSelectedCharacterId,
+    store.setSelectedSnapshotId,
+  ]);
+
+  const addCharacter = useCharacterStore(store => store.addCharacter);
+  const addItemInstance = useItemInstanceStore(store => store.addItemInstance);
+  const addBaseItem = useBaseItemStore(store => store.addBaseItem);
+  const createSimProcess = useSimProcessStore(store => store.createProcess);
+  const [createEquipmentSet, equipItem, enchantItem] = useEquipmentStore(store => [
     store.createEquipmentSet,
     store.equip,
     store.setEnchant,
   ]);
-  const createSnapshot = useSnapshotStore((store) => store.createSnapshot);
-  const addBaseEnchantment = useBaseEnchantStore((store) => store.addBaseEnchant);
-  const [createTalentSet, replaceTalentSet] = useTalentStore((store) => [
-    store.createTalentSet,
-    store.replaceTalentSet,
-  ]);
-  const initializeClassTalents = useSpellStore((store) => store.initializeClassTalents);
-  const [currentSimulationId, addCharacterToSimulation, selectCharacter] = useSimulationsStore((store) => [
-    store.selectedSimulationId,
-    store.addCharacterToSimulation,
-    store.selectCharacter,
-  ]);
+  const createSnapshot = useSnapshotStore(store => store.createSnapshot);
+  const addBaseEnchantment = useBaseEnchantStore(store => store.addBaseEnchant);
+  const [createTalentSet, replaceTalentSet] = useTalentStore(store => [store.createTalentSet, store.replaceTalentSet]);
+  const initializeClassTalents = useSpellStore(store => store.initializeClassTalents);
+  const [addCharacterToSimulation] = useSimulationsStore(store => [store.addCharacterToSimulation]);
 
   const loadCharacter = async (params: WOW.CharacterRequestParams) => {
     if (isLoading) {
@@ -57,7 +58,7 @@ export default function useCharacterLoader(): UseCharacterLoader {
     const result = await fetch(`${manifest.bnetGatewayEndpoint}character?${qs.stringify(query)}`);
     const json = (await result.json()) as WOW.Result<WOW.CharacterRequestResult>;
 
-    if (json.data && currentSimulationId) {
+    if (json.data && selectedSimulationId) {
       const character = createCharacterFromApi(json.data.character, json.data.media);
 
       initializeClassTalents(character.classWowId);
@@ -71,7 +72,7 @@ export default function useCharacterLoader(): UseCharacterLoader {
       }
 
       // Handle equipped items
-      json.data.equipment.equipped_items.forEach((item) => {
+      json.data.equipment.equipped_items.forEach(item => {
         // Add base item of the equipped item
         addBaseItem(item.item.id);
 
@@ -81,7 +82,7 @@ export default function useCharacterLoader(): UseCharacterLoader {
         equipItem(equipmentSetId, itemInstance.slot, itemInstance.id);
 
         // Handle enchantments
-        item.enchantments?.forEach((enchant) => {
+        item.enchantments?.forEach(enchant => {
           // Add all enchantment source items to the base item store
           if (enchant.source_item) {
             addBaseItem(enchant.source_item.id);
@@ -107,8 +108,9 @@ export default function useCharacterLoader(): UseCharacterLoader {
       });
 
       addCharacter(character, newSnapshotId);
-      addCharacterToSimulation(currentSimulationId, character.id);
-      selectCharacter(currentSimulationId, character.id);
+      addCharacterToSimulation(selectedSimulationId, character.id);
+      setSelectedCharacterId(selectedSimulationId, character.id);
+      setSelectedSnapshotId(character.id, newSnapshotId);
     }
 
     setIsLoading(false);

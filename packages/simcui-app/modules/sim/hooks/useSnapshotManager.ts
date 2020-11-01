@@ -1,5 +1,6 @@
 import useCharacterStore from '@sim/store/useCharacterStore';
 import useEquipmentStore from '@sim/store/useEquipmentStore';
+import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import useSimProcessStore from '@sim/store/useSimProcessStore';
 import useSnapshotStore from '@sim/store/useSnapshotStore';
 import useTalentStore from '@sim/store/useTalentStore';
@@ -16,35 +17,23 @@ type DuplicateSnapshotResult =
   | undefined;
 
 export default function useSnapshotManager(characterId?: CharacterId) {
+  const [setSelectedSnapshotId, getSelectedSnapshotId] = useInterfaceStateStore(
+    useCallback(store => [store.setSelectedSnapshotId, store.getSelectedSnapshotId, store.getSelectedCharacterId], []),
+  );
   const [snapshotList, createSnapshot, removeSnapshot, getSnapshot, freezeSnapshot] = useSnapshotStore(
     useCallback(
-      (store) => [store.list, store.createSnapshot, store.removeSnapshot, store.getSnapshot, store.freezeSnapshot],
+      store => [store.list, store.createSnapshot, store.removeSnapshot, store.getSnapshot, store.freezeSnapshot],
       [],
     ),
   );
-  const [
-    selectSnapshot,
-    addSnapshotToCharacter,
-    removeSnapshotFromCharacter,
-    getSelectedSnapshotId,
-    snapshotsInCharacter,
-  ] = useCharacterStore(
-    useCallback(
-      (store) => [
-        store.selectSnapshotId,
-        store.addSnapshotId,
-        store.removeSnapshotId,
-        store.getSelectedSnapshotId,
-        characterId ? store.snapshotsInCharacter[characterId] : [],
-      ],
-      [characterId],
-    ),
+  const [selectedCharacter, addSnapshotToCharacter, removeSnapshotFromCharacter] = useCharacterStore(
+    useCallback(store => [store.getCharacter(characterId), store.addSnapshotId, store.removeSnapshotId], [characterId]),
   );
-  const duplicateEquipmentSet = useEquipmentStore(useCallback((store) => store.duplicateEquipmentSet, []));
+  const duplicateEquipmentSet = useEquipmentStore(useCallback(store => store.duplicateEquipmentSet, []));
   const [duplicateSimProcess, getProcess, setProcessStatus] = useSimProcessStore(
-    useCallback((store) => [store.duplicateProcess, store.getProcess, store.setProcessStatus], []),
+    useCallback(store => [store.duplicateProcess, store.getProcess, store.setProcessStatus], []),
   );
-  const duplicateTalentSet = useTalentStore(useCallback((store) => store.duplicateTalentSet, []));
+  const duplicateTalentSet = useTalentStore(useCallback(store => store.duplicateTalentSet, []));
 
   const duplicateSnapshot = useCallback(
     (sourceSnapshotId: SnapshotId): DuplicateSnapshotResult => {
@@ -66,7 +55,7 @@ export default function useSnapshotManager(characterId?: CharacterId) {
       });
 
       addSnapshotToCharacter(characterId, newSnapshotId);
-      selectSnapshot(characterId, newSnapshotId);
+      setSelectedSnapshotId(characterId, newSnapshotId);
 
       return {
         snapshotId: newSnapshotId,
@@ -89,15 +78,15 @@ export default function useSnapshotManager(characterId?: CharacterId) {
           removeSnapshot(currentSnapshot.id);
         }
 
-        selectSnapshot(characterId, targetSnapshotId);
+        setSelectedSnapshotId(characterId, targetSnapshotId);
       }
     },
     [snapshotList, characterId],
   );
 
   const getSnapshotProcessMap = useCallback(() => {
-    return snapshotsInCharacter
-      .map((snapshotId) => {
+    return (selectedCharacter?.snapshotIds ?? [])
+      .map(snapshotId => {
         const snapshot = getSnapshot(snapshotId);
         const process = snapshot && getProcess(snapshot.simProcessId);
         if (snapshot && process) {
@@ -106,7 +95,7 @@ export default function useSnapshotManager(characterId?: CharacterId) {
         return undefined;
       })
       .filter(Boolean) as Array<{ snapshot: Snapshot; process: SimProcess }>;
-  }, [snapshotsInCharacter]);
+  }, [selectedCharacter]);
 
   const freezeSnapshotAndIdleProcess = useCallback((snapshotId: SnapshotId) => {
     const snapshot = getSnapshot(snapshotId);

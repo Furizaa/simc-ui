@@ -62,6 +62,7 @@ export type Character = {
   equippedItemLevel: number;
   backgroundRenderUrl?: string;
   race: WOW.LocalizedString;
+  snapshotIds: SnapshotId[];
 };
 
 export type ItemInstance = {

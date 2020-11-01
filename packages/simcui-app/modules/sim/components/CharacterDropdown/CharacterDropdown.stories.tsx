@@ -9,7 +9,7 @@ export default {
   component: CharacterDropdown,
 } as Meta;
 
-const Template: Story<CharacterDropdownProps> = (args) => (
+const Template: Story<CharacterDropdownProps> = args => (
   <BreadcrumbBar>
     <CharacterDropdown {...args} />
   </BreadcrumbBar>
@@ -37,6 +37,7 @@ const characterList = [
     equippedItemLevel: 45,
     backgroundRenderUrl: '',
     race,
+    snapshotIds: [],
   },
   {
     backgroundRenderUrl: '',
@@ -47,6 +48,7 @@ const characterList = [
     level: 50,
     equippedItemLevel: 400,
     race,
+    snapshotIds: [],
   },
   {
     backgroundRenderUrl: '',
@@ -57,6 +59,7 @@ const characterList = [
     level: 50,
     equippedItemLevel: 400,
     race,
+    snapshotIds: [],
   },
 ];
 

@@ -20,9 +20,10 @@ export default function useCharacterLoader(): UseCharacterLoader {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AsyncError>(null);
 
-  const [selectedSimulationId, setSelectedCharacterId] = useInterfaceStateStore(store => [
+  const [selectedSimulationId, setSelectedCharacterId, setSelectedSnapshotId] = useInterfaceStateStore(store => [
     store.getSelectedSimulationId(),
     store.setSelectedCharacterId,
+    store.setSelectedSnapshotId,
   ]);
 
   const addCharacter = useCharacterStore(store => store.addCharacter);
@@ -109,6 +110,7 @@ export default function useCharacterLoader(): UseCharacterLoader {
       addCharacter(character, newSnapshotId);
       addCharacterToSimulation(selectedSimulationId, character.id);
       setSelectedCharacterId(selectedSimulationId, character.id);
+      setSelectedSnapshotId(character.id, newSnapshotId);
     }
 
     setIsLoading(false);

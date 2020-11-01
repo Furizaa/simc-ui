@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { CharacterId, SimulationId } from 'types';
+import { CharacterId, SimulationId, SnapshotId } from 'types';
 import create, { GetState, SetState } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -11,6 +11,10 @@ export type InterfaceStateStore = {
   selectedCharacterId: Record<SimulationId, CharacterId | undefined>;
   getSelectedCharacterId: (simulationId: SimulationId) => CharacterId | undefined;
   setSelectedCharacterId: (simulationId: SimulationId, characterId: CharacterId | undefined) => void;
+
+  selectedSnapshotId: Record<CharacterId, SnapshotId | undefined>;
+  getSelectedSnapshotId: (characterId: CharacterId) => SnapshotId | undefined;
+  setSelectedSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId | undefined) => void;
 };
 
 const store = (set: SetState<InterfaceStateStore>, get: GetState<InterfaceStateStore>) => ({
@@ -27,6 +31,16 @@ const store = (set: SetState<InterfaceStateStore>, get: GetState<InterfaceStateS
     set(state =>
       produce(state, draft => {
         draft.selectedCharacterId[simulationId] = characterId;
+      }),
+    ),
+
+  selectedSnapshotId: {},
+
+  getSelectedSnapshotId: (characterId: CharacterId) => get().selectedSnapshotId[characterId] ?? undefined,
+  setSelectedSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId | undefined) =>
+    set(state =>
+      produce(state, draft => {
+        draft.selectedSnapshotId[characterId] = snapshotId;
       }),
     ),
 });

@@ -9,14 +9,8 @@ export type CharacterState = {
   addCharacter: (character: Character, snapshotId: SnapshotId) => void;
   getCharacter: (characterId?: CharacterId) => Character | undefined;
 
-  // Character -> Snapshot
-
-  snapshotsInCharacter: Record<CharacterId, SnapshotId[]>;
-  selectedSnapshotForCharacter: Record<CharacterId, SnapshotId>;
   addSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId) => void;
   removeSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId) => void;
-  selectSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId) => void;
-  getSelectedSnapshotId: (characterId?: CharacterId) => SnapshotId | undefined;
 };
 
 const store = (set: SetState<CharacterState>, get: GetState<CharacterState>) => ({
@@ -24,11 +18,10 @@ const store = (set: SetState<CharacterState>, get: GetState<CharacterState>) => 
   selectedCharacterId: undefined,
 
   addCharacter: (character: Character, snapshotId: SnapshotId) => {
-    return set((state) =>
-      produce(state, (draft) => {
+    return set(state =>
+      produce(state, draft => {
         draft.list[character.id] = character;
-        draft.snapshotsInCharacter[character.id] = [snapshotId];
-        draft.selectedSnapshotForCharacter[character.id] = snapshotId;
+        draft.list[character.id].snapshotIds.push(snapshotId);
       }),
     );
   },
@@ -37,16 +30,11 @@ const store = (set: SetState<CharacterState>, get: GetState<CharacterState>) => 
     return characterId && characterId in get().list ? get().list[characterId] : undefined;
   },
 
-  // Character -> Snapshot
-
-  selectedSnapshotForCharacter: {},
-  snapshotsInCharacter: {},
-
   addSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId) => {
-    set((state) => {
-      if (state.snapshotsInCharacter[characterId]) {
-        return produce(state, (draft) => {
-          draft.snapshotsInCharacter[characterId].push(snapshotId);
+    set(state => {
+      if (state.list[characterId]) {
+        return produce(state, draft => {
+          draft.list[characterId].snapshotIds.push(snapshotId);
         });
       }
       return state;
@@ -54,36 +42,13 @@ const store = (set: SetState<CharacterState>, get: GetState<CharacterState>) => 
   },
 
   removeSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId) => {
-    set((state) => {
-      return produce(state, (draft) => {
-        if (state.snapshotsInCharacter[characterId]) {
-          draft.snapshotsInCharacter[characterId] = draft.snapshotsInCharacter[characterId].filter(
-            (id) => id !== snapshotId,
-          );
-        }
-        // Deselect snapshot if the one deleted is the one selected
-        if (state.selectedSnapshotForCharacter[characterId] === snapshotId) {
-          delete draft.selectedSnapshotForCharacter[characterId];
+    set(state => {
+      return produce(state, draft => {
+        if (state.list[characterId]) {
+          draft.list[characterId].snapshotIds = draft.list[characterId].snapshotIds.filter(id => id !== snapshotId);
         }
       });
     });
-  },
-
-  selectSnapshotId: (characterId: CharacterId, snapshotId: SnapshotId) => {
-    set((state) => {
-      if (state.snapshotsInCharacter[characterId] && state.snapshotsInCharacter[characterId].includes(snapshotId)) {
-        return produce(state, (draft) => {
-          draft.selectedSnapshotForCharacter[characterId] = snapshotId;
-        });
-      }
-      return state;
-    });
-  },
-
-  getSelectedSnapshotId: (characterId?: CharacterId) => {
-    return characterId && characterId in get().selectedSnapshotForCharacter
-      ? get().selectedSnapshotForCharacter[characterId]
-      : undefined;
   },
 });
 
@@ -99,7 +64,7 @@ export const createCharacterFromApi = (
   if (media.render_url) {
     backgroundRenderUrl = media.render_url;
   } else if (media.assets) {
-    backgroundRenderUrl = media.assets.find((asset) => asset.key === 'main')?.value ?? undefined;
+    backgroundRenderUrl = media.assets.find(asset => asset.key === 'main')?.value ?? undefined;
   }
 
   return {
@@ -111,5 +76,6 @@ export const createCharacterFromApi = (
     equippedItemLevel: character.equipped_item_level,
     backgroundRenderUrl,
     race: character.race.name,
+    snapshotIds: [],
   };
 };

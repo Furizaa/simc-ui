@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 import dbProfiles from '@dbc/dbProfiles.json';
 import dbClassList from '@dbc/dbClassList.json';
 import dbTalents from '@dbc/dbTalentList.json';
+import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import useCharacterStore from '../store/useCharacterStore';
 import useSnapshotStore from '../store/useSnapshotStore';
 import useTalentStore from '../store/useTalentStore';
@@ -31,13 +32,14 @@ const serializeTCI = (tci: Record<string, unknown>) => {
 };
 
 export default function useTCI({ characterId }: UseTCIProps) {
-  const [currentCharacter, snapshotId] = useCharacterStore(
-    useCallback((store) => [store.getCharacter(characterId), store.getSelectedSnapshotId(characterId)], [characterId]),
+  const selectedSnapshotId = useInterfaceStateStore(useCallback(store => store.getSelectedSnapshotId(characterId), []));
+  const [currentCharacter] = useCharacterStore(useCallback(store => [store.getCharacter(characterId)], [characterId]));
+  const currentSnapshot = useSnapshotStore(
+    useCallback(store => store.getSnapshot(selectedSnapshotId), [selectedSnapshotId]),
   );
-  const currentSnapshot = useSnapshotStore(useCallback((store) => store.getSnapshot(snapshotId), [snapshotId]));
   const slots = useTCISlots({ equipmentSetId: currentSnapshot?.equipmentSetId });
   const currentTalentSet = useTalentStore(
-    useCallback((store) => store.getTalentSet(currentSnapshot?.talentSetId), [currentSnapshot]),
+    useCallback(store => store.getTalentSet(currentSnapshot?.talentSetId), [currentSnapshot]),
   );
 
   // Translate selected talents to a tiered list of column indexes (1032113)
@@ -48,9 +50,9 @@ export default function useTCI({ characterId }: UseTCIProps) {
       return [];
     }
 
-    return [...Array(7).keys()].map((tier) => {
+    return [...Array(7).keys()].map(tier => {
       const selectedTalentForTier = Object.values(dbTalents).find(
-        (talent) =>
+        talent =>
           ('playable_specialization' in talent
             ? talent.playable_specialization.id === currentTalentSet?.specId
             : talent.playable_class.id === currentCharacter.classWowId) &&

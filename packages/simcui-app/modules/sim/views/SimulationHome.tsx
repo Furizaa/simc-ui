@@ -6,6 +6,7 @@ import SimulationTabs from '@sim/components/SimulationTabs';
 import SnapshotTimeline from '@sim/components/SnapshotTimeline';
 import ModalLayoutSimulationConfig from '@sim/components/ModalLayoutSimulationConfig';
 import StatusBar from '@sim/components/StatusBar';
+import shallow from 'zustand/shallow';
 import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import { useRouter } from '../../shared/context/RouterContext';
 import useSimulationsStore from '../store/useSimulationsStore';
@@ -26,15 +27,18 @@ export default function SimulationHome() {
   const selectedCharacterId = useInterfaceStateStore(store =>
     selectedSimulationId ? store.getSelectedCharacterId(selectedSimulationId) : undefined,
   );
+  const selectedSnapshotId = useInterfaceStateStore(store =>
+    selectedCharacterId ? store.getSelectedSnapshotId(selectedCharacterId) : undefined,
+  );
 
-  const simulationList = useSimulationsStore(store => Object.values(store.list));
+  const simulationList = useSimulationsStore(store => Object.values(store.list), shallow);
   const selectedSimulation = useSimulationsStore(store =>
     selectedSimulationId ? store.getSimulation(selectedSimulationId) : undefined,
   );
 
-  const currentCharacterSelectedSnapshot = useCharacterStore(store => store.getSelectedSnapshotId(selectedCharacterId));
-  const characterListInSimulation = useCharacterStore(store =>
-    Object.values(store.list).filter(char => selectedSimulation?.characterIds.includes(char.id)),
+  const characterListInSimulation = useCharacterStore(
+    store => Object.values(store.list).filter(char => selectedSimulation?.characterIds.includes(char.id)),
+    shallow,
   );
 
   const { switchSnapshot, getSnapshotProcessMap, freezeSnapshotAndIdleProcess } = useSnapshotManager(
@@ -105,16 +109,16 @@ export default function SimulationHome() {
                 {selectedCharacterId && (
                   <SnapshotTimeline
                     data={getSnapshotProcessMap()}
-                    activeSnapshotId={currentCharacterSelectedSnapshot}
+                    activeSnapshotId={selectedSnapshotId}
                     onSelect={handleSelectSnapshotClick}
                     onClickFreezeSnapshot={handleFreezeSnapshotClick}
                   />
                 )}
-                {selectedSimulationId && currentCharacterSelectedSnapshot && selectedCharacterId && (
+                {selectedSimulationId && selectedSnapshotId && selectedCharacterId && (
                   <Box d="flex" justifyContent="center" p={2}>
                     <RunnerStatusBinding
                       simulationId={selectedSimulationId}
-                      snapshotId={currentCharacterSelectedSnapshot}
+                      snapshotId={selectedSnapshotId}
                       characterId={selectedCharacterId}
                     />
                   </Box>

@@ -1,4 +1,5 @@
 import useSnapshotManager from '@sim/hooks/useSnapshotManager';
+import useInterfaceStateStore from '@sim/store/useInterfaceStateStore';
 import React, { useCallback } from 'react';
 import useCharacterStore from '../../store/useCharacterStore';
 import useEquipmentStore from '../../store/useEquipmentStore';
@@ -19,18 +20,21 @@ export interface CharacterSheetProps {
 }
 
 export default function CharacterSheet({ characterId }: CharacterSheetProps) {
-  const [character, snapshotId] = useCharacterStore(
-    useCallback((store) => [store.getCharacter(characterId), store.getSelectedSnapshotId(characterId)], [characterId]),
+  const [character] = useCharacterStore(useCallback(store => [store.getCharacter(characterId)], [characterId]));
+  const selectedSnapshotId = useInterfaceStateStore(
+    useCallback(store => store.getSelectedSnapshotId(characterId), [characterId]),
   );
-  const currentSnapshot = useSnapshotStore(useCallback((store) => store.getSnapshot(snapshotId), [snapshotId]));
+  const selectedSnapshot = useSnapshotStore(
+    useCallback(store => store.getSnapshot(selectedSnapshotId), [selectedSnapshotId]),
+  );
   const equipment = useEquipmentStore(
-    useCallback((store) => store.getEquipmentSet(currentSnapshot?.equipmentSetId), [currentSnapshot]),
+    useCallback(store => store.getEquipmentSet(selectedSnapshot?.equipmentSetId), [selectedSnapshot]),
   );
   const [currentTalentSet, activateTalent] = useTalentStore(
-    useCallback((store) => [store.getTalentSet(currentSnapshot?.talentSetId), store.activateTalent], [currentSnapshot]),
+    useCallback(store => [store.getTalentSet(selectedSnapshot?.talentSetId), store.activateTalent], [selectedSnapshot]),
   );
   const currentProcess = useSimProcessStore(
-    useCallback((store) => store.getProcess(currentSnapshot?.simProcessId), [currentSnapshot]),
+    useCallback(store => store.getProcess(selectedSnapshot?.simProcessId), [selectedSnapshot]),
   );
 
   const { duplicateSnapshot } = useSnapshotManager(characterId);
@@ -40,14 +44,14 @@ export default function CharacterSheet({ characterId }: CharacterSheetProps) {
   }
 
   const handleTalentClick = (talentId: number) => {
-    if (currentSnapshot) {
-      if (currentSnapshot.isFrozen) {
-        const dupe = duplicateSnapshot(currentSnapshot.id);
+    if (selectedSnapshot) {
+      if (selectedSnapshot.isFrozen) {
+        const dupe = duplicateSnapshot(selectedSnapshot.id);
         if (dupe) {
           activateTalent(dupe.talentSetId, talentId);
         }
       } else {
-        activateTalent(currentSnapshot.talentSetId, talentId);
+        activateTalent(selectedSnapshot.talentSetId, talentId);
       }
     }
   };

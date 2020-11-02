@@ -25,9 +25,11 @@
     "@aws-cdk/aws-apigateway": "^1.68.0",
     "@aws-cdk/aws-dynamodb": "^1.68.0",
     "@aws-cdk/aws-events": "^1.68.0",
-    "@aws-cdk/aws-events-targets": "^1.68.0",
+    "@aws-cdk/aws-events-targets": "^1.71.0",
     "@aws-cdk/aws-lambda": "^1.68.0",
     "@aws-cdk/aws-secretsmanager": "^1.68.0",
+    "@aws-cdk/aws-stepfunctions": "^1.68.0",
+    "@aws-cdk/aws-stepfunctions-tasks": "^1.68.0",
     "@aws-cdk/core": "^1.68.0",
     "aws-sdk": "^2.773.0",
     "source-map-support": "^0.5.16"

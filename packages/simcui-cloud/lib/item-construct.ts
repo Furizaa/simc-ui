@@ -30,6 +30,8 @@ export class ItemConstruct extends cdk.Construct {
       timeout: cdk.Duration.seconds(15),
     });
 
+    this.handler = itemProxy;
+
     props.tokenProvider.grantInvoke(itemProxy);
     cacheTable.grantReadWriteData(itemProxy);
 

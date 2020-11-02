@@ -24,6 +24,8 @@ export class CharacterContruct extends cdk.Construct {
       timeout: cdk.Duration.seconds(15),
     });
 
+    this.handler = characterProxy;
+
     props.tokenProvider.grantInvoke(characterProxy);
 
     const character = props.restGateway.root.addResource('character');

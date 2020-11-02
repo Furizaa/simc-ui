@@ -30,6 +30,8 @@ export class SpellConstruct extends cdk.Construct {
       timeout: cdk.Duration.seconds(15),
     });
 
+    this.handler = spellProxy;
+
     props.tokenProvider.grantInvoke(spellProxy);
     cacheTable.grantReadWriteData(spellProxy);
 

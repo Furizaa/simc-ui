@@ -1,31 +1,13 @@
 import { DynamoDB, Lambda } from 'aws-sdk';
 import fetch from 'node-fetch';
+import { QueuePayloadInItem } from './types';
 
-export const handler = async (event: any = {}): Promise<any> => {
+export const handler = async (event: QueuePayloadInItem['params']): Promise<any> => {
   console.log('Item Proxy Request', event);
 
   const dynamo = new DynamoDB.DocumentClient();
   const lambda = new Lambda();
-  const region = event?.queryStringParameters?.region;
-  const itemId = event?.queryStringParameters['item-id'];
-
-  const item = await dynamo
-    .get({
-      TableName: process.env.CACHE_TABLE_NAME ?? '',
-      Key: { id: `${itemId}` },
-    })
-    .promise();
-
-  if (item.Item) {
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: { media: JSON.parse(item.Item.media), item: JSON.parse(item.Item.cache) },
-        error: null,
-      }),
-    };
-  }
+  const { region, itemId } = event;
 
   const tokenResponse = await lambda
     .invoke({
@@ -48,23 +30,15 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   if (mediaResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: mediaResponse.status, text: await mediaResponse.text() },
-      }),
+      data: null,
+      error: { code: mediaResponse.status, text: await mediaResponse.text() },
     };
   }
 
   if (itemResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: itemResponse.status, text: await itemResponse.text() },
-      }),
+      data: null,
+      error: { code: itemResponse.status, text: await itemResponse.text() },
     };
   }
 
@@ -84,11 +58,7 @@ export const handler = async (event: any = {}): Promise<any> => {
     .promise();
 
   return {
-    statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      data: { media: mediaJson, item: itemJson },
-      error: null,
-    }),
+    data: { media: mediaJson, item: itemJson },
+    error: null,
   };
 };

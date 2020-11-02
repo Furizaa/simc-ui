@@ -8,7 +8,7 @@
     "lint:src": "eslint '{lib,bin,src}/!(*.d).ts'",
     "lint:types": "tsc --noEmit",
     "lint": "concurrently yarn:lint:*",
-    "clean": "rimraf cdk.out",
+    "clean": "rimraf cdk.out src/*.d.ts src/*.js lib/*.d.ts lib/*.js",
     "build": "tsc",
     "watch": "tsc -w",
     "cdk": "cdk",

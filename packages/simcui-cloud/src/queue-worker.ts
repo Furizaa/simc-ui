@@ -14,6 +14,13 @@ export const handler = async (event: QueueWorkerInput): Promise<any> => {
     })
     .promise();
 
+  await dynamo
+    .delete({
+      TableName: process.env.QUEUE_TABLE_NAME ?? '',
+      Key: { token: `${event.token}` },
+    })
+    .promise();
+
   if (item?.Item?.payloadIn) {
     const payloadEvent = JSON.parse(item.Item.payloadIn);
 
@@ -40,16 +47,15 @@ export const handler = async (event: QueueWorkerInput): Promise<any> => {
     if (funcResult) {
       await dynamo
         .update({
-          TableName: process.env.QUEUE_TABLE_NAME ?? '',
+          TableName: process.env.RESULT_TABLE_NAME ?? '',
           Key: { token: event.token },
-          UpdateExpression: `set payloadOut = :payload`,
+          UpdateExpression: `set payloadOut = :payload, createdAt = :createdAt`,
           ExpressionAttributeValues: {
             ':payload': funcResult.Payload,
+            ':createdAt': Date.now(),
           },
         })
         .promise();
     }
   }
-
-  return { clean_timeout: 120, token: event.token };
 };

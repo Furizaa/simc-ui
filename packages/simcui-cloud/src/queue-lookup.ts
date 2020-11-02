@@ -10,7 +10,7 @@ export const handler = async (event: QueueLookupEvent): Promise<any> => {
 
   const item = await dynamo
     .get({
-      TableName: process.env.QUEUE_TABLE_NAME ?? '',
+      TableName: process.env.RESULT_TABLE_NAME ?? '',
       Key: { token: `${token}` },
     })
     .promise();

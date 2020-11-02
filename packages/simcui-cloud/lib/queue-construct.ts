@@ -21,7 +21,11 @@ export class QueueConstruct extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: Props) {
     super(scope, id);
 
-    const table = new dynamodb.Table(this, 'BNETAPIQueue', {
+    const queueTable = new dynamodb.Table(this, 'BNETAPIQueue', {
+      partitionKey: { name: 'token', type: dynamodb.AttributeType.STRING },
+    });
+
+    const resultTable = new dynamodb.Table(this, 'BNETAPIQueueResult', {
       partitionKey: { name: 'token', type: dynamodb.AttributeType.STRING },
     });
 
@@ -30,7 +34,8 @@ export class QueueConstruct extends cdk.Construct {
       handler: 'queue-worker.handler',
       code: lambda.Code.fromAsset('src'),
       environment: {
-        QUEUE_TABLE_NAME: table.tableName,
+        QUEUE_TABLE_NAME: queueTable.tableName,
+        RESULT_TABLE_NAME: resultTable.tableName,
         FUNCTION_NAME_CHARACTER: props.characterWorkerFunc.functionName,
         FUNCTION_NAME_SPELL: props.spellWorkerFunc.functionName,
         FUNCTION_NAME_ITEM: props.itemWorkerFunc.functionName,
@@ -38,22 +43,8 @@ export class QueueConstruct extends cdk.Construct {
       timeout: cdk.Duration.seconds(15),
     });
 
-    const queueCleaner = new lambda.Function(this, 'QueueCleaner', {
-      runtime: lambda.Runtime.NODEJS_12_X,
-      handler: 'queue-clean.handler',
-      code: lambda.Code.fromAsset('src'),
-      environment: {
-        QUEUE_TABLE_NAME: table.tableName,
-      },
-      timeout: cdk.Duration.seconds(10),
-    });
-
     const waitState = new sfn.Wait(this, 'Wait X Seconds', {
       time: sfn.WaitTime.secondsPath('$.wait_time'),
-    });
-
-    const waitBeforeCleanState = new sfn.Wait(this, 'Wait B4 Cleanup', {
-      time: sfn.WaitTime.secondsPath('$.clean_timeout'),
     });
 
     const workerState = new sfnTasks.LambdaInvoke(this, 'Work Queue', {
@@ -61,11 +52,7 @@ export class QueueConstruct extends cdk.Construct {
       outputPath: '$.Payload',
     });
 
-    const cleanerState = new sfnTasks.LambdaInvoke(this, 'Clean Queue', {
-      lambdaFunction: queueCleaner,
-    });
-
-    const chain = sfn.Chain.start(waitState).next(workerState).next(waitBeforeCleanState).next(cleanerState);
+    const chain = sfn.Chain.start(waitState).next(workerState);
 
     const machine = new sfn.StateMachine(this, 'StateMachine', {
       definition: chain,
@@ -79,7 +66,7 @@ export class QueueConstruct extends cdk.Construct {
       environment: {
         SPELL_CACHE_TABLE_NAME: props.spellCacheTable.tableName,
         ITEM_CACHE_TABLE_NAME: props.itemCacheTable.tableName,
-        QUEUE_TABLE_NAME: table.tableName,
+        QUEUE_TABLE_NAME: queueTable.tableName,
         QUEUE_STATE_MACHINE: machine.stateMachineArn,
       },
       timeout: cdk.Duration.seconds(10),
@@ -90,15 +77,16 @@ export class QueueConstruct extends cdk.Construct {
       handler: 'queue-lookup.handler',
       code: lambda.Code.fromAsset('src'),
       environment: {
-        QUEUE_TABLE_NAME: table.tableName,
+        RESULT_TABLE_NAME: resultTable.tableName,
       },
       timeout: cdk.Duration.seconds(10),
     });
 
-    table.grantReadWriteData(queueCleaner);
-    table.grantReadWriteData(this.queueInsert);
-    table.grantReadWriteData(queueWorker);
-    table.grantReadData(this.queueLookup);
+    queueTable.grantReadWriteData(this.queueInsert);
+    queueTable.grantReadWriteData(queueWorker);
+
+    resultTable.grantReadData(this.queueLookup);
+    resultTable.grantReadWriteData(queueWorker);
 
     machine.grantStartExecution(this.queueInsert);
 

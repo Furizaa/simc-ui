@@ -12,10 +12,12 @@ interface Props {
 export class ItemConstruct extends cdk.Construct {
   public readonly handler: lambda.Function;
 
+  public readonly cacheTable: dynamodb.Table;
+
   constructor(scope: cdk.Construct, id: string, props: Props) {
     super(scope, id);
 
-    const cacheTable = new dynamodb.Table(this, 'BNETItemCache', {
+    this.cacheTable = new dynamodb.Table(this, 'BNETItemCache', {
       partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
     });
 
@@ -25,7 +27,7 @@ export class ItemConstruct extends cdk.Construct {
       runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TOKEN_FUNCTION_NAME: props.tokenProvider.functionName,
-        CACHE_TABLE_NAME: cacheTable.tableName,
+        CACHE_TABLE_NAME: this.cacheTable.tableName,
       },
       timeout: cdk.Duration.seconds(15),
     });
@@ -33,7 +35,7 @@ export class ItemConstruct extends cdk.Construct {
     this.handler = itemProxy;
 
     props.tokenProvider.grantInvoke(itemProxy);
-    cacheTable.grantReadWriteData(itemProxy);
+    this.cacheTable.grantReadWriteData(itemProxy);
 
     const character = props.restGateway.root.addResource('item');
     const characterIntegration = new apigw.LambdaIntegration(itemProxy);

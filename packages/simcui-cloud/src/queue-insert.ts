@@ -1,12 +1,57 @@
 import { StepFunctions, DynamoDB } from 'aws-sdk';
 import { ulid } from 'ulid';
-import { QueueInsertEvent, QueueInsertResponse } from './types';
+import { QueueInsertResponse } from './types';
 
-export const handler = async (event: QueueInsertEvent): Promise<any> => {
+export const handler = async (event: any = {}): Promise<any> => {
   console.log('QueueInset Request', event);
+  const body = JSON.parse(event.body);
 
   const dynamo = new DynamoDB.DocumentClient();
   const sf = new StepFunctions();
+
+  if (body.type === 'item') {
+    const item = await dynamo
+      .get({
+        TableName: process.env.ITEM_CACHE_TABLE_NAME ?? '',
+        Key: { id: `${body.params.itemId}` },
+      })
+      .promise();
+
+    if (item.Item) {
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cache: {
+            data: { media: JSON.parse(item.Item.media), item: JSON.parse(item.Item.cache) },
+            error: null,
+          },
+        }),
+      };
+    }
+  }
+
+  if (body.type === 'spell') {
+    const spell = await dynamo
+      .get({
+        TableName: process.env.SPELL_CACHE_TABLE_NAME ?? '',
+        Key: { id: `${body.params.spellId}` },
+      })
+      .promise();
+
+    if (spell.Item) {
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cache: {
+            data: { media: JSON.parse(spell.Item.media), spell: JSON.parse(spell.Item.cache) },
+            error: null,
+          },
+        }),
+      };
+    }
+  }
 
   const token = ulid();
 

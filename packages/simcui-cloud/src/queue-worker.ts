@@ -50,4 +50,6 @@ export const handler = async (event: QueueWorkerInput): Promise<any> => {
         .promise();
     }
   }
+
+  return { clean_timeout: 120, token: event.token };
 };

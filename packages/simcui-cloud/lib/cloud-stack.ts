@@ -36,6 +36,8 @@ export default class CloudStack extends cdk.Stack {
       characterWorkerFunc: characterConstruct.handler,
       itemWorkerFunc: itemConstruct.handler,
       spellWorkerFunc: spellConstruct.handler,
+      spellCacheTable: spellConstruct.cacheTable,
+      itemCacheTable: itemConstruct.cacheTable,
     });
 
     new cdk.CfnOutput(this, 'ApiGatewayEndpoint', {

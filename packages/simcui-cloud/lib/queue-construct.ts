@@ -21,11 +21,11 @@ export class QueueConstruct extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: Props) {
     super(scope, id);
 
-    const queueTable = new dynamodb.Table(this, 'BNETAPIQueue', {
+    const queueTable = new dynamodb.Table(this, 'Queue', {
       partitionKey: { name: 'token', type: dynamodb.AttributeType.STRING },
     });
 
-    const resultTable = new dynamodb.Table(this, 'BNETAPIQueueResult', {
+    const resultTable = new dynamodb.Table(this, 'QueueResult', {
       partitionKey: { name: 'token', type: dynamodb.AttributeType.STRING },
     });
 

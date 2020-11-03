@@ -1,9 +1,8 @@
 import produce from 'immer';
-import qs from 'querystring';
 import create, { GetState, SetState } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import dbTalents from '@dbc/dbTalentList.json';
-import manifest from '@cloud/gatewayManifest.json';
+import fetchQueue from '@sim/util/fetchQueue';
 import { AsyncStore, Spell, WOW } from '../../../types';
 
 export type SpellState = {
@@ -15,51 +14,37 @@ export type SpellState = {
   initializeClassTalents: (classId: WOW.CharacterClassId) => void;
 };
 
+const processAsyncResult = (result: AsyncStore<WOW.SpellRequestResult>): AsyncStore<Spell> => {
+  if (result.data) {
+    const icon = result.data.media.assets.find(asset => asset.key === 'icon')?.value ?? undefined;
+    const spell = { ...result.data.spell, icon };
+    return { status: 'done', data: spell, error: null };
+  }
+  return (result as unknown) as AsyncStore<Spell>;
+};
+
 const store = (set: SetState<SpellState>, get: GetState<SpellState>) => ({
   list: {},
 
   addSpell: async (spellId: number) => {
-    set((state) =>
-      produce(state, (draft) => {
-        draft.list[spellId] = { status: 'loading', data: null, error: null };
-      }),
-    );
-
     const query = {
-      // We don't care from which region items are loaded UwU
-      region: 'eu',
-      'spell-id': spellId,
+      type: 'spell',
+      params: {
+        region: 'eu',
+        spellId,
+      },
     };
 
-    const result = await fetch(`${manifest.bnetGatewayEndpoint}spell?${qs.stringify(query)}`);
-    const json = (await result.json()) as WOW.Result<WOW.SpellRequestResult>;
-
-    if (json.error) {
-      set((state) =>
-        produce(state, (draft) => {
-          draft.list[spellId] = { status: 'done', data: null, error: json.error };
-        }),
-      );
-      return;
-    }
-
-    if (json.data) {
-      const icon = json.data.media.assets.find((asset) => asset.key === 'icon')?.value ?? undefined;
-      const spell = { ...json.data.spell, icon };
-      set((state) =>
-        produce(state, (draft) => {
-          draft.list[spellId] = { status: 'done', data: spell, error: null };
-        }),
-      );
-      return;
-    }
-
-    // Unknown Response
-    set((state) =>
-      produce(state, (draft) => {
-        draft.list[spellId] = { status: 'done', data: null, error: { code: 500, text: 'Unknown response.' } };
-      }),
-    );
+    fetchQueue<WOW.SpellRequestResult>({
+      body: query,
+      onUpdate: update => {
+        set(state =>
+          produce(state, draft => {
+            draft.list[spellId] = processAsyncResult(update);
+          }),
+        );
+      },
+    });
   },
 
   getSpell: (spellId: number): AsyncStore<Spell> => {
@@ -73,8 +58,8 @@ const store = (set: SetState<SpellState>, get: GetState<SpellState>) => ({
 
   initializeClassTalents: (classId: WOW.CharacterClassId) => {
     Object.values(dbTalents)
-      .filter((talent) => talent.playable_class.id === classId)
-      .forEach((talent) => get().addSpell(talent.spell.id));
+      .filter(talent => talent.playable_class.id === classId)
+      .forEach(talent => get().addSpell(talent.spell.id));
   },
 });
 

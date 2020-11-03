@@ -63,7 +63,7 @@ export const handler = async (event: any = {}): Promise<any> => {
     .promise();
 
   const queueCount = scanResult.Count ?? 0;
-  const waitTime = queueCount * 10;
+  const waitTime = Math.floor(queueCount / 15) + 1;
 
   await dynamo
     .update({

@@ -3,6 +3,7 @@ import useBaseItemStore from '../../store/useBaseItemStore';
 import useItemInstanceStore from '../../store/useItemInstanceStore';
 import EquippedItemInstance, { EquippedItemInstanceProps } from './EquippedItemInstance';
 import EquippedItemInstanceLoading from '../EquippedItemInstanceLoading';
+import EquippedItemInstanceQueue from '../EquippedItemInstanceQueue';
 
 export interface EquippedItemInstanceBindingProps extends Pick<EquippedItemInstanceProps, 'displayDirection'> {
   itemInstanceId: string;
@@ -10,10 +11,10 @@ export interface EquippedItemInstanceBindingProps extends Pick<EquippedItemInsta
 
 export default function EquippedItemInstanceBinding({ itemInstanceId, ...rest }: EquippedItemInstanceBindingProps) {
   const itemInstance = useItemInstanceStore(
-    useCallback((store) => store.getItemInstance(itemInstanceId), [itemInstanceId]),
+    useCallback(store => store.getItemInstance(itemInstanceId), [itemInstanceId]),
   );
   const itemBaseAsync = useBaseItemStore(
-    useCallback((store) => itemInstance && store.getBaseItem(itemInstance.baseItemId), [itemInstance]),
+    useCallback(store => itemInstance && store.getBaseItem(itemInstance.baseItemId), [itemInstance]),
   );
 
   if (itemInstance && itemBaseAsync && itemBaseAsync.status === 'done' && itemBaseAsync.data) {
@@ -31,6 +32,9 @@ export default function EquippedItemInstanceBinding({ itemInstanceId, ...rest }:
     );
   }
 
-  // TODO: Loading State
+  if (itemBaseAsync && itemBaseAsync?.status === 'queue') {
+    return <EquippedItemInstanceQueue {...rest} />;
+  }
+
   return <EquippedItemInstanceLoading {...rest} />;
 }

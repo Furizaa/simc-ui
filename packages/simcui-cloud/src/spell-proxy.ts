@@ -1,31 +1,13 @@
 import { DynamoDB, Lambda } from 'aws-sdk';
 import fetch from 'node-fetch';
+import { QueuePayloadInSpell } from './types';
 
-export const handler = async (event: any = {}): Promise<any> => {
+export const handler = async (event: QueuePayloadInSpell['params']): Promise<any> => {
   console.log('Spell Proxy Request', event);
 
   const dynamo = new DynamoDB.DocumentClient();
   const lambda = new Lambda();
-  const region = event?.queryStringParameters?.region;
-  const spallId = event?.queryStringParameters['spell-id'];
-
-  const spell = await dynamo
-    .get({
-      TableName: process.env.CACHE_TABLE_NAME ?? '',
-      Key: { id: `${spallId}` },
-    })
-    .promise();
-
-  if (spell.Item) {
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: { media: JSON.parse(spell.Item.media), spell: JSON.parse(spell.Item.cache) },
-        error: null,
-      }),
-    };
-  }
+  const { region, spellId } = event;
 
   const tokenResponse = await lambda
     .invoke({
@@ -36,11 +18,11 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   const bearer = JSON.parse(tokenResponse.Payload as string);
 
-  const mediaPromise = fetch(`https://${region}.api.blizzard.com/data/wow/media/spell/${spallId}`, {
+  const mediaPromise = fetch(`https://${region}.api.blizzard.com/data/wow/media/spell/${spellId}`, {
     headers: { authorization: `Bearer ${bearer}`, 'battlenet-namespace': `static-${region}` },
   });
 
-  const spellPromise = fetch(`https://${region}.api.blizzard.com/data/wow/spell/${spallId}`, {
+  const spellPromise = fetch(`https://${region}.api.blizzard.com/data/wow/spell/${spellId}`, {
     headers: { authorization: `Bearer ${bearer}`, 'battlenet-namespace': `static-${region}` },
   });
 
@@ -48,23 +30,15 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   if (mediaResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: mediaResponse.status, text: await mediaResponse.text() },
-      }),
+      data: null,
+      error: { code: mediaResponse.status, text: await mediaResponse.text() },
     };
   }
 
   if (spellResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: spellResponse.status, text: await spellResponse.text() },
-      }),
+      data: null,
+      error: { code: mediaResponse.status, text: await mediaResponse.text() },
     };
   }
 
@@ -74,7 +48,7 @@ export const handler = async (event: any = {}): Promise<any> => {
   await dynamo
     .update({
       TableName: process.env.CACHE_TABLE_NAME ?? '',
-      Key: { id: `${spallId}` },
+      Key: { id: `${spellId}` },
       UpdateExpression: `set media = :media, cache = :cache`,
       ExpressionAttributeValues: {
         ':media': JSON.stringify(mediaJson),
@@ -84,11 +58,7 @@ export const handler = async (event: any = {}): Promise<any> => {
     .promise();
 
   return {
-    statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      data: { media: mediaJson, spell: spellJson },
-      error: null,
-    }),
+    data: { media: mediaJson, spell: spellJson },
+    error: null,
   };
 };

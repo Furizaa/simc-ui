@@ -1,14 +1,13 @@
 import { Lambda } from 'aws-sdk';
 import fetch from 'node-fetch';
+import { QueuePayloadInCharacter } from './types';
 
-export const handler = async (event: any = {}): Promise<any> => {
+export const handler = async (event: QueuePayloadInCharacter['params']): Promise<any> => {
   console.log('Character Proxy Request', event);
 
   const lambda = new Lambda();
 
-  const region = event?.queryStringParameters?.region;
-  const server = event?.queryStringParameters['server-slug'];
-  const character = event?.queryStringParameters['character-name'];
+  const { region, name, realm } = event;
 
   const tokenResponse = await lambda
     .invoke({
@@ -19,22 +18,22 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   const bearer = JSON.parse((tokenResponse?.Payload as string) ?? '');
 
-  const characterPromise = fetch(`https://${region}.api.blizzard.com/profile/wow/character/${server}/${character}`, {
+  const characterPromise = fetch(`https://${region}.api.blizzard.com/profile/wow/character/${realm}/${name}`, {
     headers: { authorization: `Bearer ${bearer}`, 'battlenet-namespace': `profile-${region}` },
   });
 
   const equipmentPromise = fetch(
-    `https://${region}.api.blizzard.com/profile/wow/character/${server}/${character}/equipment`,
+    `https://${region}.api.blizzard.com/profile/wow/character/${realm}/${name}/equipment`,
     { headers: { authorization: `Bearer ${bearer}`, 'battlenet-namespace': `profile-${region}` } },
   );
 
   const mediaPromise = fetch(
-    `https://${region}.api.blizzard.com/profile/wow/character/${server}/${character}/character-media`,
+    `https://${region}.api.blizzard.com/profile/wow/character/${realm}/${name}/character-media`,
     { headers: { authorization: `Bearer ${bearer}`, 'battlenet-namespace': `profile-${region}` } },
   );
 
   const specPromise = fetch(
-    `https://${region}.api.blizzard.com/profile/wow/character/${server}/${character}/specializations`,
+    `https://${region}.api.blizzard.com/profile/wow/character/${realm}/${name}/specializations`,
     { headers: { authorization: `Bearer ${bearer}`, 'battlenet-namespace': `profile-${region}` } },
   );
 
@@ -47,45 +46,29 @@ export const handler = async (event: any = {}): Promise<any> => {
 
   if (characterResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: characterResponse.status, text: await characterResponse.text() },
-      }),
+      data: null,
+      error: { code: characterResponse.status, text: await characterResponse.text() },
     };
   }
 
   if (equipmentResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: equipmentResponse.status, text: await equipmentResponse.text() },
-      }),
+      data: null,
+      error: { code: equipmentResponse.status, text: await equipmentResponse.text() },
     };
   }
 
   if (mediaResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: mediaResponse.status, text: await mediaResponse.text() },
-      }),
+      data: null,
+      error: { code: mediaResponse.status, text: await mediaResponse.text() },
     };
   }
 
   if (specResponse.status !== 200) {
     return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        data: null,
-        error: { code: specResponse.status, text: await specResponse.text() },
-      }),
+      data: null,
+      error: { code: specResponse.status, text: await specResponse.text() },
     };
   }
 
@@ -95,11 +78,7 @@ export const handler = async (event: any = {}): Promise<any> => {
   const specJson = await specResponse.json();
 
   return {
-    statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      data: { character: characterJson, equipment: equipmentJson, media: mediaJson, spec: specJson },
-      error: null,
-    }),
+    data: { character: characterJson, equipment: equipmentJson, media: mediaJson, spec: specJson },
+    error: null,
   };
 };

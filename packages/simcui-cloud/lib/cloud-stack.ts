@@ -5,6 +5,7 @@ import { TokenContruct } from './token-construct';
 import { CharacterContruct } from './character-construct';
 import { ItemConstruct } from './item-construct';
 import { SpellConstruct } from './spell-construct';
+import { QueueConstruct } from './queue-construct';
 
 export default class CloudStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -16,23 +17,38 @@ export default class CloudStack extends cdk.Stack {
       restApiName: 'BNet Gateway Service',
     });
 
-    new CharacterContruct(this, 'CharacterConstruct', {
+    const characterConstruct = new CharacterContruct(this, 'CharacterConstruct', {
       tokenProvider: tokenConstruct.handler,
       restGateway: api,
     });
 
-    new ItemConstruct(this, 'ItemConstruct', {
+    const itemConstruct = new ItemConstruct(this, 'ItemConstruct', {
       tokenProvider: tokenConstruct.handler,
       restGateway: api,
     });
 
-    new SpellConstruct(this, 'SpellConstruct', {
+    const spellConstruct = new SpellConstruct(this, 'SpellConstruct', {
       tokenProvider: tokenConstruct.handler,
       restGateway: api,
+    });
+
+    const queueConstruct = new QueueConstruct(this, 'QueueConstruct', {
+      characterWorkerFunc: characterConstruct.handler,
+      itemWorkerFunc: itemConstruct.handler,
+      spellWorkerFunc: spellConstruct.handler,
+      spellCacheTable: spellConstruct.cacheTable,
+      itemCacheTable: itemConstruct.cacheTable,
     });
 
     new cdk.CfnOutput(this, 'ApiGatewayEndpoint', {
       value: api.url,
     });
+
+    const queue = api.root.addResource('queue');
+    const queueInsertIntegration = new apigw.LambdaIntegration(queueConstruct.queueInsert);
+    const queueLookupIntegration = new apigw.LambdaIntegration(queueConstruct.queueLookup);
+
+    queue.addMethod('POST', queueInsertIntegration);
+    queue.addMethod('GET', queueLookupIntegration);
   }
 }

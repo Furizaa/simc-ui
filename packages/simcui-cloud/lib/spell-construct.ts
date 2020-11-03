@@ -12,10 +12,12 @@ interface Props {
 export class SpellConstruct extends cdk.Construct {
   public readonly handler: lambda.Function;
 
+  public readonly cacheTable: dynamodb.Table;
+
   constructor(scope: cdk.Construct, id: string, props: Props) {
     super(scope, id);
 
-    const cacheTable = new dynamodb.Table(this, 'BNETSpellCache', {
+    this.cacheTable = new dynamodb.Table(this, 'BNETSpellCache', {
       partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
     });
 
@@ -25,13 +27,15 @@ export class SpellConstruct extends cdk.Construct {
       runtime: lambda.Runtime.NODEJS_12_X,
       environment: {
         TOKEN_FUNCTION_NAME: props.tokenProvider.functionName,
-        CACHE_TABLE_NAME: cacheTable.tableName,
+        CACHE_TABLE_NAME: this.cacheTable.tableName,
       },
       timeout: cdk.Duration.seconds(15),
     });
 
+    this.handler = spellProxy;
+
     props.tokenProvider.grantInvoke(spellProxy);
-    cacheTable.grantReadWriteData(spellProxy);
+    this.cacheTable.grantReadWriteData(spellProxy);
 
     const character = props.restGateway.root.addResource('spell');
     const characterIntegration = new apigw.LambdaIntegration(spellProxy);

@@ -13,7 +13,7 @@ import {
   Select,
   Text,
 } from '@chakra-ui/core';
-import { WarningIcon } from '@chakra-ui/icons';
+import { RepeatClockIcon, WarningIcon } from '@chakra-ui/icons';
 import * as Yup from 'yup';
 import dbRealmList from '@dbc/dbRealmList.json';
 import supportedRegions from '../../../data/supportedRegions';
@@ -31,14 +31,14 @@ interface FormValues {
 }
 
 const validRealmIdsForRegionBuffer: Record<string, number[]> = supportedRegions.reduce(
-  (prev, region) => ({ ...prev, [region]: dbRealmList[region].map((item) => item.id) }),
+  (prev, region) => ({ ...prev, [region]: dbRealmList[region].map(item => item.id) }),
   {},
 );
 
 export default function FormImportCharacter({ onLoadedCharacter }: FormImportCharacterProps) {
-  const [loadError, loadCharacter] = useCharacterLoader();
+  const [loadError, loadCharacter, isLoadingCharacter, queueWaitTimeSeconds] = useCharacterLoader();
 
-  const validationSchema = Yup.lazy((values) => {
+  const validationSchema = Yup.lazy(values => {
     const currentRegion = (values as FormValues).region;
     const validRealmIds = validRealmIdsForRegionBuffer[currentRegion as string] as number[];
     return Yup.object().shape({
@@ -53,16 +53,20 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
   });
 
   const handleSubmit = async (formValues: FormValues) => {
-    const realm = dbRealmList[formValues.region].find((item) => item.id === formValues.realmId);
+    const realm = dbRealmList[formValues.region].find(item => item.id === formValues.realmId);
     if (realm) {
-      await loadCharacter({
-        name: formValues.characterName.trim().toLowerCase(),
-        region: formValues.region,
-        realmSlug: realm.slug,
-      });
-      if (onLoadedCharacter && !loadError) {
-        onLoadedCharacter();
-      }
+      await loadCharacter(
+        {
+          name: formValues.characterName.trim().toLowerCase(),
+          region: formValues.region,
+          realm: realm.slug,
+        },
+        () => {
+          if (onLoadedCharacter) {
+            onLoadedCharacter();
+          }
+        },
+      );
     }
   };
 
@@ -82,15 +86,15 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
                   <RadioGroup
                     name="region"
                     colorScheme="purple"
-                    onChange={(value) => {
+                    onChange={value => {
                       props.setFieldValue('region', value);
                       props.setFieldValue('realm', undefined);
                     }}
                     value={field.value}
-                    disabled={props.isSubmitting}
+                    disabled={isLoadingCharacter}
                   >
                     <HStack spacing={5}>
-                      {supportedRegions.map((region) => (
+                      {supportedRegions.map(region => (
                         <Radio key={region} value={region}>
                           {region.toUpperCase()}
                         </Radio>
@@ -108,10 +112,10 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
                   <FormLabel variant="large">Realm</FormLabel>
                   <Select
                     placeholder="Select Realm"
-                    onChange={(event) => props.setFieldValue('realmId', parseInt(event.target.value, 10))}
+                    onChange={event => props.setFieldValue('realmId', parseInt(event.target.value, 10))}
                     value={field.value}
                     variant="filled"
-                    disabled={props.isSubmitting}
+                    disabled={isLoadingCharacter}
                   >
                     {dbRealmList[props.values.region].map((realm: WOW.RealmReference) => (
                       <option key={realm.id} value={realm.id}>
@@ -133,9 +137,9 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
                   <FormLabel variant="large">Character Name</FormLabel>
                   <Input
                     variant="filled"
-                    onChange={(event) => props.setFieldValue('characterName', event.target.value)}
+                    onChange={event => props.setFieldValue('characterName', event.target.value)}
                     value={field.value}
-                    disabled={props.isSubmitting}
+                    disabled={isLoadingCharacter}
                   />
                   <FormErrorMessage>{props.errors.characterName}</FormErrorMessage>
                 </FormControl>
@@ -143,10 +147,10 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
             </Field>
 
             <HStack mt={6} spacing={6}>
-              <Button flexShrink={0} isLoading={props.isSubmitting} colorScheme="blue" type="submit">
+              <Button flexShrink={0} isLoading={isLoadingCharacter} colorScheme="blue" type="submit">
                 Import
               </Button>
-              {!props.isSubmitting && loadError ? (
+              {!isLoadingCharacter && loadError ? (
                 <HStack color="red.400">
                   <WarningIcon fontSize="xl" mr={4} />
                   {loadError && loadError.code === 404 ? (
@@ -162,6 +166,14 @@ export default function FormImportCharacter({ onLoadedCharacter }: FormImportCha
                       <Text fontSize="xs">The BNet api returned an unexpected result. Please try again later.</Text>
                     </Box>
                   )}
+                </HStack>
+              ) : null}
+              {isLoadingCharacter && queueWaitTimeSeconds > 0 ? (
+                <HStack color="blue.400">
+                  <RepeatClockIcon fontSize="xl" mr={4} />
+                  <Text fontSize="sm" fontWeight="bold">{`Queued. Estimated wait time: ${Math.ceil(
+                    queueWaitTimeSeconds / 1000,
+                  )} seconds.`}</Text>
                 </HStack>
               ) : null}
             </HStack>

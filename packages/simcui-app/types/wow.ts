@@ -147,9 +147,9 @@ export type PreviewItem = {
 // API Responses
 // ----------------
 
-export type CharacterRequestParams = {
+export type CharacterRequestBody = {
   region: Region;
-  realmSlug: string;
+  realm: string;
   name: string;
 };
 
@@ -158,6 +158,21 @@ export type CharacterRequestResult = {
   equipment: EquipmentResponse;
   media: CharacterMediaResponse;
   spec: CharacterSpecsResponse;
+};
+
+export type QueuedResult<T> =
+  | {
+      token: string;
+      waitTimeSeconds: number;
+    }
+  | {
+      cache: Result<T>;
+    };
+
+export type QueuedLookupResult<T> = {
+  token: string;
+  status: 'QUEUE' | 'DONE';
+  payload: T;
 };
 
 export type Result<T> = {

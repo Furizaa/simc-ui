@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import useSpellStore from '../../store/useSpellStore';
 import SpellIconLoading from '../SpellIconLoading';
+import SpellIconQueue from '../SpellIconQueue';
 import Talent from './Talent';
 
 export interface TalentBindingProps {
@@ -10,7 +11,7 @@ export interface TalentBindingProps {
 }
 
 export default function TalentBinding({ spellId, isActive, onClick }: TalentBindingProps) {
-  const asyncSpell = useSpellStore(useCallback((store) => store.getSpell(spellId), [spellId]));
+  const asyncSpell = useSpellStore(useCallback(store => store.getSpell(spellId), [spellId]));
 
   const handleClick = () => {
     if (onClick) {
@@ -18,10 +19,10 @@ export default function TalentBinding({ spellId, isActive, onClick }: TalentBind
     }
   };
 
-  if (asyncSpell.status !== 'done') {
-    return <SpellIconLoading size="md" />;
+  if (asyncSpell.status === 'queue') {
+    return <SpellIconQueue size="md" />;
   }
-  if (asyncSpell.data) {
+  if (asyncSpell.status === 'done' && asyncSpell.data) {
     return (
       <Talent
         name={asyncSpell.data.name.en_US}
@@ -31,6 +32,8 @@ export default function TalentBinding({ spellId, isActive, onClick }: TalentBind
       />
     );
   }
+
+  return <SpellIconLoading size="md" />;
 
   // TODO error state
   return null;

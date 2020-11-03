@@ -1,4 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import useBaseItemStore from '@sim/store/useBaseItemStore';
+import useSpellStore from '@sim/store/useSpellStore';
 import useExecutableRunner from '../../hooks/useExecutableRunner';
 import useSimProcessStore from '../../store/useSimProcessStore';
 import useSnapshotStore from '../../store/useSnapshotStore';
@@ -14,15 +16,24 @@ export interface RunnerStatusBindingProps {
 
 export default function RunnerStatusBinding({ snapshotId, characterId }: RunnerStatusBindingProps) {
   const [currentSnapshot, freezeSnapshot] = useSnapshotStore(
-    useCallback((store) => [store.getSnapshot(snapshotId), store.freezeSnapshot], [snapshotId]),
+    useCallback(store => [store.getSnapshot(snapshotId), store.freezeSnapshot], [snapshotId]),
   );
-  const setProcessStatus = useSimProcessStore(useCallback((store) => store.setProcessStatus, []));
+  const setProcessStatus = useSimProcessStore(useCallback(store => store.setProcessStatus, []));
   const currentProcess = useSimProcessStore(
-    useCallback((store) => store.getProcess(currentSnapshot?.simProcessId), [currentSnapshot]),
+    useCallback(store => store.getProcess(currentSnapshot?.simProcessId), [currentSnapshot]),
   );
+  const baseItemList = useBaseItemStore(useCallback(store => store.list, []));
+  const spellList = useSpellStore(useCallback(store => store.list, []));
 
   const tci = useTCI({ characterId });
   useExecutableRunner(currentSnapshot?.simProcessId, tci);
+
+  const itemsInQueue = useMemo(() => Object.values(baseItemList).filter(asyncItem => asyncItem.status === 'queue'), [
+    baseItemList,
+  ]);
+  const spellsInQueue = useMemo(() => Object.values(spellList).filter(asyncSpell => asyncSpell.status === 'queue'), [
+    spellList,
+  ]);
 
   const handleRunProcessClick = () => {
     if (currentSnapshot) {
@@ -38,6 +49,10 @@ export default function RunnerStatusBinding({ snapshotId, characterId }: RunnerS
       setProcessStatus(currentSnapshot.simProcessId, { type: 'idle' });
     }
   };
+
+  if (itemsInQueue.length || spellsInQueue.length) {
+    return <RunnerStatus currentRun={{ status: 'queue' }} />;
+  }
 
   if (currentProcess && currentProcess.status.type === 'running') {
     return (

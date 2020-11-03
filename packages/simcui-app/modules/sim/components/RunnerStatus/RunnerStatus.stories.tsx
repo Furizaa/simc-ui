@@ -7,7 +7,7 @@ export default {
   component: RunnerStatus,
 } as Meta;
 
-const Template: Story<RunnerStatusProps> = (args) => <RunnerStatus {...args} />;
+const Template: Story<RunnerStatusProps> = args => <RunnerStatus {...args} />;
 
 export const Initial = Template.bind({});
 Initial.args = {};
@@ -25,4 +25,9 @@ Done.args = {
 export const Dirty = Template.bind({});
 Dirty.args = {
   currentRun: { status: 'dirty', dps: 67635 },
+};
+
+export const Queue = Template.bind({});
+Queue.args = {
+  currentRun: { status: 'queue' },
 };

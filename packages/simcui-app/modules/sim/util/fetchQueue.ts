@@ -6,7 +6,7 @@ interface Params<T> {
   onUpdate: (entry: AsyncStore<T>) => void;
 }
 
-const QUEUE_GRACE_PERIOD_MS = 5000;
+const QUEUE_GRACE_PERIOD_MS = 1250;
 const QUEUE_RETRY_PERIOD_MS = 3000;
 const QUEUE_RETRY_COUNT = 3;
 

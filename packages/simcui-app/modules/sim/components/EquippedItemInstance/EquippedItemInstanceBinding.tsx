@@ -33,7 +33,7 @@ export default function EquippedItemInstanceBinding({ itemInstanceId, ...rest }:
   }
 
   if (itemBaseAsync && itemBaseAsync?.status === 'queue') {
-    <EquippedItemInstanceQueue {...rest} />;
+    return <EquippedItemInstanceQueue {...rest} />;
   }
 
   return <EquippedItemInstanceLoading {...rest} />;

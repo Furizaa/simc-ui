@@ -4,6 +4,8 @@ import * as WOW from './types/wow';
 export * as Simc from './types/simc';
 export * as WOW from './types/wow';
 
+export type TsFIXME = any;
+
 export type AsyncError = { code: number; text: string } | null;
 
 export type AsyncStore<T> = {

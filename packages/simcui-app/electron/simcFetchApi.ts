@@ -43,13 +43,13 @@ export default function instrument(app: App) {
 
       fs.writeFileSync(simTCIFullPath, simTCI);
 
-      const simProc = cproc.execFile(execFullPath, [simTCIFullPath, `json2=${outputFullPath}`], (error) => {
+      const simProc = cproc.execFile(execFullPath, [simTCIFullPath, `json2=${outputFullPath}`], error => {
         if (error) {
           event.reply(eventChannel, { data: null, error: `Error Calling SimC: "${error}"` });
         }
       });
 
-      simProc.stdout?.on('data', (stdout) => {
+      simProc.stdout?.on('data', stdout => {
         const percentage = parseSimOutputPercentage(stdout);
         if (percentage) {
           event.reply(eventChannel, { data: { stage: 'running', percentage }, error: null });
@@ -59,7 +59,7 @@ export default function instrument(app: App) {
       simProc.on('close', () => {
         fs.unlinkSync(simTCIFullPath);
         try {
-          const simResult = fs.readFileSync(outputFullPath, { encoding: 'UTF-8' });
+          const simResult = fs.readFileSync(outputFullPath, { encoding: 'utf8' });
           event.reply(eventChannel, { data: { stage: 'done', output: simResult }, error: null });
         } catch (e) {
           event.reply(eventChannel, { data: null, error: "Simulation didn't finish properly." });
@@ -70,7 +70,7 @@ export default function instrument(app: App) {
     }
   });
 
-  ipcMain.on('exec-status', (event) => {
+  ipcMain.on('exec-status', event => {
     try {
       const execFullPath = path.resolve(resourcesPath, 'bin', getExecutableFileName());
 

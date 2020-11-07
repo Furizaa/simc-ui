@@ -11,51 +11,55 @@ import { WithTooltipProvidedProps } from '@visx/tooltip/lib/enhancers/withToolti
 import { max } from 'd3-array';
 import { Box, Tag, useTheme } from '@chakra-ui/core';
 
-export interface VisDpsOverFightProps {
+export interface VisLineGraphProps {
   width: number;
   height: number;
   data: number[];
+  colorScheme: string;
 }
 
 type TooltipData = { dps: number; time: number };
 
-function VisDpsOverFight({
+function VisLineGraph({
   width,
   height,
   data,
+  colorScheme = 'orange',
   showTooltip,
   hideTooltip,
   tooltipData,
   tooltipTop = 0,
   tooltipLeft = 0,
-}: VisDpsOverFightProps & WithTooltipProvidedProps<TooltipData>) {
+}: VisLineGraphProps & WithTooltipProvidedProps<TooltipData>) {
   const theme = useTheme();
   const marginLeft = 50;
   const innerWidth = width - marginLeft;
+
+  const timedData = useMemo(() => data.map((dat, index) => ({ time: index, value: dat })), [data]);
 
   const dpsTimeScale = useMemo(
     () =>
       scaleLinear({
         range: [0, innerWidth],
-        domain: [0, data.length],
+        domain: [0, timedData.length],
       }),
-    [innerWidth, data],
+    [innerWidth, timedData],
   );
 
   const dpsValueScale = useMemo(
     () =>
       scaleLinear({
         range: [height, 0],
-        domain: [0, max(data) || 0],
+        domain: [0, max(timedData, d => d.value) || 0],
         nice: true,
       }),
-    [height, data],
+    [height, timedData],
   );
 
   // [60, 120, 180, ...length]
   const gridTickValues = useMemo(() => {
-    return Array.from(Array(Math.floor(data.length / 60))).map((_, index) => (index + 1) * 60);
-  }, [data.length]);
+    return Array.from(Array(Math.floor(timedData.length / 60))).map((_, index) => (index + 1) * 60);
+  }, [timedData.length]);
 
   const axisTickFormat: TickFormatter<any> = (value: number) => `${value}`;
 
@@ -65,9 +69,9 @@ function VisDpsOverFight({
       const correctedX = x - marginLeft;
       const x0 = Math.floor(dpsTimeScale.invert(correctedX));
       showTooltip({
-        tooltipData: { dps: data[x0], time: x0 },
+        tooltipData: { dps: timedData[x0].value, time: x0 },
         tooltipLeft: correctedX,
-        tooltipTop: dpsValueScale(data[x0]),
+        tooltipTop: dpsValueScale(timedData[x0].value),
       });
     },
     [showTooltip, dpsValueScale, dpsTimeScale, data],
@@ -77,9 +81,9 @@ function VisDpsOverFight({
     <Box p="relative">
       <svg width={width} height={height}>
         <LinearGradient
-          id="area-gradient"
-          from={theme.colors.orange['400']}
-          to={theme.colors.orange['700']}
+          id={`area-gradient-${colorScheme}`}
+          from={theme.colors[colorScheme]['400']}
+          to={theme.colors[colorScheme]['700']}
           toOpacity={0.3}
         />
         <g transform={`translate(${marginLeft},0)`}>
@@ -89,18 +93,18 @@ function VisDpsOverFight({
             height={height}
             strokeDasharray="2,5"
             tickValues={gridTickValues}
-            stroke={theme.colors.orange['800']}
+            stroke={theme.colors[colorScheme]['800']}
             strokeOpacity={0.7}
             pointerEvents="none"
           />
           <AreaClosed
-            data={data}
-            x={(d) => dpsTimeScale(data.indexOf(d)) || 0}
-            y={(d) => dpsValueScale(d) ?? 0}
+            data={timedData}
+            x={d => dpsTimeScale(d.time) ?? 0}
+            y={d => dpsValueScale(d.value) ?? 0}
             yScale={dpsValueScale}
             strokeWidth={2}
-            stroke="url(#area-gradient)"
-            fill="url(#area-gradient)"
+            stroke={`url(#area-gradient-${colorScheme})`}
+            fill={`url(#area-gradient-${colorScheme})`}
             curve={curveMonotoneX}
           />
           <AxisLeft
@@ -108,14 +112,14 @@ function VisDpsOverFight({
             scale={dpsValueScale}
             tickFormat={axisTickFormat}
             tickLabelProps={() => ({
-              fill: theme.colors.orange['400'],
+              fill: theme.colors[colorScheme]['400'],
               fontSize: '0.8em',
               textAnchor: 'end',
               dx: '-0.25em',
               dy: '0.25em',
             })}
             hideZero
-            tickStroke={theme.colors.orange['400']}
+            tickStroke={theme.colors[colorScheme]['400']}
             numTicks={4}
             label="dps"
           />
@@ -194,4 +198,4 @@ function VisDpsOverFight({
   );
 }
 
-export default withTooltip<VisDpsOverFightProps, TooltipData>(VisDpsOverFight);
+export default withTooltip<VisLineGraphProps, TooltipData>(VisLineGraph);

@@ -1,53 +1,59 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable import/prefer-default-export */
 
+export type Target = 'error_threshold' | 'iterations';
+
 // target_error
-export enum TargetError {
-  Auto = '0',
-  $1 = '1',
-  $05 = '0.5',
-  $03 = '0.3',
-  $01 = '0.1',
-  $005 = '0.05',
-  $003 = '0.03',
-  $001 = '0.01',
-}
+export const TARGET_ERROR = {
+  Auto: '0',
+  '1 %': '1',
+  '0.5 %': '0.5',
+  '0.3 %': '0.3',
+  '0.1 %': '0.1',
+  '0.05 %': '0.05',
+  '0.03 %': '0.03',
+  '0.01 %': '0.01',
+};
+export type TargetError = keyof typeof TARGET_ERROR;
 
 // iterations
-export enum Iterations {
-  $100 = 100,
-  $1000 = 1000,
-  $10000 = 10000,
-  $25000 = 25000,
-  $50000 = 50000,
-  $100000 = 100000,
-  $250000 = 250000,
-  $500000 = 500000,
-}
+export const ITERATIONS = {
+  '100': 100,
+  '1000': 1000,
+  '10000': 10000,
+  '25000': 25000,
+  '50000': 50000,
+  '100000': 100000,
+  '250000': 250000,
+  '500000': 500000,
+};
+export type Iterations = keyof typeof ITERATIONS;
 
 // max_time
-export enum Length {
-  $100 = 100,
-  $150 = 150,
-  $200 = 200,
-  $250 = 250,
-  $300 = 300,
-  $350 = 350,
-  $400 = 400,
-  $450 = 450,
-  $500 = 500,
-  $600 = 600,
-}
+export const FIGHT_LENGTH = {
+  100: '100 Seconds',
+  150: '150 Seconds',
+  200: '200 Seconds',
+  250: '250 Seconds',
+  300: '300 Seconds',
+  350: '350 Seconds',
+  400: '400 Seconds',
+  450: '450 Seconds',
+  500: '500 Seconds',
+  600: '600 Seconds',
+};
+export type FightLength = keyof typeof FIGHT_LENGTH;
 
 // vary_combat_length
-export enum LengthVariation {
-  $0 = '0',
-  $10 = '0.1',
-  $20 = '0.2',
-  $30 = '0.3',
-  $40 = '0.4',
-  $50 = '0.5',
-}
+export const FIGHT_LENGTH_VARIATION = {
+  '0': 'None',
+  '0.1': '10 %',
+  '0.2': '20 %',
+  '0.3': '30 %',
+  '0.4': '40 %',
+  '0.5': '50 %',
+};
+export type FightLengthVariation = keyof typeof FIGHT_LENGTH_VARIATION;
 
 export type EnemyCount = number;
 
@@ -100,17 +106,18 @@ export enum TankDummyType {
   Mythic = 'Mythic',
 }
 
-export enum FightStyle {
-  Patchwerk = 'Patchwerk',
-  HecticAddCleave = 'HecticAddCleave',
-  HelterSkelter = 'HelterSkelter',
-  Ultraxion = 'Ultraxion',
-  LightMovement = 'LightMovement',
-  HeavyMovement = 'HeavyMovement',
-  Beastlord = 'Beastlord',
-  CastingPatchwerk = 'CastingPatchwerk',
-  DungeonSlice = 'DungeonSlice',
-}
+export const FIGHT_STYLE = {
+  Patchwerk: 'Patchwerk (Tank-n-spank stationary target)',
+  HecticAddCleave: 'Add Cleave (heavy movement with frequent add spawns)',
+  HelterSkelter: 'HelterSkelter (movement, stuns, interrupts, target switching)',
+  Ultraxion: 'Ultraxion (periodic stuns, raid damage)',
+  LightMovement: 'Light Movement',
+  HeavyMovement: 'Heavy Movement',
+  Beastlord: 'Beastlord (random movement, advanced positioning, frequent add spawns)',
+  CastingPatchwerk: 'Casting Patchwerk (stationary target, interrupts on cooldown)',
+  DungeonSlice: 'Dungeon Slice (mythic+ trash and boss pulls)',
+};
+export type FightStyle = keyof typeof FIGHT_STYLE;
 
 // tmi_window_global
 export enum TMIWindow {
@@ -139,8 +146,8 @@ export interface Config {
   targetError: TargetError;
   iterations: Iterations;
   fightStyle: FightStyle;
-  fightLength: Length;
-  fightLengthVariation: LengthVariation;
+  fightLength: FightLength;
+  fightLengthVariation: FightLengthVariation;
   challangeMode: ChallangeMode;
   pvpLevelDamageReduction: PVPLevelDamageReduction;
   targetRace: TargetRace;

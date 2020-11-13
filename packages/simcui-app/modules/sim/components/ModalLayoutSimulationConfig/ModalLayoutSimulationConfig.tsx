@@ -12,13 +12,15 @@ import {
   Tabs,
 } from '@chakra-ui/core';
 import { useRouter } from '@shared/context/RouterContext';
-import React from 'react';
+import React, { useState } from 'react';
 import useModalStore, { SimModalType } from '../../store/useModalStore';
+import FormSimulationCustom from '../FormSimulationCustom';
 import FormSimulationPreset from '../FormSimulationPreset';
 
 export default function ModalLayoutSimulationConfig() {
+  const [tabIndex, setTabIndex] = useState(0);
   const { currentRoute, push } = useRouter();
-  const [currentOpenModal, closeAllModals] = useModalStore((store) => [store.currentOpenModal, store.closeAll]);
+  const [currentOpenModal, closeAllModals] = useModalStore(store => [store.currentOpenModal, store.closeAll]);
 
   const handleSimulationCreated = () => {
     closeAllModals();
@@ -36,15 +38,19 @@ export default function ModalLayoutSimulationConfig() {
           <ModalBody>
             <Grid height="100%" templateColumns="200px auto">
               <Box bgColor="gray.900" h="100%" pb={1}>
-                <Tabs size="md" variant="vertical" orientation="vertical">
+                <Tabs index={tabIndex} onChange={setTabIndex} size="md" variant="vertical" orientation="vertical">
                   <TabList>
                     <Tab>Sensible Presets</Tab>
-                    <Tab disabled>Manual Configuration</Tab>
+                    <Tab>Manual Configuration</Tab>
                   </TabList>
                 </Tabs>
               </Box>
               <Box px={8} py={4}>
-                <FormSimulationPreset onSimulationCreated={handleSimulationCreated} />
+                {tabIndex === 0 ? (
+                  <FormSimulationPreset onSimulationCreated={handleSimulationCreated} />
+                ) : (
+                  <FormSimulationCustom />
+                )}
               </Box>
             </Grid>
           </ModalBody>
